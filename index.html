@@ -184,8 +184,6 @@
         document.documentElement.style.setProperty('--base-font-size', currentSize + 'px');
     }
 
-    // DITO MO ILALAGAY ANG MISMONG NILALAMAN NG PDF O MGA ARALIN MO
-    // Pwede mong baguhin o dagdagan ang teksto rito anumang oras na gusto mo.
     const KCC_DATABASE = `
     OPISYAL NA MGA ARALIN AT IMPORMASYON NG KCC:
 
@@ -198,24 +196,6 @@
     - Definition: Mission = The ongoing assignment to bring the King's vision to reality.
     - MISSION: To make the Kingdom visible on earth by restoring people to the rule of God through the gospel of the Kingdom, discipleship, and the demonstration of Kingdom culture.
     - BIBLICAL REFERENCES: Matthew 4:17, Luke 4:43, Matthew 28:18-20, Matthew 6:33, Acts 1:3, Acts 1:8
-
-    3. PROSESO NG PAGSISISI AT PAGIGING CITIZEN NG KAHARIAN (July 2025):
-    - Kailangan ipanganak muli (sa tubig at Espiritu) upang maging citizen ng Kaharian (John 3).
-    - Mga Hakbang sa Pagsisisi: 
-      1) Kilalanin na nagkasala laban sa Diyos, 
-      2) Unawain na ang kabayaran ay kamatayan, 
-      3) Manampalataya kay Hesus, 
-      4) Aminin at isuko ang mga kamalian, 
-      5) Pagsisisan at magbago ng isip (Lucas 13:3), 
-      6) Tanggapin si Hesus bilang Panginoon at Tagapagligtas (Romans 10:9-10).
-
-    4. BANAL NA ESPIRITU AT ANG MGA GAWAIN NITO (Sept 28, 2025):
-    - Holy Spirit: "Parakletos" (legal assistant, advocate, counsel for defense).
-    - 3 Pangunahing Gawain ng Banal na Espiritu: 
-      1) Magtuturo ng lahat ng bagay tungkol kay Jesus, 
-      2) Magpapaalala ng mga sinabi ni Jesus, 
-      3) Patnubay sa gitna ng pagsubok.
-    - Tayo ang "Salt" (para mag-preserve) at "Light" (knowledge of truth) ng sanlibutan (Matthew 5:13-16).
     `;
 
     async function sendMessage() {
@@ -226,7 +206,6 @@
         
         if (!userText) return;
 
-        // Ipakita ang tanong ng user
         chatBox.innerHTML += `<div class="message user">${userText}</div>`;
         inputField.value = "";
         chatBox.scrollTop = chatBox.scrollHeight;
@@ -238,7 +217,6 @@
         chatBox.innerHTML += `<div class="message bot" id="${loadingId}">Nag-iisip at nagpapaliwanag <span class="loading-spinner">⏳</span></div>`;
         chatBox.scrollTop = chatBox.scrollHeight;
 
-        // Smart Local Matcher + AI Simulator (Parang totoong guro na nagpapaliwanag)
         setTimeout(() => {
             const loadingElem = document.getElementById(loadingId);
             if (loadingElem) loadingElem.remove();
@@ -246,22 +224,20 @@
             let reply = "";
             const query = userText.toLowerCase();
 
-            // Pagsusuri kung ano ang itinanong para sagutin nang parang tao
             if (query.includes("vision") || query.includes("layunin")) {
-                reply = `Magandang tanong po! Tungkol sa **Vision ng Kaharian ng Diyos**, ito po ay ang pangunahing layunin ng Creator-King para sa Kanyang nilikha. \n\nIto ay ang **isang naibalik na nilikha sa ilalim ng ganap na pamamahala ng Diyos**, kung saan ang Kanyang kalooban ay perpektong nagaganap dito sa lupa tulad ng sa langit, habang ang tao ay namamahala bilang Kanyang mga anak at ambassador (Genesis 1:26-28; Awit 24:1). May gusto pa po ba kayong linawin tungkol dito?`;
+                reply = `Magandang tanong po! Tungkol sa "Vision ng Kaharian ng Diyos", ito po ay ang pangunahing layunin ng Creator-King para sa Kanyang nilikha. \n\nIto ay ang "isang naibalik na nilikha sa ilalim ng ganap na pamamahala ng Diyos", kung saan ang Kanyang kalooban ay perpektong nagaganap dito sa lupa tulad ng sa langit, habang ang tao ay namamahala bilang Kanyang mga anak at ambassador (Genesis 1:26-28; Awit 24:1). May gusto pa po ba kayong linawin tungkol dito?`;
             } 
             else if (query.includes("mission") || query.includes("misyon")) {
-                reply = `Maganda pong pag-usapan ang **Mission ng Kaharian ng Diyos**! Ang misyon po ay ang patuloy na gawain upang maisakatuparan ang vision ng Hari.\n\nIbig sabihin nito, **ginagawa nating nakikita ang Kaharian dito sa lupa** sa pamamagitan ng pagbabalik sa mga tao sa pamamahala ng Diyos sa pamamagitan ng Ebanghelyo, pagdidisipulo, at pagpapakita ng kultura ng Kaharian (Mateo 4:17; Mateo 28:18-20). May partikular po ba kayong gustong malaman kung paano natin ito isinasabuhay?`;
+                reply = `Maganda pong pag-usapan ang "Mission ng Kaharian ng Diyos"! Ang misyon po ay ang patuloy na gawain upang maisakatuparan ang vision ng Hari.\n\nIbig sabihin nito, "ginagawa nating nakikita ang Kaharian dito sa lupa" sa pamamagitan ng pagbabalik sa mga tao sa pamamahala ng Diyos sa pamamagitan ng Ebanghelyo, pagdidisipulo, at pagpapakita ng kultura ng Kaharian (Mateo 4:17; Mateo 28:18-20). May partikular po ba kayong gustong malaman kung paano natin ito isinasabuhay?`;
             }
             else if (query.includes("pagsisi") || query.includes("citizen") || query.includes("maging citizen")) {
                 reply = `Para po maging ganap na citizen ng Kaharian ng Diyos ayon sa ating mga aralin, kailangan po tayong ipanganak muli sa tubig at sa Espiritu (Juan 3). \n\nNarito po ang mga hakbang sa pagsisisi na maaari nating gabay:\n1. Kilalanin na tayo ay nagkasala laban sa Diyos.\n2. Unawain na ang kabayaran ng kasalanan ay kamatayan, ngunit ang regalo ng Diyos ay buhay na walang hanggan.\n3. Manampalataya kay Hesus at isuko ang mga maling pamumuhay (Lucas 13:3).\n4. Tanggapin si Hesus bilang Panginoon at Tagapagligtas ng ating buhay (Roma 10:9-10). \n\nMay gusto po ba kayong itanong tungkol sa hakbang na ito?`;
             }
             else if (query.includes("espiritu") || query.includes("parakletos") || query.includes("banal na espiritu")) {
-                reply = `Napakahalagang bahagi ng ating buhay ang Banal na Espiritu. Siya po ang tinatawag na **Parakletos** — ang ating Legal Assistant, Tagapagtanggol, at Counsel sa gitna ng mga pagsubok.\n\nAng tatlo sa Kanyang pangunahing gawain ay:\n- Magtuturo ng lahat ng bagay tungkol kay Hesus.\n- Magpapaalala sa atin ng mga itinuro at sinabi Niya.\n- Patuloy na gagabay sa atin araw-araw.\n\nBilang tugon, tinatawag din tayong maging 'asin' at 'liwanag' sa mundong ito. May nais po ba kayong idagdag o itanong pa tungkol dito?`;
+                reply = `Napakahalagang bahagi ng ating buhay ang Banal na Espiritu. Siya po ang tinatawag na "Parakletos" - ang ating Legal Assistant, Tagapagtanggol, at Counsel sa gitna ng mga pagsubok.\n\nAng tatlo sa Kanyang pangunahing gawain ay:\n- Magtuturo ng lahat ng bagay tungkol kay Hesus.\n- Magpapaalala sa atin ng mga itinuro at sinabi Niya.\n- Patuloy na gagabay sa atin araw-araw.\n\nBilang tugon, tinatawag din tayong maging 'asin' at 'liwanag' sa mundong ito. May nais po ba kayong idagdag o itanong pa tungkol dito?`;
             }
             else {
-                // Pangkalahatang magalang at pwedeng i-customize na sagot ng guro/tao
-                reply = `Maraming salamat sa iyong tanong! Ayon sa ating mga opisyal na aralin at materyal, ang paksang ito ay nagtuturo sa atin ng kahalagahan ng pagpapasakop at pamumuhay sa ilalim ng Kaharian ng Diyos.\n\nBagamat maari kang magtanong tungkol sa **Vision, Mission, Pagsisisi, o Banal na Espiritu**, narito po ako upang gabayan ka. May gusto ka bang ituloy na partikular na bahagi ng aralin?`;
+                reply = `Maraming salamat sa iyong tanong! Ayon sa ating mga opisyal na aralin at materyal, ang paksang ito ay nagtuturo sa atin ng kahalagahan ng pagpapasakop at pamumuhay sa ilalim ng Kaharian ng Diyos.\n\nBagamat maari kang magtanong tungkol sa "Vision, Mission, Pagsisisi, o Banal na Espiritu", narito po ako upang gabayan ka. May gusto ka bang ituloy na partikular na bahagi ng aralin?`;
             }
 
             chatBox.innerHTML += `<div class="message bot">${reply}</div>`;
@@ -270,7 +246,7 @@
             inputField.disabled = false;
             sendBtn.disabled = false;
             inputField.focus();
-        }, 800); // Para magmukhang nag-iisip sandali ang AI tulad ng totoong tao
+        }, 800);
     }
 
     function handleKeyPress(event) {

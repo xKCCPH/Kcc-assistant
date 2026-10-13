@@ -178,7 +178,6 @@
 </div>
 
 <script>
-    // Tamang Groq API Key
     const GROQ_API_KEY = "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";
 
     let currentSize = 15;
@@ -272,7 +271,7 @@ Mahigpit na Patakaran: Ang tanging pagkukunan mo ng sagot ay ang opisyal na KCC 
                     "Authorization": `Bearer ${GROQ_API_KEY}`
                 },
                 body: JSON.stringify({
-                    model: "llama-3.3-70b-versatile",
+                    model: "llama-3.1-8b-instant",
                     messages: [
                         { role: "system", content: systemInstruction },
                         { role: "user", content: userText }

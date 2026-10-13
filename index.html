@@ -19,6 +19,7 @@
             color: var(--text-color);
             margin: 0;
             padding: 20px;
+            padding-bottom: 80px;
             line-height: 1.6;
         }
 
@@ -77,6 +78,122 @@
             padding: 20px;
             font-size: 0.9rem;
             color: #64748b;
+        }
+
+        /* --- AI CHAT WIDGET STYLES --- */
+        .chat-widget-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 22px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .chat-widget-button:hover {
+            transform: scale(1.05);
+            background-color: #1d4ed8;
+        }
+
+        .chat-box {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 350px;
+            max-width: 90vw;
+            height: 450px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 9999;
+            border: 1px solid #e2e8f0;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .message {
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .bot-msg {
+            background: #f1f5f9;
+            color: #1e293b;
+            align-self: flex-start;
+        }
+
+        .user-msg {
+            background: var(--primary-color);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e2e8f0;
+            background: #fff;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .chat-input-area button {
+            margin-left: 8px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -145,6 +262,80 @@
     </footer>
 
 </div>
+
+<!-- AI CHAT WIDGET BUTTON -->
+<button class="chat-widget-button" onclick="toggleChat()">
+    💬 Magtanong sa AI
+</button>
+
+<!-- CHAT WINDOW -->
+<div class="chat-box" id="chatBox">
+    <div class="chat-header">
+        <span>Kingdom AI Assistant</span>
+        <button onclick="toggleChat()">✖</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot-msg">
+            Shalom! Ako ang inyong Kingdom Principles Assistant. Anong gusto mong itanong o linawin tungkol sa mga aralin?
+        </div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="userInput" placeholder="Isulat ang tanong mo..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    function toggleChat() {
+        const chatBox = document.getElementById('chatBox');
+        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+            chatBox.style.display = 'flex';
+        } else {
+            chatBox.style.display = 'none';
+        }
+    }
+
+    function handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('userInput');
+        const text = input.value.trim();
+        if (!text) return;
+
+        const chatMessages = document.getElementById('chatMessages');
+
+        // Display user message
+        const userDiv = document.createElement('div');
+        userDiv.className = 'message user-msg';
+        userDiv.textContent = text;
+        chatMessages.appendChild(userDiv);
+
+        input.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Auto-reply logic / Simulation
+        setTimeout(() => {
+            const botDiv = document.createElement('div');
+            botDiv.className = 'message bot-msg';
+            
+            const lowerText = text.toLowerCase();
+            if (lowerText.includes("relihiyon") || lowerText.includes("kaharian")) {
+                botDiv.textContent = "Ang relihiyon ay pagtatangka ng taong maabot ang Diyos, ngunit ang Kaharian ay ang mismong pamamahala ng Diyos na bumaba sa lupa sa pamamagitan ni Kristo.";
+            } else if (lowerText.includes("mateo 6:33") || lowerText.includes("katuwiran")) {
+                botDiv.textContent = "Sa Mateo 6:33, ipinapaalala sa atin na unahin ang Kaharian at ang katuwiran ng Diyos, at ang lahat ng ating pangangailangan ay idadagdag sa atin.";
+            } else {
+                botDiv.textContent = "Salamat sa iyong tanong! Ang paksang ito ay tumutukoy sa pamumuhay bilang mamamayan at ambassador ng Kaharian ng Diyos dito sa lupa.";
+            }
+
+            chatMessages.appendChild(botDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 800);
+    }
+</script>
 
 </body>
 </html>

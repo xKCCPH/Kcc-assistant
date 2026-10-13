@@ -122,6 +122,79 @@
             box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
         }
 
+        /* DAILY DECLARATION CARD */
+        .declaration-card {
+            background: linear-gradient(135deg, #1e293b, #151d30);
+            border: 1px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 24px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.1);
+        }
+
+        .declaration-card h3 {
+            margin: 0 0 10px 0;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .declaration-card p {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--text-main);
+            font-style: italic;
+        }
+
+        /* AUDIO PLAYER BANNER */
+        .audio-banner {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 18px 25px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .audio-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .audio-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .audio-controls button {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .audio-controls button:hover {
+            background: #2563eb;
+        }
+
         /* METRICS OVERVIEW */
         .metrics-grid {
             display: grid;
@@ -163,6 +236,33 @@
             margin: 2px 0 0 0;
             font-size: 0.85rem;
             color: var(--text-muted);
+        }
+
+        /* CHAPTER JUMP GRID */
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .chapter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chapter-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-2px);
         }
 
         /* SEARCH BAR */
@@ -273,7 +373,41 @@
             font-size: 0.95rem;
         }
 
-        /* FLOATING CHAT WIDGET BUTTON (Nakatutok sa kanang ibaba) */
+        /* NOTES & REFLECTION PAD */
+        .notes-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .notes-textarea {
+            width: 100%;
+            height: 120px;
+            background: #0b0f19;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-main);
+            padding: 15px;
+            box-sizing: border-box;
+            font-family: inherit;
+            resize: vertical;
+            margin-top: 10px;
+        }
+
+        .notes-btn {
+            background: var(--accent-gold);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        /* FLOATING CHAT BUTTON & MODAL */
         .chat-widget-button {
             position: fixed;
             bottom: 25px;
@@ -286,7 +420,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            text-decoration: none;
+            cursor: pointer;
             box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.2);
             z-index: 1000;
@@ -311,6 +445,109 @@
             0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
             70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+        }
+
+        /* AI CHAT MODAL POPUP */
+        .ai-modal {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 25px;
+            width: 360px;
+            height: 480px;
+            background: #151d30;
+            border: 1px solid var(--accent-gold);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            z-index: 1001;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .ai-modal-header {
+            background: #1e293b;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .ai-modal-header h4 {
+            margin: 0;
+            color: var(--accent-gold);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .ai-chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 0.9rem;
+        }
+
+        .chat-msg {
+            padding: 10px 14px;
+            border-radius: 12px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+
+        .msg-bot {
+            background: #1e293b;
+            color: var(--text-main);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .msg-user {
+            background: var(--accent-blue);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .ai-chat-footer {
+            padding: 12px;
+            background: #0b0f19;
+            display: flex;
+            gap: 8px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .ai-input {
+            flex: 1;
+            background: #151d30;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: white;
+            outline: none;
+            font-size: 0.85rem;
+        }
+
+        .ai-send-btn {
+            background: var(--accent-gold);
+            color: #000;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
         }
 
         footer {
@@ -344,13 +581,33 @@
         </div>
     </header>
 
+    <!-- DAILY KINGDOM DECLARATION -->
+    <div class="declaration-card">
+        <h3>✨ Daily Kingdom Declaration & Principle</h3>
+        <p>"Ang Kaharian ay hindi isang relihiyon kundi ang pamamahala at impluwensya ng Diyos sa lupa sa pamamagitan ng Kanyang mga mamamayan. (Mateo 6:33)"</p>
+    </div>
+
+    <!-- QUICK AUDIO / READING GUIDE -->
+    <div class="audio-banner">
+        <div class="audio-info">
+            <div class="audio-icon">🎧</div>
+            <div>
+                <strong style="color: white; display: block; font-size: 0.95rem;">Study Audio Guide Summary</strong>
+                <span style="color: var(--text-muted); font-size: 0.85rem;">Pakinggan ang mabilisang buod ng mga Prinsipyo ng Kaharian</span>
+            </div>
+        </div>
+        <div class="audio-controls">
+            <button onclick="toggleAudioGuide()">▶️ I-play Audio Guide</button>
+        </div>
+    </div>
+
     <!-- METRICS OVERVIEW -->
     <div class="metrics-grid">
         <div class="metric-card">
             <div class="metric-icon">📖</div>
             <div class="metric-info">
-                <h4>05 Modyul</h4>
-                <p>Pangunahing Aralin</p>
+                <h4>12 Chapters</h4>
+                <p>Kingdom Principles Book</p>
             </div>
         </div>
         <div class="metric-card">
@@ -367,6 +624,23 @@
                 <p>Community Resource</p>
             </div>
         </div>
+    </div>
+
+    <!-- CHAPTER JUMP GRID -->
+    <h2 class="section-title">Mga Kabanata ng Kingdom Principles</h2>
+    <div class="chapter-grid">
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 1: Priority</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 2: Government</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 3: Colonization</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 4: Kings</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 5: Lord</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 6: Territory</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 7: Constitution</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 8: Law</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 9: Keys</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 10: Citizenship</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 11: Culture</div>
+        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 12: Giving</div>
     </div>
 
     <!-- LIVE SEARCH BAR -->
@@ -434,16 +708,41 @@
         </div>
     </div>
 
-    <!-- FLOATING CHAT WIDGET BUTTON (Narito na ang nakitang chat button sa kanang ibaba) -->
-    <a href="https://m.me/lightmaligaya" target="_blank" class="chat-widget-button">
-        <span class="pulse-dot"></span>
-        <span>💬 Magtanong Tungkol sa Kingdom Principles</span>
-    </a>
+    <!-- NOTES & REFLECTION PAD -->
+    <div class="notes-container">
+        <h3 style="margin: 0; color: var(--accent-gold);">📝 Personal Notes & Reflection Pad</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin: 5px 0 0 0;">Isulat ang iyong mga natutunan at repleksyon sa pag-aaral. Awtomatiko itong magse-save sa iyong browser.</p>
+        <textarea id="userNotes" class="notes-textarea" placeholder="I-type ang iyong personal na note o repleksyon dito..."></textarea>
+        <button class="notes-btn" onclick="saveNotes()">💾 I-save ang Notes</button>
+    </div>
 
     <footer>
         <p>Kingdom Community Center &bull; Executive Portal &bull; All Rights Reserved</p>
     </footer>
 
+</div>
+
+<!-- FLOATING CHAT BUTTON -->
+<div class="chat-widget-button" onclick="toggleAiModal()">
+    <span class="pulse-dot"></span>
+    <span>💬 Itanong kay Gemini AI</span>
+</div>
+
+<!-- AI CHAT MODAL POPUP -->
+<div class="ai-modal" id="aiModal">
+    <div class="ai-modal-header">
+        <h4>👑 Ask Bot (Gemini AI)</h4>
+        <button class="close-btn" onclick="toggleAiModal()">✕</button>
+    </div>
+    <div class="ai-chat-body" id="chatBody">
+        <div class="chat-msg msg-bot">
+            Shalom! Ako ang AI Assistant ng Kingdom Community Center. Magtanong ka tungkol sa <b>Kingdom Principles</b> o anumang aralin sa portal at sasagutin kita batay sa mga prinsipyo ng Kaharian!
+        </div>
+    </div>
+    <div class="ai-chat-footer">
+        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong tungkol sa Kingdom..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
+        <button class="ai-send-btn" onclick="sendAiMessage()">Ipadala</button>
+    </div>
 </div>
 
 <script>
@@ -469,6 +768,77 @@
                 qa.style.display = "none";
             }
         });
+    }
+
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleAudioGuide() {
+        alert("Playing Kingdom Study Audio Guide...");
+    }
+
+    // NOTES LOCALSTORAGE
+    document.addEventListener("DOMContentLoaded", function() {
+        let saved = localStorage.getItem("kcc_user_notes");
+        if(saved) {
+            document.getElementById("userNotes").value = saved;
+        }
+    });
+
+    function saveNotes() {
+        let notes = document.getElementById("userNotes").value;
+        localStorage.setItem("kcc_user_notes", notes);
+        alert("Matagumpay na na-save ang iyong notes!");
+    }
+
+    // AI CHAT MODAL FUNCTIONS
+    function toggleAiModal() {
+        let modal = document.getElementById("aiModal");
+        if(modal.style.display === "flex") {
+            modal.style.display = "none";
+        } else {
+            modal.style.display = "flex";
+        }
+    }
+
+    function sendAiMessage() {
+        let input = document.getElementById("aiInput");
+        let text = input.value.trim();
+        if(!text) return;
+
+        let chatBody = document.getElementById("chatBody");
+
+        // User message
+        let userDiv = document.createElement("div");
+        userDiv.className = "chat-msg msg-user";
+        userDiv.innerText = text;
+        chatBody.appendChild(userDiv);
+
+        input.value = "";
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Bot Response
+        setTimeout(() => {
+            let botDiv = document.createElement("div");
+            botDiv.className = "chat-msg msg-bot";
+
+            let lower = text.toLowerCase();
+            if(lower.includes("hari") || lower.includes("king")) {
+                botDiv.innerText = "Base sa Kingdom Principles (Ch. 4): Ang Hari ang pinakapuso ng Kaharian. Ang Kanyang salita ay batas at Siya ang may-ari ng lahat ng teritoryo.";
+            } else if(lower.includes("lord") || lower.includes("panginoon")) {
+                botDiv.innerText = "Base sa Kingdom Principles (Ch. 5): Ang Lordship ay tumutukoy sa pagmamay-ari (Ownership). Ang Hari bilang Lord ang nagmamay-ari ng lahat ng teritoryo at yaman sa Kaharian.";
+            } else if(lower.includes("mateo 6:33") || lower.includes("katuwiran") || lower.includes(" righteousness")) {
+                botDiv.innerText = "Ang Mateo 6:33 ang pangunahing utos: Hanapin muna ang Kaharian ng Diyos at ang Kanyang katuwiran (tamang alignment sa Kanyang awtoridad), at ang lahat ng pangangailangan ay idaragdag sa iyo.";
+            } else if(lower.includes("susi") || lower.includes("keys")) {
+                botDiv.innerText = "Base sa Kingdom Principles (Ch. 9): Ang mga Susi ng Kaharian ay ang mga prinsipyo, batas, at awtoridad na nagbubukas ng mga yaman ng Langit dito sa lupa.";
+            } else {
+                botDiv.innerText = "Ayon sa Kingdom Principles ni Dr. Myles Munroe: Ang Kaharian ng Diyos ay ang pamamahala at impluwensya ng Langit dito sa lupa sa pamamagitan ng Kanyang mga mamamayan. Maaari mong ihambing ito sa ating Modyul 1 hanggang 5 at sa PDF para sa mas malalim na pag-aaral!";
+            }
+
+            chatBody.appendChild(botDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, 600);
     }
 </script>
 

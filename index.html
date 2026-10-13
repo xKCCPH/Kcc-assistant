@@ -148,53 +148,6 @@
             font-style: italic;
         }
 
-        /* AUDIO PLAYER BANNER */
-        .audio-banner {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 18px 25px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .audio-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .audio-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--accent-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .audio-controls button {
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .audio-controls button:hover {
-            background: #2563eb;
-        }
-
         /* METRICS OVERVIEW */
         .metrics-grid {
             display: grid;
@@ -236,33 +189,6 @@
             margin: 2px 0 0 0;
             font-size: 0.85rem;
             color: var(--text-muted);
-        }
-
-        /* CHAPTER JUMP GRID */
-        .chapter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .chapter-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 12px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .chapter-btn:hover {
-            border-color: var(--accent-gold);
-            color: var(--accent-gold);
-            transform: translateY(-2px);
         }
 
         /* SEARCH BAR */
@@ -347,32 +273,6 @@
             line-height: 1.6;
         }
 
-        .qa-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 22px 26px;
-            margin-bottom: 16px;
-            transition: border-color 0.2s ease;
-        }
-
-        .qa-card:hover {
-            border-color: var(--accent-gold);
-        }
-
-        .qa-card h4 { 
-            margin: 0 0 8px 0; 
-            color: var(--accent-blue); 
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .qa-card p {
-            color: var(--text-muted);
-            margin: 0;
-            font-size: 0.95rem;
-        }
-
         /* NOTES & REFLECTION PAD */
         .notes-container {
             background: var(--bg-card);
@@ -453,8 +353,8 @@
             position: fixed;
             bottom: 90px;
             right: 25px;
-            width: 360px;
-            height: 480px;
+            width: 380px;
+            height: 520px;
             background: #151d30;
             border: 1px solid var(--accent-gold);
             border-radius: 16px;
@@ -503,7 +403,7 @@
         .chat-msg {
             padding: 10px 14px;
             border-radius: 12px;
-            max-width: 80%;
+            max-width: 85%;
             line-height: 1.4;
         }
 
@@ -568,7 +468,7 @@
     <header>
         <span class="badge">👑 Official Portal</span>
         <h1>Kingdom Community Center</h1>
-        <p>Executive Dashboard & Center for Kingdom Studies</p>
+        <p>Executive Dashboard & Center for Kingdom Studies (Tatay Pastor Archive)</p>
         
         <!-- ACTION BUTTONS -->
         <div class="action-buttons">
@@ -583,22 +483,8 @@
 
     <!-- DAILY KINGDOM DECLARATION -->
     <div class="declaration-card">
-        <h3>✨ Daily Kingdom Declaration & Principle</h3>
-        <p>"Ang Kaharian ay hindi isang relihiyon kundi ang pamamahala at impluwensya ng Diyos sa lupa sa pamamagitan ng Kanyang mga mamamayan. (Mateo 6:33)"</p>
-    </div>
-
-    <!-- QUICK AUDIO / READING GUIDE -->
-    <div class="audio-banner">
-        <div class="audio-info">
-            <div class="audio-icon">🎧</div>
-            <div>
-                <strong style="color: white; display: block; font-size: 0.95rem;">Study Audio Guide Summary</strong>
-                <span style="color: var(--text-muted); font-size: 0.85rem;">Pakinggan ang mabilisang buod ng mga Prinsipyo ng Kaharian</span>
-            </div>
-        </div>
-        <div class="audio-controls">
-            <button onclick="toggleAudioGuide()">▶️ I-play Audio Guide</button>
-        </div>
+        <h3>✨ Aral ni Tatay Pastor: Be Fruitful & Multiply</h3>
+        <p>"Ang Kaharian ng Diyos ang ating unahin higit sa lahat. Ang ating layunin ay maging mabunga sa kalidad at dami, dumami, sakupin at impluwensyahan ang mundo ayon sa Kanyang disenyo."</p>
     </div>
 
     <!-- METRICS OVERVIEW -->
@@ -606,15 +492,15 @@
         <div class="metric-card">
             <div class="metric-icon">📖</div>
             <div class="metric-info">
-                <h4>12 Chapters</h4>
-                <p>Kingdom Principles Book</p>
+                <h4>Mga Aralin</h4>
+                <p>2025-2026 Archive</p>
             </div>
         </div>
         <div class="metric-card">
-            <div class="metric-icon">❓</div>
+            <div class="metric-icon">🕊️</div>
             <div class="metric-info">
-                <h4>04 Gabay</h4>
-                <p>Mula sa Talakayan</p>
+                <h4>Holy Spirit</h4>
+                <p>Ang Gobernador</p>
             </div>
         </div>
         <div class="metric-card">
@@ -626,92 +512,56 @@
         </div>
     </div>
 
-    <!-- CHAPTER JUMP GRID -->
-    <h2 class="section-title">Mga Kabanata ng Kingdom Principles</h2>
-    <div class="chapter-grid">
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 1: Priority</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 2: Government</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 3: Colonization</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 4: Kings</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 5: Lord</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 6: Territory</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 7: Constitution</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 8: Law</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 9: Keys</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 10: Citizenship</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 11: Culture</div>
-        <div class="chapter-btn" onclick="scrollToSection('contentGrid')">Ch 12: Giving</div>
-    </div>
-
     <!-- LIVE SEARCH BAR -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Maghanap ng paksa, aralin, o katanungan sa portal..." onkeyup="filterContent()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Maghanap sa mga aralin ni Tatay Pastor (Covenant, Holy Spirit, Citizenship...)" onkeyup="filterContent()">
     </div>
 
-    <!-- MGA PANGUNAHING KONSEPTO -->
-    <h2 class="section-title">Mga Pangunahing Konsepto at Aral</h2>
+    <!-- MGA PANGUNAHING KONSEPTO AT ARAL NI TATAY PASTOR -->
+    <h2 class="section-title">Mga Aral at Arangkada ni Tatay Pastor (Archive)</h2>
 
     <div class="grid" id="contentGrid">
-        <div class="card" data-search="layunin ng biblia at ng tao hari kaharian maharlikang pamilya dominion">
-            <span class="card-num">MODULE 01</span>
-            <h3>Layunin ng Biblia at ng Tao</h3>
-            <p>Ang Biblia ay hindi lamang tungkol sa relihiyon kundi tungkol sa isang Hari, Kaharian, at Maharlikang Pamilya. Itinatag ng Diyos ang tao sa lupa upang palawakin ang Kanyang pamahalaan sa pamamagitan ng dominion.</p>
+        <div class="card" data-search="be fruitful god is faithful exodus 3-6 10-19 jeremiah 33 levitical law christ">
+            <span class="card-num">ARAL 01</span>
+            <h3>Be Fruitful, God is Faithful (Oct 2025)</h3>
+            <p>Ang kautusan ay nagpapanatili sa bayan ng Diyos na nakahanay sa Kanyang kalooban[cite: 227]. Ang Levitical law ay nagwakas sapagkat si Kristo ang nag-antig at tumupad nito bilang huling handog[cite: 227].</p>
         </div>
 
-        <div class="card" data-search="kaharian vs relihiyon pamamahala ng diyos">
-            <span class="card-num">MODULE 02</span>
-            <h3>Kaharian vs. Relihiyon</h3>
-            <p>Ang relihiyon ay pagtatangka ng taong hanapin ang Diyos. Ang Kaharian naman ay ang mismong pamamahala ng Diyos na bumaba sa lupa upang ibalik ang tao sa Kanyang orihinal na posisyon.</p>
+        <div class="card" data-search="covenant kasunduan abraham sarai pagpapalit ng pangalan banang pagkatakot">
+            <span class="card-num">ARAL 02</span>
+            <h3>Covenant at Pagpapalit ng Pangalan (Oct 2025)</h3>
+            <p>Ang kasunduan ng Diyos kay Abram (na naging Abraham) at Sarai (na naging Sarah) ay nagpapakita ng pagbabago ng pag-iisip at pamumuhay. Ang Salita ng Hari ay pangwakas at ganap, hindi nangangailangan ng negosasyon.</p>
         </div>
 
-        <div class="card" data-search="ang kaharian at katuwiran mateo 6:33 awtoridad batas ng hari">
-            <span class="card-num">MODULE 03</span>
-            <h3>Ang Kaharian at Katuwiran (Mateo 6:33)</h3>
-            <p>Ang paghahanap sa Kaharian ay pagpapasailalim sa pamamahala ng Langit, habang ang katuwiran (righteousness) ay ang tamang pagkakahanay sa awtoridad at batas ng Hari.</p>
+        <div class="card" data-search="familial consecration sabado sabsabbath noah administrator">
+            <span class="card-num">ARAL 03</span>
+            <h3>Familial Consecration (Jan 2026)</h3>
+            <p>Ang consecration ay paglalaan para sa pamamahala ng Hari[cite: 231]. Ang Sabbath ay nagpapakita ng banal na pattern ng pagpapahinga at pagkilala sa kapangyarihan ng Diyos[cite: 231]. Si Noah ay itinalaga bilang administrator ng kaharian[cite: 231].</p>
         </div>
 
-        <div class="card" data-search="ang hari at panginoon lord may-ari ng teritoryo">
-            <span class="card-num">MODULE 04</span>
-            <h3>Ang Hari at Panginoon (Lord)</h3>
-            <p>Ang Hari ay hindi ibinoboto at ang Kanyang salita ay batas. Bilang Panginoon, Siya ang nagmamay-ari ng lahat ng teritoryo at ari-arian sa loob ng Kanyang Kaharian.</p>
+        <div class="card" data-search="intent of the creator-king hosea 4 6 death holy spirit governor">
+            <span class="card-num">ARAL 04</span>
+            <h3>Intent of the Creator-King (Aug 2025)</h3>
+            <p>Ang langit ang Main Kingdom at ang lupa ay Colony nito[cite: 236]. Ang pag-aalsa ng tao ay nagbunsod upang maatras ang Gobernador (Holy Spirit)[cite: 237]. Ang pinakamahalagang pangako ay ang pagbabalik ng Gobernador sa mga anak ng Diyos[cite: 237].</p>
         </div>
 
-        <div class="card" data-search="mga susi at pagkamamamayan keys citizenship prinsipyong panalangin">
-            <span class="card-num">MODULE 05</span>
-            <h3>Mga Susi at Pagkamamamayan</h3>
-            <p>Ang mga Susi ng Kaharian ay kumakatawan sa mga prinsipyo, batas, at awtoridad upang ma-access ang mga yaman ng Langit habang namumuhay bilang mamamayan dito sa lupa.</p>
-        </div>
-    </div>
-
-    <!-- MGA KATANUNGAN AT PAG-AARAL -->
-    <h2 class="section-title">Mga Gabay na Tanong para sa Talakayan</h2>
-
-    <div id="qaContainer">
-        <div class="qa-card" data-search="bakit sinasabing ang relihiyon ang isa sa mga pangunahing balakid">
-            <h4>Tanong 1:</h4>
-            <p>Bakit sinasabing ang relihiyon ang isa sa mga pangunahing balakid upang maunawaan ang tunay na konseptong Kaharian?</p>
+        <div class="card" data-search="listening and responding to the holy spirit parakletos advocate">
+            <span class="card-num">ARAL 05</span>
+            <h3>Listening & Responding to the Holy Spirit (Sept 2025)</h3>
+            <p>Ang Banal na Espiritu ay tinatawag na "Parakletos" – ang ating legal assistant, advocate, at gabay na ipinadala upang ituro ang lahat ng sinabi ni Kristo[cite: 240]. Tayo ang asin at ilaw ng lupa at sistema[cite: 241].</p>
         </div>
 
-        <div class="qa-card" data-search="paano nababago ng pagiging katiwala steward sa halip na may-ari owner">
-            <h4>Tanong 2:</h4>
-            <p>Paano nababago ng pagiging 'Katiwala' (Steward) sa halip na 'May-ari' (Owner) ang ating pananaw sa ating pera at ari-arian?</p>
-        </div>
-
-        <div class="qa-card" data-search="ano ang ibig sabihin ng pamumuhay bilang isang ambassador kinatawan ng langit">
-            <h4>Tanong 3:</h4>
-            <p>Ano ang ibig sabihin ng pamumuhay bilang isang 'Ambassador' o Kinatawan ng Langit dito sa lupa?</p>
-        </div>
-
-        <div class="qa-card" data-search="paano natin mai-a-apply ang mga prinsipyo at kultura ng kaharian">
-            <h4>Tanong 4:</h4>
-            <p>Paano natin mai-a-apply ang mga prinsipyo at kultura ng Kaharian sa ating pang-araw-araw na pamumuhay at mga desisyon?</p>
+        <div class="card" data-search="process of citizenship born again tubig at espiritu romans 3:23">
+            <span class="card-num">ARAL 06</span>
+            <h3>Process of Citizenship in the Heavenly Kingdom</h3>
+            <p>Walang makakakita sa Kaharian ng Diyos maliban kung siya ay ipinanganak muli (Born Again) sa tubig at sa Espiritu[cite: 254]. Kinakailangang kilalanin ang kasalanan, magsisi, at tanggapin si Hesus bilang Panginoon at Tagapagligtas[cite: 254].</p>
         </div>
     </div>
 
     <!-- NOTES & REFLECTION PAD -->
     <div class="notes-container">
         <h3 style="margin: 0; color: var(--accent-gold);">📝 Personal Notes & Reflection Pad</h3>
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin: 5px 0 0 0;">Isulat ang iyong mga natutunan at repleksyon sa pag-aaral. Awtomatiko itong magse-save sa iyong browser.</p>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin: 5px 0 0 0;">Isulat ang iyong mga natutunan mula sa mga aral ni Tatay Pastor. Awtomatiko itong magse-save sa iyong browser.</p>
         <textarea id="userNotes" class="notes-textarea" placeholder="I-type ang iyong personal na note o repleksyon dito..."></textarea>
         <button class="notes-btn" onclick="saveNotes()">💾 I-save ang Notes</button>
     </div>
@@ -725,22 +575,22 @@
 <!-- FLOATING CHAT BUTTON -->
 <div class="chat-widget-button" onclick="toggleAiModal()">
     <span class="pulse-dot"></span>
-    <span>💬 Itanong kay Gemini AI</span>
+    <span>💬 Itanong kay Gemini AI (Tatay Pastor Notes)</span>
 </div>
 
 <!-- AI CHAT MODAL POPUP -->
 <div class="ai-modal" id="aiModal">
     <div class="ai-modal-header">
-        <h4>👑 Ask Bot (Gemini AI)</h4>
+        <h4>👑 Ask Bot (Kingdom Assistant)</h4>
         <button class="close-btn" onclick="toggleAiModal()">✕</button>
     </div>
     <div class="ai-chat-body" id="chatBody">
         <div class="chat-msg msg-bot">
-            Shalom! Ako ang AI Assistant ng Kingdom Community Center. Magtanong ka tungkol sa <b>Kingdom Principles</b> o anumang aralin sa portal at sasagutin kita batay sa mga prinsipyo ng Kaharian!
+            Shalom! Ako ang AI Assistant ng Kingdom Community Center. Na-load ko na ang mga notes at aral ni Tatay Pastor mula 2025-2026 (Covenant, Holy Spirit, Citizenship, at iba pa). Ano ang nais mong malaman?
         </div>
     </div>
     <div class="ai-chat-footer">
-        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong tungkol sa Kingdom..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
+        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong tungkol sa mga aral..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
         <button class="ai-send-btn" onclick="sendAiMessage()">Ipadala</button>
     </div>
 </div>
@@ -749,7 +599,6 @@
     function filterContent() {
         let input = document.getElementById('searchInput').value.toLowerCase();
         let cards = document.querySelectorAll('.grid .card');
-        let qaCards = document.querySelectorAll('#qaContainer .qa-card');
 
         cards.forEach(card => {
             let text = card.getAttribute('data-search') + ' ' + card.innerText.toLowerCase();
@@ -759,23 +608,6 @@
                 card.style.display = "none";
             }
         });
-
-        qaCards.forEach(qa => {
-            let text = qa.getAttribute('data-search') + ' ' + qa.innerText.toLowerCase();
-            if (text.includes(input)) {
-                qa.style.display = "block";
-            } else {
-                qa.style.display = "none";
-            }
-        });
-    }
-
-    function scrollToSection(id) {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function toggleAudioGuide() {
-        alert("Playing Kingdom Study Audio Guide...");
     }
 
     // NOTES LOCALSTORAGE
@@ -792,7 +624,7 @@
         alert("Matagumpay na na-save ang iyong notes!");
     }
 
-    // AI CHAT MODAL FUNCTIONS
+    // AI CHAT MODAL & LOCAL KNOWLEDGE BASE FUNCTIONS
     function toggleAiModal() {
         let modal = document.getElementById("aiModal");
         if(modal.style.display === "flex") {
@@ -818,22 +650,24 @@
         input.value = "";
         chatBody.scrollTop = chatBody.scrollHeight;
 
-        // Bot Response
+        // Bot Response hango sa mga PDF notes ni Tatay Pastor
         setTimeout(() => {
             let botDiv = document.createElement("div");
             botDiv.className = "chat-msg msg-bot";
 
             let lower = text.toLowerCase();
-            if(lower.includes("hari") || lower.includes("king")) {
-                botDiv.innerText = "Base sa Kingdom Principles (Ch. 4): Ang Hari ang pinakapuso ng Kaharian. Ang Kanyang salita ay batas at Siya ang may-ari ng lahat ng teritoryo.";
-            } else if(lower.includes("lord") || lower.includes("panginoon")) {
-                botDiv.innerText = "Base sa Kingdom Principles (Ch. 5): Ang Lordship ay tumutukoy sa pagmamay-ari (Ownership). Ang Hari bilang Lord ang nagmamay-ari ng lahat ng teritoryo at yaman sa Kaharian.";
-            } else if(lower.includes("mateo 6:33") || lower.includes("katuwiran") || lower.includes(" righteousness")) {
-                botDiv.innerText = "Ang Mateo 6:33 ang pangunahing utos: Hanapin muna ang Kaharian ng Diyos at ang Kanyang katuwiran (tamang alignment sa Kanyang awtoridad), at ang lahat ng pangangailangan ay idaragdag sa iyo.";
-            } else if(lower.includes("susi") || lower.includes("keys")) {
-                botDiv.innerText = "Base sa Kingdom Principles (Ch. 9): Ang mga Susi ng Kaharian ay ang mga prinsipyo, batas, at awtoridad na nagbubukas ng mga yaman ng Langit dito sa lupa.";
+            if(lower.includes("holy spirit") || lower.includes("espiritu") || lower.includes("parakletos")) {
+                botDiv.innerText = "Ayon sa aral ni Tatay Pastor (Listening to the Holy Spirit): Ang Banal na Espiritu ay tinatawag na 'Parakletos' – ang ating legal assistant, advocate, at gabay na ipinadala upang ipaalala at ituro ang mga salita ni Kristo[cite: 240]. Siya ang Gobernador na pumalit upang gabayan ang kolonya ng Diyos sa lupa[cite: 240].";
+            } else if(lower.includes("covenant") || lower.includes("kasunduan") || lower.includes("abraham")) {
+                botDiv.innerText = "Base sa Covenant notes ni Tatay Pastor: Ang kasunduan ng Diyos kay Abram (na ginawang Abraham) ay may sign na circumcision[cite: 228]. Ang pagpapalit ng pangalan ay nagpapakita ng pagbabago ng pag-iisip at pamumuhay[cite: 228]. Ang Salita ng Hari ay pangwakas at di na nangangailangan ng negosasyon[cite: 228].";
+            } else if(lower.includes("citizenship") || lower.includes("born again") || lower.includes("isilang")) {
+                botDiv.innerText = "Ayon sa aral tungkol sa Citizenship: Walang makakakita sa Kaharian ng Diyos maliban kung siya ay ipinanganak muli sa tubig (pisikal) at sa Espiritu (espiritwal)[cite: 254]. Kailangan nating kilalanin ang ating kasalanan, magsisi, at kilalanin si Hesus bilang Panginoon[cite: 254].";
+            } else if(lower.includes("salt") || lower.includes("light") || lower.includes("asin") || lower.includes("ilaw")) {
+                botDiv.innerText = "Base sa pagtuturo ni Tatay Pastor: Tayo ang asin ng lupa (upang mag-preserve at magprotekta sa ating pisikal na teritoryo) at ilaw ng mundo (dala ang Kaalaman ng Katotohanan sa mga sistema rito sa lupa)[cite: 241, 251, 253].";
+            } else if(lower.includes("purpose") || lower.includes("potential") || lower.includes("fruitful") || lower.includes("subdue")) {
+                botDiv.innerText = "Ayon sa Purpose, Potential and Principles: Kailangan nating maging mabunga (Be Fruitful sa quality at quantity), lumago (Increase/Mastery), punuin ang lupa (Fill the earth), at sakupin/impluwensyahan ang paligid (Subdue)[cite: 243, 244].";
             } else {
-                botDiv.innerText = "Ayon sa Kingdom Principles ni Dr. Myles Munroe: Ang Kaharian ng Diyos ay ang pamamahala at impluwensya ng Langit dito sa lupa sa pamamagitan ng Kanyang mga mamamayan. Maaari mong ihambing ito sa ating Modyul 1 hanggang 5 at sa PDF para sa mas malalim na pag-aaral!";
+                botDiv.innerText = "Ayon sa mga aral at notes ni Tatay Pastor mula 2025-2026: Ang bawat turo ay nakasentro sa pagpapanumbalik ng Kaharian ng Diyos, pagpapailalim sa Kanyang batas, at pamumuhay bilang mga tapat na mamamayan at kinatawan ng Langit dito sa lupa[cite: 228, 236, 240, 254]. May nais ka bang itanong tungkol sa Covenant, Holy Spirit, o Citizenship?";
             }
 
             chatBody.appendChild(botDiv);

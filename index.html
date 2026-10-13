@@ -333,12 +333,6 @@
             box-shadow: 0 12px 25px rgba(0,0,0,0.4);
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         .card-num {
             display: inline-block;
             background: rgba(59, 130, 246, 0.15);
@@ -387,7 +381,7 @@
         }
 
         .lesson-viewer-container {
-            max-width: 850px;
+            max-width: 900px;
             margin: 0 auto;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -456,6 +450,33 @@
 
         .lesson-content li {
             margin-bottom: 8px;
+        }
+
+        /* BUILT-IN BIBLE VIEWER BOX SA SECOND PAGE */
+        .bible-reader-box {
+            background: #0b0f19;
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .bible-reader-box h4 {
+            color: var(--accent-gold);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bible-verse-text {
+            font-style: italic;
+            color: var(--text-main);
+            background: rgba(251, 191, 36, 0.05);
+            padding: 12px 16px;
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 4px;
+            margin: 10px 0;
         }
 
         /* NOTES & REFLECTION PAD */
@@ -797,7 +818,7 @@
 
 </div>
 
-<!-- FULL-PAGE LESSON VIEWER OVERLAY -->
+<!-- FULL-PAGE LESSON VIEWER OVERLAY (SECOND PAGE) -->
 <div class="lesson-viewer-overlay" id="lessonViewer">
     <div class="lesson-viewer-container">
         <button class="back-btn" onclick="closeLesson()">← Bumalik sa Main Dashboard</button>
@@ -808,107 +829,133 @@
 <!-- FLOATING CHAT BUTTON -->
 <div class="chat-widget-button" onclick="toggleAiModal()">
     <span class="pulse-dot"></span>
-    <span>💬 Itanong kay Gemini AI</span>
+    <span>💬 Itanong kay Gemini AI (Kingdom Lens)</span>
 </div>
 
 <!-- AI CHAT MODAL POPUP -->
 <div class="ai-modal" id="aiModal">
     <div class="ai-modal-header">
-        <h4>👑 Ask Bot (Kingdom Assistant)</h4>
+        <h4>👑 Kingdom Assistant (AI Bot)</h4>
         <button class="close-btn" onclick="toggleAiModal()">✕</button>
     </div>
     <div class="ai-chat-body" id="chatBody">
         <div class="chat-msg msg-bot">
-            Shalom! Ako ang AI Assistant ng Kingdom Community Center Philippines. Habang nagbabasa ka ng aralin, pwede ka ring magtanong sa akin anumang oras!
+            Shalom! Ako ang iyong Kingdom Assistant. Nakabase ang aking mga sagot sa mga turo ng Kaharian (Kingdom Principles ni Dr. Myles Munroe at mga notes nina Tatay Pastor, Ate Jam, at Kuya Pastor Jec). Ano ang nais mong malaman o linawin tungkol sa aralin?
         </div>
     </div>
     <div class="ai-chat-footer">
-        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong tungkol sa mga aral..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
+        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong gamit ang Kingdom Lens..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
         <button class="ai-send-btn" onclick="sendAiMessage()">Ipadala</button>
     </div>
 </div>
 
 <script>
-    // DEDICATED LESSON DATA DATABASE
+    // DEDICATED LESSON DATABASE WITH BUILT-IN BIBLE READER
     const lessonsData = {
         lesson1: {
             badge: "Aralin 01 • Ate Jam",
             title: "The Sovereign of God",
+            bibleVerse: "Ephesians 1:9-11 — 'He made known to us the mystery of his will... according to his good pleasure, which he purposed in Christ, to be put into effect when the times reach their fulfillment—to bring unity to all things in heaven and on earth under Christ.'",
             content: `
-                <h4>1. Kahulugan ng Sovereignty</h4>
-                <p>Ang salitang <strong>Sovereign</strong> ay nagmula sa Latin na <em>"SUPERANUS"</em> na nangangahulugang Supreme, at Hebrew na <em>"SHALLIT"</em> na nangangahulugang Ruler, King, at Lord. Ang pag-aaral sa Kanyang Sovereignty ay ang pag-aaral ng mismong "GOD-ness" ng Diyos.</p>
+                <h4>1. Kahulugan ng Sovereignty (Ang "God-ness" ng Diyos)</h4>
+                <p>Ang salitang <strong>Sovereign</strong> ay nagmula sa Latin na <em>"SUPERANUS"</em> (Supreme) at Hebrew na <em>"SHALLIT"</em> (Ruler, King, Lord). Ang pag-aaral sa Kanyang Sovereignty ay ang pag-aaral ng Kanyang Kataas-taasang kapangyarihan.</p>
 
-                <h4>2. Mga Katangian ng Kanyang Sovereignty</h4>
+                <h4>2. Kanyang Control at Presence</h4>
                 <ul>
-                    <li><strong>His Control is His Authority:</strong> (Ephesians 1:9-11, Isaiah 46:9-11) Ginagawa ng Kanyang nilikha ang kung ano ang Kanyang ipinaguutos.</li>
-                    <li><strong>His Presence is His Governance:</strong> Sa Kanyang presence naroon ang Kanyang pamamahala.</li>
+                    <li><strong>His Control is His Authority:</strong> (Isaiah 46:9-11) Ang anomang iutos ng Hari ay dapat sundin ng Kanyang nilikha.</li>
+                    <li><strong>His Presence is His Governance:</strong> Kasama ng Kanyang presensya ang Kanyang direktang pamamahala bilang Hari.</li>
                 </ul>
 
-                <h4>3. Ang Disenyo at Plano ng Hari (Genesis 1:26-28 hanggang Revelation 21-22)</h4>
-                <p>Nilikha ang tao sa Kanyang larawan at kawangis (Image & Likeness). Ang kalooban ng tao (Man's Will) ay idinisenyo upang gabayan at idirekta ng plano ng Diyos. Kahit nagkasala ang tao noong Genesis 3, ang layunin ng Hari hanggang sa Aklat ng Pahayag ay ang ganap na pagpapanumbalik ng Kanyang Kaharian sa lupa.</p>
+                <div class="bible-reader-box">
+                    <h4>📖 Built-in Bible Study Reference</h4>
+                    <p><strong>Genesis 1:26-28</strong></p>
+                    <div class="bible-verse-text">"Pagkatapos ay sinabi ng Diyos, 'Lalangin natin ang tao ayon sa ating larawan, ayon sa ating kawangis... at maghari sila sa mga isda sa dagat...'"</div>
+                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Ang tao ay hindi nilikha upang mamuno sa kapwa tao kundi upang maging lokal na gobernador at kinatawan (ambassador) ng Kaharian ng Langit dito sa lupa.</p>
+                </div>
             `
         },
         lesson2: {
             badge: "Aralin 02 • Tatay Pastor",
             title: "Understanding Our Assignment",
+            bibleVerse: "John 17:15-18 — 'My prayer is not that you take them out of the world but that you protect them from the evil one... As you sent me into the world, I have sent them into the world.'",
             content: `
-                <h4>1. Ano ang HINDI natin Atas (Assignment)</h4>
+                <h4>1. Ang Tunay na Misyon (Assignment)</h4>
                 <ul>
-                    <li><strong>Hindi tayo inatasang magtatag ng Relihiyon:</strong> Ang itinayo ng Diyos ay isang agency na tinatawag na "Ecclesia" o Kanyang Simbahan (John 17).</li>
-                    <li><strong>Hindi tayo inatasang ihiwalay o i-isolate ang sarili sa mundo:</strong> (Matthew 9:12-13) Ang ating misyon ay ipasok ang Kanyang impluwensya sa mundo.</li>
-                    <li><strong>Hindi tayo inatasang makipagkumpitensya o magkondena:</strong> (John 3:16-17) Ang layunin natin ay i-reintroduce ang ideya ng Diyos sa sanlibutan nang walang kompromiso sa Katotohanan.</li>
+                    <li><strong>Hindi Relihiyon:</strong> Ang itinatag ng Diyos ay isang gubyerno at pamilya ("Ecclesia" / Monarchy), hindi isang relihiyon o denominasyon.</li>
+                    <li><strong>Hindi Pag-ihiwalay (Isolation):</strong> (Matthew 9:12-13) Hindi tayo inatasang lumayo sa mundo kundi ang pumasok at baguhin ito sa pamamagitan ng impluwensya.</li>
+                    <li><strong>Pag-reintroduce ng Diyos:</strong> (John 3:16-17) Ipinapaabot natin ang katotohanan nang walang kompromiso.</li>
                 </ul>
 
-                <h4>2. Ang Kaharian ay isang Monarkiya at Family Business</h4>
-                <p>Ang Kaharian ng Langit ay nakasentro sa ugnayan ng Ama at ng Kanyang mga anak (Luke 19:13, John 1:13). Tayo ay mga tagapagdala at custodians ng Kanyang konstitusyon (ang Banal na Kasulatan).</p>
+                <div class="bible-reader-box">
+                    <h4>📖 Built-in Bible Study Reference</h4>
+                    <p><strong>Psalms 115:16 & Isaiah 45:18</strong></p>
+                    <div class="bible-verse-text">"Ang langit ay langit para sa Panginoon, ngunit ang lupa ay ibinigay niya sa mga anak ng tao."</div>
+                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Ang lupa ay kolonya at teritoryo na ipinagkatiwala sa tao upang pamahalaan ayon sa pamantayan ng Langit.</p>
+                </div>
             `
         },
         lesson3: {
             badge: "Aralin 03 • Kuya Pastor Jec",
             title: "Vision & Direction",
+            bibleVerse: "Proverbs 29:18 (KJV) — 'Where there is no vision, the people perish: But he that keepeth the law, happy is he.'",
             content: `
-                <h4>1. Kahalagahan ng Vision (Proverbs 29:18)</h4>
-                <p><em>"Where there is no vision, the people perish: But he that keepeth the law, happy is he."</em> Ang taong walang vision ay walang direksyon at walang disiplina.</p>
+                <h4>1. Kahalagahan ng Vision sa Kaharian</h4>
+                <p>Ang <strong>Vision</strong> ay nagbibigay ng direksyon at disiplina. Kung walang malinaw na pagkaunawa sa orihinal na layunin ng Creator-King, ang tao ay naliligaw sa mga sistema ng mundong ito.</p>
 
-                <h4>2. Ang Kaligtasan ay Simula Lamang</h4>
-                <p>Ang kaligtasan ay paunang bahagi lamang upang ilipat tayo sa pamamahala ng Diyos. Hindi ito ang pinaka-rurok; ang rurok ay ang mamuhay sa ilalim ng Kanyang Kaharian at maisagawa ang Kanyang layunin dito sa lupa (John 17:3, Psalms 115:15-16).</p>
+                <div class="bible-reader-box">
+                    <h4>📖 Built-in Bible Study Reference</h4>
+                    <p><strong>John 17:3</strong></p>
+                    <div class="bible-verse-text">"At ito ang buhay na walang hanggan: ang makilala ka nila, na ikaw lamang ang tunay na Diyos, at si Jesucristo na iyong sinugo."</div>
+                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Ang kaligtasan ay ang pintuan o pasaporte lamang upang makabalik sa Kaharian; ang rurok ng buhay ay ang pamumuhay at pagkilos bilang tapat na mamamayan ng Kaharian.</p>
+                </div>
             `
         },
         lesson4: {
             badge: "Aralin 04 • Tatay Pastor",
             title: "Covenant at Pagpapalit ng Pangalan",
+            bibleVerse: "Genesis 17:4-7 — 'As for me, this is my covenant with you: You will be the father of many nations. No longer will you be called Abram; your name will be Abraham...'",
             content: `
-                <h4>1. Ang Kasunduan (Genesis 17:1-27)</h4>
-                <p>Gumawa ang Diyos ng kasunduan kay Abram na gagawin siyang Ama ng Maraming Bansa. Ang tanda nito ay ang circumcision.</p>
+                <h4>1. Ang Kasunduan ng Hari sa Tao</h4>
+                <p>Ang <strong>Covenant</strong> ay kasunduan na nagtatali sa Hari at sa Kanyang mga mamamayan. Ang pagpapalit ng pangalan nina Abram (Abraham) at Sarai (Sarah) ay sumisimbolo sa ganap na pagbabago ng pag-iisip (mindset) at pamumuhay palayo sa makasamang sistema.</p>
 
-                <h4>2. Pagbabago ng Pag-iisip at Pamumuhay</h4>
-                <p>Ang pagpapalit ng pangalan mula Abram papuntang Abraham, at Sarai papuntang Sarah ay nagpapakita ng pagbabago ng mindset at pamumuhay upang tumugon sa layunin ng Diyos para sa mga susunod na henerasyon.</p>
+                <div class="bible-reader-box">
+                    <h4>📖 Built-in Bible Study Reference</h4>
+                    <p><strong>Deuteronomy 11:18-23</strong></p>
+                    <div class="bible-verse-text">"Itanim ninyo sa inyong puso at kaluluwa ang mga salitang ito... Ituro ninyo ito sa inyong mga anak..."</div>
+                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Ang pamilya ang pangunahing institusyon ng Kaharian upang ipasa ang kultura at batas ng Langit sa mga susunod na henerasyon.</p>
+                </div>
             `
         },
         lesson5: {
             badge: "Aralin 05 • Tatay Pastor",
             title: "Listening & Responding to the Holy Spirit",
+            bibleVerse: "John 14:26 — 'But the Advocate, the Holy Spirit, whom the Father will send in my name, will teach you all things and will remind you of everything I have said to you.'",
             content: `
-                <h4>1. Ang Banal na Espiritu bilang Parakletos</h4>
-                <p>Ang Banal na Espiritu ay ang ating <strong>"Parakletos"</strong> (Advocate, Legal Assistant, Counselor) na ipinadala ng Hari upang pumalit at gabayan tayo sa buong katotohanan (John 14:26, John 16:12-15).</p>
+                <h4>1. Ang Banal na Espiritu bilang Gobernador at Parakletos</h4>
+                <p>Ang Banal na Espiritu ay hindi lamang espiritu kundi ang <strong>Gubernador</strong> ng Kaharian na ipinadala upang gabayan ang kolonya ng Diyos sa lupa. Siya ang ating <em>Parakletos</em> (legal assistant at tagapagtanggol).</p>
 
-                <h4>2. Asin at Ilaw ng Lupa</h4>
-                <p>Tayo ang asin ng lupa (upang mag-preserve at magprotekta sa pisikal na teritoryo) at ilaw ng mundo (dala ang kaalaman ng katotohanan sa lahat ng sistema sa lupa).</p>
+                <div class="bible-reader-box">
+                    <h4>📖 Built-in Bible Study Reference</h4>
+                    <p><strong>Matthew 5:13-16</strong></p>
+                    <div class="bible-verse-text">"Kayo ang asin ng lupa... Kayo ang ilaw ng sanlibutan..."</div>
+                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Bilang mga mamamayan, ang ating presensya ay dapat nagpapanatili ng moralidad (asin) at nagdadala ng katotohanan (ilaw) sa mga bulok na sistema ng mundo.</p>
+                </div>
             `
         },
         lesson6: {
             badge: "Aralin 06 • Tatay Pastor",
             title: "Process of Citizenship in the Heavenly Kingdom",
+            bibleVerse: "John 3:3, 5 — 'Jesus replied, Very truly I tell you, no one can see the kingdom of God unless they are born again... no one can enter the kingdom of God unless they are born of water and the Spirit.'",
             content: `
-                <h4>1. Ang Muling Kapanganakan (John 3:3-7)</h4>
-                <p>Walang makakakita o makakapasok sa Kaharian ng Diyos maliban kung siya ay ipinanganak muli sa tubig (pisikal) at sa Espiritu (espiritwal).</p>
+                <h4>1. Pagiging Mamamayan ng Kaharian</h4>
+                <p>Kung paanong ang isang tao ay nagiging mamamayan ng isang bansa sa pamamagitan ng kapanganakan, ganoon din sa Kaharian ng Langit. Kinakailangan ang <strong>muling kapanganakan</strong> (Born Again) sa tubig at sa Espiritu.</p>
 
-                <h4>2. Mga Hakbang sa Pagiging Mamamayan</h4>
-                <ul>
-                    <li>Kilalanin ang kasalanan at pagrerebelde laban sa Diyos (Romans 3:23).</li>
-                    <li>Magsisi at magbago ng isip at pamumuhay (Luke 13:3).</li>
-                    <li>Ipahayag at kilalanin si Hesus bilang Panginoon at Tagapagligtas (Romans 10:9-10).</li>
-                </ul>
+                <div class="bible-reader-box">
+                    <h4>📖 Built-in Bible Study Reference</h4>
+                    <p><strong>Romans 10:9-10</strong></p>
+                    <div class="bible-verse-text">"Kung ipahahayag ng iyong bibig na si Jesus ay Panginoon at sasampalatayanan sa iyong puso na binuhay siyang muli ng Diyos, ikaw ay maliligtas."</div>
+                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Ang pagkilala kay Hesus ay pagpapasakop sa Kanyang awtoridad bilang Hari ng iyong buhay.</p>
+                </div>
             `
         }
     };
@@ -919,15 +966,19 @@
 
         const contentDiv = document.getElementById("lessonViewerContent");
         contentDiv.innerHTML = `
-            <span class="lesson-header-badge">\${lesson.badge}</span>
-            <h1 class="lesson-title">\${lesson.title}</h1>
+            <span class="lesson-header-badge">${lesson.badge}</span>
+            <h1 class="lesson-title">${lesson.title}</h1>
+            <div class="bible-reader-box" style="margin-top: 15px; margin-bottom: 25px;">
+                <h4>📖 Susing Banal na Kasulatan</h4>
+                <div class="bible-verse-text">${lesson.bibleVerse}</div>
+            </div>
             <div class="lesson-content">
-                \${lesson.content}
+                ${lesson.content}
             </div>
         `;
 
         document.getElementById("lessonViewer").style.display = "block";
-        document.body.style.overflow = "hidden"; // Prevent scrolling main page behind
+        document.body.style.overflow = "hidden";
     }
 
     function closeLesson() {
@@ -963,7 +1014,7 @@
         alert("Matagumpay na na-save ang iyong notes!");
     }
 
-    // AI CHAT MODAL FUNCTIONS
+    // AI CHAT MODAL FUNCTIONS (KINGDOM LENS ENGINE)
     function toggleAiModal() {
         let modal = document.getElementById("aiModal");
         if(modal.style.display === "flex") {
@@ -989,26 +1040,26 @@
         input.value = "";
         chatBody.scrollTop = chatBody.scrollHeight;
 
-        // Bot Response hango sa mga PDF notes
+        // Bot Response hango sa Kingdom Principles at mga PDF ni Tatay Pastor
         setTimeout(() => {
             let botDiv = document.createElement("div");
             botDiv.className = "chat-msg msg-bot";
 
             let lower = text.toLowerCase();
-            if(lower.includes("sovereign") || lower.includes("sovereignty") || lower.includes("shallit")) {
-                botDiv.innerText = "Ayon sa aral tungkol sa The Sovereign of God: Ang 'Sovereign' ay nagmula sa salitang Latin na 'Superanus' (Supreme) at Hebrew na 'Shallit' (Ruler, King, Lord). Ang Kanyang control ay authority at ang Kanyang presence ay governance.";
-            } else if(lower.includes("assignment") || lower.includes("relihiyon") || lower.includes("church") || lower.includes("ecclesia")) {
-                botDiv.innerText = "Ayon sa Understanding Our Assignment: Hindi tayo inatasang magtatag ng relihiyon o lumayo sa mundo, kundi ang i-reintroduce ang ideya ng Diyos, maging pamilya (family business/monarchy), at impluwensyahan ang mundo.";
-            } else if(lower.includes("vision") || lower.includes("direksyon") || lower.includes("proverbs 29")) {
-                botDiv.innerText = "Ayon sa aral tungkol sa Vision: Ang taong walang vision ay walang direksyon at disiplina (Proverbs 29:18). Ang kaligtasan ay paunang hakbang lamang upang maibalik tayo sa kaharian ng Diyos.";
-            } else if(lower.includes("holy spirit") || lower.includes("espiritu") || lower.includes("parakletos")) {
-                botDiv.innerText = "Ayon sa aral tungkol sa Banal na Espiritu: Siya ang 'Parakletos' – ang ating legal assistant, advocate, at gabay na ipinadala upang ituro at ipaalala ang mga salita ni Kristo.";
+            if(lower.includes("sovereign") || lower.includes("sovereignty") || lower.includes("kapangyarihan")) {
+                botDiv.innerText = "Ayon sa Kingdom Principles (The Sovereign of God): Ang ating Diyos ay Hari at Kataas-taasang Tagapamahala (Shallit). Ang Kanyang layunin mula Genesis hanggang Pahayag ay maibalik ang Kanyang pamamahala at kultura rito sa lupa sa pamamagitan ng mga mamamayan nito.";
+            } else if(lower.includes("assignment") || lower.includes("relihiyon") || lower.includes("mundo")) {
+                botDiv.innerText = "Base sa aral tungkol sa Assignment: Hindi tayo tinawag upang magtatag ng relihiyon o tumakas sa sanlibutan. Tayo ay mga embahador at kolonisador ng Langit na may layuning i-reintroduce ang Diyos at impluwensyahan ang mga sistema sa lupa.";
+            } else if(lower.includes("vision") || lower.includes("direksyon")) {
+                botDiv.innerText = "Sa lente ng Vision (Proverbs 29:18): Ang taong walang vision ay walang direksyon. Ang kaligtasan ay paunang hakbang lamang upang maibalik tayo sa Kaharian kung saan ang Kanyang kalooban ang masusunod.";
+            } else if(lower.includes("holy spirit") || lower.includes("espiritu") || lower.includes("governor")) {
+                botDiv.innerText = "Ayon sa turo tungkol sa Banal na Espiritu: Siya ang Gobernador (Governor) ng Kaharian na ipinadala sa kolonya (lupa) upang gabayan tayo, magsilbing legal assistant (Parakletos), at ipaalala ang mga salita ng Hari.";
             } else if(lower.includes("covenant") || lower.includes("kasunduan") || lower.includes("abraham")) {
-                botDiv.innerText = "Ayon sa Covenant notes: Ang kasunduan ng Diyos kay Abram at Sarai ay nagpapakita ng pagbabago ng isip at pamumuhay. Ang Salita ng Hari ay pangwakas at ganap.";
+                botDiv.innerText = "Sa Covenant notes: Ang kasunduan ng Diyos ay nagdadala ng bagong pagkakakilanlan (tulad ng pagpapalit ng pangalan nina Abraham at Sarah) upang baguhin ang ating mindset at ihanda sa pagpapala ng mga susunod na henerasyon.";
             } else if(lower.includes("citizenship") || lower.includes("born again")) {
-                botDiv.innerText = "Ayon sa aral tungkol sa Citizenship: Walang makakakita sa Kaharian ng Diyos maliban kung siya ay ipinanganak muli sa tubig at sa Espiritu.";
+                botDiv.innerText = "Batay sa aral ng Citizenship: Ang pagiging mamamayan ng Kaharian ay nangangailangan ng muling kapanganakan sa tubig at sa Espiritu (John 3:3-5), pagpapasakop sa Salita ng Hari, at pamumuhay bilang asin at ilaw.";
             } else {
-                botDiv.innerText = "Ayon sa mga aral sa Kingdom Community Center Philippines: Ang bawat turo ay nakasentro sa Kaharian ng Diyos, sa Kanyang Sovereignty, at sa ating misyon na dalhin ang Kanyang impluwensya sa bawat bansa. May nais ka bang itanong tungkol sa Sovereignty, Assignment, o Vision?";
+                botDiv.innerText = "Sa lente ng Kingdom Principles at sa mga aral ni Tatay Pastor: Ang bawat turo ay nakasentro sa pagpapanumbalik ng Kaharian ng Diyos sa lupa. May partikular ka bang talata o konsepto na nais nating suriin gamit ang Kingdom Lens?";
             }
 
             chatBody.appendChild(botDiv);

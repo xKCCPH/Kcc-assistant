@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kingdom Community Center | Official Portal</title>
+    <style>
+        :root {
+            --bg-deep: #0b0f19;
+            --bg-card: #151d30;
+            --border-color: #2a364f;
+            --accent-gold: #fbbf24;
+            --accent-blue: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            padding: 45px 30px;
+            background: radial-gradient(circle at top, #1e293b 0%, #0b0f19 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #fbbf24, #3b82f6);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        header h1 { 
+            margin: 0 0 10px 0; 
+            font-size: 2.8rem; 
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        header p { 
+            margin: 0 0 30px 0; 
+            color: var(--text-muted); 
+            font-size: 1.15rem;
+        }
+
+        /* ACTION BUTTONS */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .majestic-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 26px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-pdf {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            color: white;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-pdf:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.5);
+        }
+
+        .btn-fb {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-fb:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+        }
+
+        /* METRICS OVERVIEW */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .metric-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--accent-blue);
+        }
+
+        .metric-info h4 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .metric-info p {
+            margin: 2px 0 0 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* SEARCH BAR */
+        .search-container {
+            margin-bottom: 35px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 24px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+        }
+
+        /* SECTION TITLES */
+        .section-title {
+            color: var(--text-main);
+            font-size: 1.35rem;
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 14px;
+            margin: 40px 0 20px 0;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        /* MODULES & CARDS GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 26px;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .card:hover { 
+            transform: translateY(-4px); 
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .card-num {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 { 
+            margin: 0 0 10px 0; 
+            color: var(--accent-gold); 
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .qa-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 22px 26px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        .qa-card:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .qa-card h4 { 
+            margin: 0 0 8px 0; 
+            color: var(--accent-blue); 
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .qa-card p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* FLOATING CHAT WIDGET BUTTON (Na nakakonekta sa FB / PDF Knowledge Bot) */
+        .chat-widget-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 14px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .chat-widget-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.6);
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 70px;
+            padding: 30px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER AREA -->
+    <header>
+        <span class="badge">👑 Official Portal</span>
+        <h1>Kingdom Community Center</h1>
+        <p>Executive Dashboard & Center for Kingdom Studies</p>
+        
+        <!-- ACTION BUTTONS -->
+        <div class="action-buttons">
+            <a href="https://irp-cdn.multiscreensite.com/c21a6153/files/uploaded/kingdom-principles.pdf" target="_blank" class="majestic-btn btn-pdf">
+                📄 Kingdom Principles PDF (Dr. Myles Munroe)
+            </a>
+            <a href="https://www.facebook.com/lightmaligaya" target="_blank" class="majestic-btn btn-fb">
+                💬 Facebook Page (Light Maligaya)
+            </a>
+        </div>
+    </header>
+
+    <!-- METRICS OVERVIEW -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-icon">📖</div>
+            <div class="metric-info">
+                <h4>05 Modyul</h4>
+                <p>Pangunahing Aralin</p>
+            </div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-icon">❓</div>
+            <div class="metric-info">
+                <h4>04 Gabay</h4>
+                <p>Mula sa Talakayan</p>
+            </div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-icon">🌐</div>
+            <div class="metric-info">
+                <h4>100% Libre</h4>
+                <p>Community Resource</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIVE SEARCH BAR -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Maghanap ng paksa, aralin, o katanungan sa portal..." onkeyup="filterContent()">
+    </div>
+
+    <!-- MGA PANGUNAHING KONSEPTO -->
+    <h2 class="section-title">Mga Pangunahing Konsepto at Aral</h2>
+
+    <div class="grid" id="contentGrid">
+        <div class="card" data-search="layunin ng biblia at ng tao hari kaharian maharlikang pamilya dominion">
+            <span class="card-num">MODULE 01</span>
+            <h3>Layunin ng Biblia at ng Tao</h3>
+            <p>Ang Biblia ay hindi lamang tungkol sa relihiyon kundi tungkol sa isang Hari, Kaharian, at Maharlikang Pamilya. Itinatag ng Diyos ang tao sa lupa upang palawakin ang Kanyang pamahalaan sa pamamagitan ng dominion.</p>
+        </div>
+
+        <div class="card" data-search="kaharian vs relihiyon pamamahala ng diyos">
+            <span class="card-num">MODULE 02</span>
+            <h3>Kaharian vs. Relihiyon</h3>
+            <p>Ang relihiyon ay pagtatangka ng taong hanapin ang Diyos. Ang Kaharian naman ay ang mismong pamamahala ng Diyos na bumaba sa lupa upang ibalik ang tao sa Kanyang orihinal na posisyon.</p>
+        </div>
+
+        <div class="card" data-search="ang kaharian at katuwiran mateo 6:33 awtoridad batas ng hari">
+            <span class="card-num">MODULE 03</span>
+            <h3>Ang Kaharian at Katuwiran (Mateo 6:33)</h3>
+            <p>Ang paghahanap sa Kaharian ay pagpapasailalim sa pamamahala ng Langit, habang ang katuwiran (righteousness) ay ang tamang pagkakahanay sa awtoridad at batas ng Hari.</p>
+        </div>
+
+        <div class="card" data-search="ang hari at panginoon lord may-ari ng teritoryo">
+            <span class="card-num">MODULE 04</span>
+            <h3>Ang Hari at Panginoon (Lord)</h3>
+            <p>Ang Hari ay hindi ibinoboto at ang Kanyang salita ay batas. Bilang Panginoon, Siya ang nagmamay-ari ng lahat ng teritoryo at ari-arian sa loob ng Kanyang Kaharian.</p>
+        </div>
+
+        <div class="card" data-search="mga susi at pagkamamamayan keys citizenship prinsipyong panalangin">
+            <span class="card-num">MODULE 05</span>
+            <h3>Mga Susi at Pagkamamamayan</h3>
+            <p>Ang mga Susi ng Kaharian ay kumakatawan sa mga prinsipyo, batas, at awtoridad upang ma-access ang mga yaman ng Langit habang namumuhay bilang mamamayan dito sa lupa.</p>
+        </div>
+    </div>
+
+    <!-- MGA KATANUNGAN AT PAG-AARAL -->
+    <h2 class="section-title">Mga Gabay na Tanong para sa Talakayan</h2>
+
+    <div id="qaContainer">
+        <div class="qa-card" data-search="bakit sinasabing ang relihiyon ang isa sa mga pangunahing balakid">
+            <h4>Tanong 1:</h4>
+            <p>Bakit sinasabing ang relihiyon ang isa sa mga pangunahing balakid upang maunawaan ang tunay na konseptong Kaharian?</p>
+        </div>
+
+        <div class="qa-card" data-search="paano nababago ng pagiging katiwala steward sa halip na may-ari owner">
+            <h4>Tanong 2:</h4>
+            <p>Paano nababago ng pagiging 'Katiwala' (Steward) sa halip na 'May-ari' (Owner) ang ating pananaw sa ating pera at ari-arian?</p>
+        </div>
+
+        <div class="qa-card" data-search="ano ang ibig sabihin ng pamumuhay bilang isang ambassador kinatawan ng langit">
+            <h4>Tanong 3:</h4>
+            <p>Ano ang ibig sabihin ng pamumuhay bilang isang 'Ambassador' o Kinatawan ng Langit dito sa lupa?</p>
+        </div>
+
+        <div class="qa-card" data-search="paano natin mai-a-apply ang mga prinsipyo at kultura ng kaharian">
+            <h4>Tanong 4:</h4>
+            <p>Paano natin mai-a-apply ang mga prinsipyo at kultura ng Kaharian sa ating pang-araw-araw na pamumuhay at mga desisyon?</p>
+        </div>
+    </div>
+
+    <!-- FLOATING CHAT WIDGET BUTTON (Direktang magbubukas sa Messenger kung saan nakakabit ang PDF / Page Assistant) -->
+    <a href="https://m.me/lightmaligaya" target="_blank" class="chat-widget-button">
+        <span class="pulse-dot"></span>
+        <span>💬 Magtanong Tungkol sa Kingdom Principles</span>
+    </a>
+
+    <footer>
+        <p>Kingdom Community Center &bull; Executive Portal &bull; All Rights Reserved</p>
+    </footer>
+
+</div>
+
+<script>
+    function filterContent() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.querySelectorAll('.grid .card');
+        let qaCards = document.querySelectorAll('#qaContainer .qa-card');
+
+        cards.forEach(card => {
+            let text = card.getAttribute('data-search') + ' ' + card.innerText.toLowerCase();
+            if (text.includes(input)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        qaCards.forEach(qa => {
+            let text = qa.getAttribute('data-search') + ' ' + qa.innerText.toLowerCase();
+            if (text.includes(input)) {
+                qa.style.display = "block";
+            } else {
+                qa.style.display = "none";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

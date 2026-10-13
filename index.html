@@ -355,9 +355,9 @@
             background: rgba(251, 191, 36, 0.1);
             color: var(--accent-gold);
             border: 1px solid rgba(251, 191, 36, 0.3);
-            padding: 8px 14px;
+            padding: 10px 16px;
             border-radius: 8px;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             font-weight: 700;
             text-align: center;
             transition: all 0.2s ease;
@@ -534,6 +534,44 @@
             font-weight: 700;
             margin-top: 10px;
             cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .notes-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* CUSTOM TOAST NOTIFICATION STYLES */
+        .toast-notification {
+            visibility: hidden;
+            min-width: 300px;
+            background: linear-gradient(135deg, #151d30, #1e293b);
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            text-align: center;
+            border-radius: 12px;
+            padding: 14px 22px;
+            position: fixed;
+            z-index: 4000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.4s ease, bottom 0.4s ease, visibility 0.4s;
+        }
+
+        .toast-notification.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 45px;
         }
 
         /* FLOATING CHAT BUTTON & MODAL */
@@ -770,12 +808,12 @@
 
     <!-- LIVE SEARCH BAR -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Maghanap sa mga aralin (3 C's, Hermeneutics, Standard, Disciple, Inside Out...)" onkeyup="filterContent()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Maghanap sa mga aralin (3 C's, Hermeneutics, Standard, Disciple, Inside Out, Sovereign...)" onkeyup="filterContent()">
     </div>
 
     <!-- MGA PANGUNAHING KONSEPTO AT ARAL (CLICKABLE CARDS) -->
     <h2 class="section-title">Mga Aral at Arangkada ni Tatay Pastor & Team (Archive)</h2>
-    <p style="color: var(--text-muted); margin-top: -10px; margin-bottom: 20px; font-size: 0.9rem;">👇 Pindutin ang alinmang card upang buksan ang buong aralin at i-download ang PDF handout:</p>
+    <p style="color: var(--text-muted); margin-top: -10px; margin-bottom: 20px; font-size: 0.9rem;">👇 Pindutin ang alinmang card upang buksan at basahin ang kumpletong aralin:</p>
 
     <div class="grid" id="contentGrid">
         <div class="card" onclick="openLesson('lesson3Cs')" data-search="3 cs constitution commission calling capacity ate jam">
@@ -783,7 +821,7 @@
                 <span class="card-num">SPECIAL LESSON</span>
                 <h3>3 C's of the Kingdom (Ate Jam)</h3>
             </div>
-            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
+            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
         </div>
 
         <div class="card" onclick="openLesson('lessonDisciple')" data-search="am i a believer follower disciple kuya jec">
@@ -791,7 +829,7 @@
                 <span class="card-num">SPECIAL LESSON</span>
                 <h3>Believer, Follower, o Disciple? (Kuya Jec)</h3>
             </div>
-            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
+            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
         </div>
 
         <div class="card" onclick="openLesson('lessonInsideOut')" data-search="a change from inside out mental transformation tatay pastor">
@@ -799,7 +837,7 @@
                 <span class="card-num">SPECIAL LESSON</span>
                 <h3>A Change from Inside Out (Tatay Pastor)</h3>
             </div>
-            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
+            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
         </div>
 
         <div class="card" onclick="openLesson('lessonStandard')" data-search="standard kuya pastor jec king's word constitution">
@@ -807,7 +845,7 @@
                 <span class="card-num">SPECIAL LESSON</span>
                 <h3>Kingdom Standard (Kuya Pastor Jec)</h3>
             </div>
-            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
+            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
         </div>
 
         <div class="card" onclick="openLesson('lessonHermeneutics')" data-search="hermeneutics 10 principles original intent kingdom context constitution">
@@ -815,7 +853,7 @@
                 <span class="card-num">SPECIAL GUIDE</span>
                 <h3>Kingdom-Based Principles of Hermeneutics</h3>
             </div>
-            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
+            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
         </div>
 
         <div class="card" onclick="openLesson('lesson1')" data-search="the sovereign of god ate jam supreme ruler shallit control authority">
@@ -823,7 +861,7 @@
                 <span class="card-num">ARAL 01</span>
                 <h3>The Sovereign of God (Ate Jam)</h3>
             </div>
-            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
+            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
         </div>
     </div>
 
@@ -839,6 +877,11 @@
         <p>Kingdom Community Center Philippines &bull; Official Portal &bull; All Rights Reserved</p>
     </footer>
 
+</div>
+
+<!-- CUSTOM TOAST NOTIFICATION BOX -->
+<div id="toastNotification" class="toast-notification">
+    <span>✨ Matagumpay na na-save ang iyong notes!</span>
 </div>
 
 <!-- FULL-PAGE LESSON VIEWER OVERLAY (SECOND PAGE) -->
@@ -993,7 +1036,7 @@
         });
     }
 
-    // NOTES LOCALSTORAGE
+    // NOTES LOCALSTORAGE & CUSTOM TOAST
     document.addEventListener("DOMContentLoaded", function() {
         let saved = localStorage.getItem("kcc_user_notes");
         if(saved) {
@@ -1001,10 +1044,18 @@
         }
     });
 
+    function showToast() {
+        let toast = document.getElementById("toastNotification");
+        toast.classList.add("show");
+        setTimeout(function() { 
+            toast.classList.remove("show"); 
+        }, 3000);
+    }
+
     function saveNotes() {
         let notes = document.getElementById("userNotes").value;
         localStorage.setItem("kcc_user_notes", notes);
-        alert("Matagumpay na na-save ang iyong notes!");
+        showToast();
     }
 
     // AI CHAT MODAL FUNCTIONS (BASED ON ALL UPLOADED PDF FILES)
@@ -1042,7 +1093,7 @@
             if(lower.includes("3 c") || lower.includes("constitution") || lower.includes("commission") || lower.includes("calling")) {
                 botDiv.innerText = "Ayon sa PDF notes (3 C's of the Kingdom ni Ate Jam): Ang 3 C's ay (1) Constitution — Ang Bibliya bilang dokumentadong kalooban ng Hari; (2) Commission — Ang Ecclesia bilang Cabinet ng Hari; at (3) Calling & Capacity — Ang panawag na nakabase sa Identity at Grace.";
             } else if(lower.includes("believer") || lower.includes("follower") || lower.includes("disciple")) {
-                botDiv.innerText = "Ayon sa PDF notes (Am I a Believer, Follower, or Disciple ni Kuya Jec): Ang Believer ay ang pintuak pamasok sa Kaharian; ang Follower ay ang araw-araw na sumusunod sa Hari; at ang Disciple ay ang nagiging tulad ng Kanyang Master sa pamamagitan ng Transformation.";
+                botDiv.innerText = "Ayon sa PDF notes (Am I a Believer, Follower, or Disciple ni Kuya Jec): Ang Believer ay ang pintuan pamasok sa Kaharian; ang Follower ay ang araw-araw na sumusunod sa Hari; at ang Disciple ay ang nagiging tulad ng Kanyang Master sa pamamagitan ng Transformation.";
             } else if(lower.includes("inside out") || lower.includes("transformation") || lower.includes("pag-iisip")) {
                 botDiv.innerText = "Ayon sa PDF notes (A Change from Inside Out ni Tatay Pastor): Utos ng Hari ang baguhin ang ating pag-iisip (Romans 12:2) upang maunawaan ang Kanyang kalooban at maiwasan ang makamundong sistema.";
             } else if(lower.includes("standard")) {

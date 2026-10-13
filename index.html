@@ -178,8 +178,8 @@
 </div>
 
 <script>
-    // Ilagay dito ang iyong Groq API Key galing sa https://console.groq.com/
-    const GROQ_API_KEY = "ILAGAY_MO_DITO_ANG_GROQ_API_KEY_MO";
+    // Tamang Groq API Key
+    const GROQ_API_KEY = "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";
 
     let currentSize = 15;
     function adjustFontSize(change) {
@@ -265,7 +265,6 @@ Mahigpit na Patakaran: Ang tanging pagkukunan mo ng sagot ay ang opisyal na KCC 
 `;
 
         try {
-            // Groq API endpoint gamit ang Llama 3.3 70B model
             const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
                 headers: { 

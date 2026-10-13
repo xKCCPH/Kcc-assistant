@@ -906,11 +906,11 @@
     </div>
     <div class="ai-chat-body" id="chatBody">
         <div class="chat-msg msg-bot">
-            Shalom! Ako ang iyong Kingdom Assistant. Nakabase ang aking mga sagot sa LAHAT ng inupload mong PDF files sa GitHub (3 C's, Inside Out, Disciple, Standard, Hermeneutics, at iba pa). Ano ang nais mong suriin?
+            Shalom! Ako ang iyong Kingdom Assistant. Handa akong umanalisa at tumulong sa iyong mga katanungan gamit ang Kingdom Lens, Hermeneutics, at ang mga turo sa ating mga PDF. Ano ang nais mong malaman?
         </div>
     </div>
     <div class="ai-chat-footer">
-        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong batay sa mga PDF notes..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
+        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong tungkol sa Salita o mga Aralin..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
         <button class="ai-send-btn" onclick="sendAiMessage()">Ipadala</button>
     </div>
 </div>
@@ -1058,7 +1058,7 @@
         showToast();
     }
 
-    // AI CHAT MODAL FUNCTIONS (BASED ON ALL UPLOADED PDF FILES)
+    // ADVANCED AI CHAT ANALYZER (KINGDOM LENS & HERMENEUTICS ENGINE)
     function toggleAiModal() {
         let modal = document.getElementById("aiModal");
         if(modal.style.display === "flex") {
@@ -1084,33 +1084,45 @@
         input.value = "";
         chatBody.scrollTop = chatBody.scrollHeight;
 
-        // Bot Response hango sa LAHAT ng PDF files sa repository
+        // Intelligent AI Simulation hango sa Hermeneutics at PDF Frameworks
         setTimeout(() => {
             let botDiv = document.createElement("div");
             botDiv.className = "chat-msg msg-bot";
 
             let lower = text.toLowerCase();
-            if(lower.includes("3 c") || lower.includes("constitution") || lower.includes("commission") || lower.includes("calling")) {
-                botDiv.innerText = "Ayon sa PDF notes (3 C's of the Kingdom ni Ate Jam): Ang 3 C's ay (1) Constitution — Ang Bibliya bilang dokumentadong kalooban ng Hari; (2) Commission — Ang Ecclesia bilang Cabinet ng Hari; at (3) Calling & Capacity — Ang panawag na nakabase sa Identity at Grace.";
-            } else if(lower.includes("believer") || lower.includes("follower") || lower.includes("disciple")) {
-                botDiv.innerText = "Ayon sa PDF notes (Am I a Believer, Follower, or Disciple ni Kuya Jec): Ang Believer ay ang pintuan pamasok sa Kaharian; ang Follower ay ang araw-araw na sumusunod sa Hari; at ang Disciple ay ang nagiging tulad ng Kanyang Master sa pamamagitan ng Transformation.";
-            } else if(lower.includes("inside out") || lower.includes("transformation") || lower.includes("pag-iisip")) {
-                botDiv.innerText = "Ayon sa PDF notes (A Change from Inside Out ni Tatay Pastor): Utos ng Hari ang baguhin ang ating pag-iisip (Romans 12:2) upang maunawaan ang Kanyang kalooban at maiwasan ang makamundong sistema.";
-            } else if(lower.includes("standard")) {
-                botDiv.innerText = "Ayon sa PDF notes (Kingdom Standard ni Kuya Pastor Jec): Ang Salita ng Hari ang ating tanging Standard. Ang opinyon ng tao ay walang halaga kumpara sa Salita ng Hari.";
-            } else if(lower.includes("hermeneutics") || lower.includes("original intent")) {
-                botDiv.innerText = "Ayon sa Kingdom Hermeneutics PDF: Ang pag-intindi ng Kasulatan ay pagtuklas sa Original Intent ng Hari (Proverbs 25:2) gamit ang 10 Principles at ang Banal na Espiritu bilang Gobernador.";
-            } else if(lower.includes("sovereign") || lower.includes("sovereignty")) {
-                botDiv.innerText = "Ayon sa The Sovereign of God PDF: Ang 'Sovereign' ay Supreme Ruler (Shallit). Ang Kanyang control ay Authority at ang Kanyang presence ay Governance.";
-            } else if(lower.includes("assignment") || lower.includes("relihiyon")) {
-                botDiv.innerText = "Ayon sa Understanding Our Assignment PDF: Hindi tayo inatasang magtatag ng relihiyon kundi maging pamilya at kolonisador upang i-reintroduce ang Diyos sa mundo.";
-            } else {
-                botDiv.innerText = "Batay sa lahat ng inupload mong PDF notes sa GitHub: Ang bawat turo nina Tatay Pastor, Ate Jam, at Kuya Pastor Jec ay nakasentro sa Konstitusyon at Pamamahala ng Kaharian. May partikular ka bang tanong mula sa mga PDF?";
+            
+            // Pagsusuri gamit ang Hermeneutics / Pag-intindi sa Biblia
+            if(lower.includes("hirap") || lower.includes("paano intindihin") || lower.includes("pag-unawa") || lower.includes("bible") || lower.includes("talata") || lower.includes("hermeneutics")) {
+                botDiv.innerText = "Shalom! Nauunawaan ko na minsan ay mahirap intindihin ang Bibliya kapag tiningnan natin ito sa relihiyosong paraan. Ngunit ayon sa ating Kingdom Hermeneutics at sa mga turo nina Tatay Pastor at Ate Jam: Huwag nating basahin ang Bibliya bilang simpleng librong relihiyoso kundi bilang *Konstitusyon ng Kaharian*. Gamitin natin ang *Original Intent* ng Hari—itinatanong natin: 'Ano ba ang ibig sabihin ng Diyos nang sinabi Niya ito?' sa halip na 'Ano ang ibig sabihin nito sa akin?'. Gabay din natin ang Banal na Espiritu bilang Gobernador upang linawin ang bawat talata!";
+            } 
+            // 3 C's of the Kingdom
+            else if(lower.includes("3 c") || lower.includes("constitution") || lower.includes("commission") || lower.includes("calling") || lower.includes("capacity")) {
+                botDiv.innerText = "Batay sa aral tungkol sa 3 C's ng Kaharian (ni Ate Jam): \n1. **Constitution:** Ang Bibliya ang dokumentadong kalooban at desisyon ng Hari.\n2. **Commission:** Ang Ecclesia (Simbahan) ay ang Gabinete ng Hari na naatasang magdala ng Kanyang layunin.\n3. **Calling & Capacity:** Ang ating panawagan ay nakabase sa ating Identity at Grace, na nagbibigay sa atin ng burden at desires na tuparin ang kalooban ng Diyos.";
+            } 
+            // Believer, Follower, Disciple
+            else if(lower.includes("believer") || lower.includes("follower") || lower.includes("disciple") || lower.includes("disipulo")) {
+                botDiv.innerText = "Ayon sa mga aral ni Kuya Jec (Am I a Believer, Follower, or Disciple?): \n• **Believer:** Ang tumitiwala at nagpapakilala sa Hesus (ang pintuan o entry point sa Kaharian).\n• **Follower:** Ang araw-araw na sumusunod sa landas, pamumuno, at lifestyle ng Hari.\n• **Disciple:** Ang mag-aaral na dumaan sa ganap na *Transformation* at nagre-reproduce ng buhay ng Hari sa iba.";
+            } 
+            // A Change from Inside Out
+            else if(lower.includes("inside out") || lower.includes("transformation") || lower.includes("isip") || lower.includes("mind") || lower.includes("pagbabago")) {
+                botDiv.innerText = "Ayon sa turo ni Tatay Pastor (A Change from Inside Out): Kailangan ang mental transformation o pagbabago ng pag-iisip dahil ito ay utos ng Hari (Romans 12:2). Hindi tayo makasamba nang maayos kung bulok o makamundo pa rin ang ating isip (Proverbs 23:7). Kailangan nating iwan ang lumang kultura at mamuhay ayon sa Kingdom Community.";
+            } 
+            // Kingdom Standard
+            else if(lower.includes("standard") || lower.includes("opinyon")) {
+                botDiv.innerText = "Ayon kay Kuya Pastor Jec (Kingdom Standard): Ang tanging pamantayan o Standard sa ating komunidad ay ang Salita ng Hari. Ang opinyon ng tao ay walang halaga! Kailangan nating i-align ang ating character, relationship, decisions, at priorities sa Salita ng Diyos.";
+            } 
+            // Sovereignty & Assignment
+            else if(lower.includes("sovereign") || lower.includes("assignment") || lower.includes("hari")) {
+                botDiv.innerText = "Sa lente ng Kingdom Principles: Ang ating Diyos ay Kataas-taasang Hari (Shallit). Ang Kanyang layunin ay hindi magtatag ng relihiyon kundi ibalik ang Kanyang pamamahala (Governance) sa lupa sa pamamagitan natin bilang Kanyang mga embahador at kolonisador.";
+            } 
+            // General fallback na matalino at parang tao
+            else {
+                botDiv.innerText = "Magandang tanong 'yan! Sinusuri ko ang iyong katanungan gamit ang Kingdom Lens at ang mga inupload nating PDF notes nina Tatay Pastor, Ate Jam, at Kuya Pastor Jec. Tandaan natin na ang bawat katotohanan sa Bibliya ay dapat nating tingnan sa konteksto ng Gobyerno at Kaharian ng Diyos. May gusto ka bang linawin pa tungkol sa Hermeneutics o sa mga aralin natin?";
             }
 
             chatBody.appendChild(botDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
-        }, 600);
+        }, 700);
     }
 </script>
 

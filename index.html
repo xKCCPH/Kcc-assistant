@@ -227,4 +227,206 @@
         .card-num {
             display: inline-block;
             background: rgba(59, 130, 246, 0.15);
-            color: var(--accent
+            color: var(--accent-blue);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 { 
+            margin: 0 0 10px 0; 
+            color: var(--accent-gold); 
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .qa-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 22px 26px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        .qa-card:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .qa-card h4 { 
+            margin: 0 0 8px 0; 
+            color: var(--accent-blue); 
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .qa-card p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 70px;
+            padding: 30px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER AREA -->
+    <header>
+        <span class="badge">👑 Official Portal</span>
+        <h1>Kingdom Community Center</h1>
+        <p>Executive Dashboard & Center for Kingdom Studies</p>
+        
+        <!-- ACTION BUTTONS -->
+        <div class="action-buttons">
+            <a href="https://irp-cdn.multiscreensite.com/c21a6153/files/uploaded/kingdom-principles.pdf" target="_blank" class="majestic-btn btn-pdf">
+                📄 Kingdom Principles PDF
+            </a>
+            <a href="https://www.facebook.com/lightmaligaya" target="_blank" class="majestic-btn btn-fb">
+                💬 Facebook Page (Light Maligaya)
+            </a>
+        </div>
+    </header>
+
+    <!-- METRICS OVERVIEW -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-icon">📖</div>
+            <div class="metric-info">
+                <h4>05 Modyul</h4>
+                <p>Pangunahing Aralin</p>
+            </div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-icon">❓</div>
+            <div class="metric-info">
+                <h4>04 Gabay</h4>
+                <p>Mula sa Talakayan</p>
+            </div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-icon">🌐</div>
+            <div class="metric-info">
+                <h4>100% Libre</h4>
+                <p>Community Resource</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIVE SEARCH BAR -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Maghanap ng paksa, aralin, o katanungan sa portal..." onkeyup="filterContent()">
+    </div>
+
+    <!-- MGA PANGUNAHING KONSEPTO -->
+    <h2 class="section-title">Mga Pangunahing Konsepto at Aral</h2>
+
+    <div class="grid" id="contentGrid">
+        <div class="card" data-search="layunin ng biblia at ng tao hari kaharian maharlikang pamilya dominion">
+            <span class="card-num">MODULE 01</span>
+            <h3>Layunin ng Biblia at ng Tao</h3>
+            <p>Ang Biblia ay hindi lamang tungkol sa relihiyon kundi tungkol sa isang Hari, Kaharian, at Maharlikang Pamilya. Itinatag ng Diyos ang tao sa lupa upang palawakin ang Kanyang pamahalaan sa pamamagitan ng dominion.</p>
+        </div>
+
+        <div class="card" data-search="kaharian vs relihiyon pamamahala ng diyos">
+            <span class="card-num">MODULE 02</span>
+            <h3>Kaharian vs. Relihiyon</h3>
+            <p>Ang relihiyon ay pagtatangka ng taong hanapin ang Diyos. Ang Kaharian naman ay ang mismong pamamahala ng Diyos na bumaba sa lupa upang ibalik ang tao sa Kanyang orihinal na posisyon.</p>
+        </div>
+
+        <div class="card" data-search="ang kaharian at katuwiran mateo 6:33 awtoridad batas ng hari">
+            <span class="card-num">MODULE 03</span>
+            <h3>Ang Kaharian at Katuwiran (Mateo 6:33)</h3>
+            <p>Ang paghahanap sa Kaharian ay pagpapasailalim sa pamamahala ng Langit, habang ang katuwiran (righteousness) ay ang tamang pagkakahanay sa awtoridad at batas ng Hari.</p>
+        </div>
+
+        <div class="card" data-search="ang hari at panginoon lord may-ari ng teritoryo">
+            <span class="card-num">MODULE 04</span>
+            <h3>Ang Hari at Panginoon (Lord)</h3>
+            <p>Ang Hari ay hindi ibinoboto at ang Kanyang salita ay batas. Bilang Panginoon, Siya ang nagmamay-ari ng lahat ng teritoryo at ari-arian sa loob ng Kanyang Kaharian.</p>
+        </div>
+
+        <div class="card" data-search="mga susi at pagkamamamayan keys citizenship prinsipyong panalangin">
+            <span class="card-num">MODULE 05</span>
+            <h3>Mga Susi at Pagkamamamayan</h3>
+            <p>Ang mga Susi ng Kaharian ay kumakatawan sa mga prinsipyo, batas, at awtoridad upang ma-access ang mga yaman ng Langit habang namumuhay bilang mamamayan dito sa lupa.</p>
+        </div>
+    </div>
+
+    <!-- MGA KATANUNGAN AT PAG-AARAL -->
+    <h2 class="section-title">Mga Gabay na Tanong para sa Talakayan</h2>
+
+    <div id="qaContainer">
+        <div class="qa-card" data-search="bakit sinasabing ang relihiyon ang isa sa mga pangunahing balakid">
+            <h4>Tanong 1:</h4>
+            <p>Bakit sinasabing ang relihiyon ang isa sa mga pangunahing balakid upang maunawaan ang tunay na konseptong Kaharian?</p>
+        </div>
+
+        <div class="qa-card" data-search="paano nababago ng pagiging katiwala steward sa halip na may-ari owner">
+            <h4>Tanong 2:</h4>
+            <p>Paano nababago ng pagiging 'Katiwala' (Steward) sa halip na 'May-ari' (Owner) ang ating pananaw sa ating pera at ari-arian?</p>
+        </div>
+
+        <div class="qa-card" data-search="ano ang ibig sabihin ng pamumuhay bilang isang ambassador kinatawan ng langit">
+            <h4>Tanong 3:</h4>
+            <p>Ano ang ibig sabihin ng pamumuhay bilang isang 'Ambassador' o Kinatawan ng Langit dito sa lupa?</p>
+        </div>
+
+        <div class="qa-card" data-search="paano natin mai-a-apply ang mga prinsipyo at kultura ng kaharian">
+            <h4>Tanong 4:</h4>
+            <p>Paano natin mai-a-apply ang mga prinsipyo at kultura ng Kaharian sa ating pang-araw-araw na pamumuhay at mga desisyon?</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Kingdom Community Center &bull; Executive Portal &bull; All Rights Reserved</p>
+    </footer>
+
+</div>
+
+<script>
+    function filterContent() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.querySelectorAll('.grid .card');
+        let qaCards = document.querySelectorAll('#qaContainer .qa-card');
+
+        cards.forEach(card => {
+            let text = card.getAttribute('data-search') + ' ' + card.innerText.toLowerCase();
+            if (text.includes(input)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        qaCards.forEach(qa => {
+            let text = qa.getAttribute('data-search') + ' ' + qa.innerText.toLowerCase();
+            if (text.includes(input)) {
+                qa.style.display = "block";
+            } else {
+                qa.style.display = "none";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

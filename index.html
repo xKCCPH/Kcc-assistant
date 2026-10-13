@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KCC Bible Study Assistant</title>
+    <title>KCC Bible Assistant</title>
     <style>
         :root {
             --base-font-size: 15px;
@@ -178,8 +178,8 @@
 </div>
 
 <script>
-    // OpenRouter API Key
-    const OPENROUTER_API_KEY = "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";
+    // Bagong Cohere API Key
+    const COHERE_API_KEY = "cohere_esg96pUTz7UukJXAKHknQmFixvxIBw42YOUWV3oB2OzM80";
 
     let currentSize = 15;
     function adjustFontSize(change) {
@@ -208,7 +208,6 @@
         chatBox.innerHTML += `<div class="message bot" id="${loadingId}">Nag-iisip <span class="loading-spinner">⏳</span></div>`;
         chatBox.scrollTop = chatBox.scrollHeight;
 
-        // System Instruction na naglalaman ng Vision at Mission
         const systemInstruction = `
 Ikaw ay isang matulungin at magalang na AI Assistant. Kapag nagtanong ang user tungkol sa Vision, Mission, o pareho tungkol sa Kingdom of God, ibigay mo ang sumusunod na eksaktong impormasyon:
 
@@ -227,21 +226,19 @@ Sagutin ang iba pang mga pangkalahatang tanong nang malinaw at maayos sa wikang 
 `;
 
         try {
-            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            // Paggamit ng Proxy para maiwasan ang Browser CORS Block sa Cohere API
+            const response = await fetch("https://corsproxy.io/?" + encodeURIComponent("https://api.cohere.com/v2/chat"), {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-                    "HTTP-Referer": window.location.href,
-                    "X-Title": "KCC Bible Assistant"
+                    "Authorization": `Bearer ${COHERE_API_KEY}`
                 },
                 body: JSON.stringify({
-                    model: "meta-llama/llama-3.1-8b-instruct:free",
+                    model: "command-r-plus",
                     messages: [
                         { role: "system", content: systemInstruction },
                         { role: "user", content: userText }
-                    ],
-                    temperature: 0.3
+                    ]
                 })
             });
 
@@ -250,11 +247,14 @@ Sagutin ang iba pang mga pangkalahatang tanong nang malinaw at maayos sa wikang 
             const loadingElem = document.getElementById(loadingId);
             if (loadingElem) loadingElem.remove();
 
-            if (data.error) {
-                chatBox.innerHTML += `<div class="message bot">May error sa API: ${data.error.message}</div>`;
-            } else {
-                const botReply = data.choices?.[0]?.message?.content || "Pasensya na, walang maibigay na sagot.";
+            const botReply = data.message?.content?.[0]?.text || data.text;
+
+            if (botReply) {
                 chatBox.innerHTML += `<div class="message bot">${botReply}</div>`;
+            } else if (data.error || data.message) {
+                chatBox.innerHTML += `<div class="message bot">May error: ${data.error?.message || data.message}</div>`;
+            } else {
+                chatBox.innerHTML += `<div class="message bot">Pasensya na, walang maibigay na sagot.</div>`;
             }
             
         } catch (error) {

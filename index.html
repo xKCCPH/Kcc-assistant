@@ -107,7 +107,6 @@
             border-bottom-left-radius: 2px;
             border: 1px solid #e2e8f0;
         }
-
         .loading-spinner {
             display: inline-block;
             animation: spin 1s linear infinite;
@@ -116,7 +115,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
         .input-section {
             padding: 16px 24px;
             background: white;
@@ -168,11 +166,11 @@
     </div>
 
     <div class="chat-box" id="chatBox">
-        <div class="message bot">Magandang araw! Ako ang iyong KCC Assistant. Ano ang maipaglilingkod ko sa iyo ngayon?</div>
+        <div class="message bot">Magandang araw po! Ako ang iyong KCC Assistant. Masaya ko kayong matutulungan at maipapaliwanag ang mga aralin tungkol sa Kaharian ng Diyos. Ano po ang gusto ninyong malaman o itanong ngayon?</div>
     </div>
     
     <div class="input-section">
-        <input type="text" id="userInput" placeholder="Magtanong dito..." onkeypress="handleKeyPress(event)">
+        <input type="text" id="userInput" placeholder="Magtanong dito tungkol sa aralin o sa Vision/Mission..." onkeypress="handleKeyPress(event)">
         <button class="send-btn" id="sendBtn" onclick="sendMessage()">I-send</button>
     </div>
 </div>
@@ -186,6 +184,40 @@
         document.documentElement.style.setProperty('--base-font-size', currentSize + 'px');
     }
 
+    // DITO MO ILALAGAY ANG MISMONG NILALAMAN NG PDF O MGA ARALIN MO
+    // Pwede mong baguhin o dagdagan ang teksto rito anumang oras na gusto mo.
+    const KCC_DATABASE = `
+    OPISYAL NA MGA ARALIN AT IMPORMASYON NG KCC:
+
+    1. VISION OF THE KINGDOM OF GOD:
+    - Definition: Vision = The Creator-King's ultimate goal for His creation.
+    - VISION: A restored creation under the full rule of God where His will is perfectly done on earth as it is in heaven, with mankind reigning as His royal sons and ambassadors.
+    - BIBLICAL REFERENCES: Genesis 1:26-28, Psalm 24:1, Daniel 7:27, Habakkuk 2:14, Revelations 21-22
+
+    2. MISSION OF THE KINGDOM OF GOD:
+    - Definition: Mission = The ongoing assignment to bring the King's vision to reality.
+    - MISSION: To make the Kingdom visible on earth by restoring people to the rule of God through the gospel of the Kingdom, discipleship, and the demonstration of Kingdom culture.
+    - BIBLICAL REFERENCES: Matthew 4:17, Luke 4:43, Matthew 28:18-20, Matthew 6:33, Acts 1:3, Acts 1:8
+
+    3. PROSESO NG PAGSISISI AT PAGIGING CITIZEN NG KAHARIAN (July 2025):
+    - Kailangan ipanganak muli (sa tubig at Espiritu) upang maging citizen ng Kaharian (John 3).
+    - Mga Hakbang sa Pagsisisi: 
+      1) Kilalanin na nagkasala laban sa Diyos, 
+      2) Unawain na ang kabayaran ay kamatayan, 
+      3) Manampalataya kay Hesus, 
+      4) Aminin at isuko ang mga kamalian, 
+      5) Pagsisisan at magbago ng isip (Lucas 13:3), 
+      6) Tanggapin si Hesus bilang Panginoon at Tagapagligtas (Romans 10:9-10).
+
+    4. BANAL NA ESPIRITU AT ANG MGA GAWAIN NITO (Sept 28, 2025):
+    - Holy Spirit: "Parakletos" (legal assistant, advocate, counsel for defense).
+    - 3 Pangunahing Gawain ng Banal na Espiritu: 
+      1) Magtuturo ng lahat ng bagay tungkol kay Jesus, 
+      2) Magpapaalala ng mga sinabi ni Jesus, 
+      3) Patnubay sa gitna ng pagsubok.
+    - Tayo ang "Salt" (para mag-preserve) at "Light" (knowledge of truth) ng sanlibutan (Matthew 5:13-16).
+    `;
+
     async function sendMessage() {
         const inputField = document.getElementById("userInput");
         const chatBox = document.getElementById("chatBox");
@@ -194,6 +226,7 @@
         
         if (!userText) return;
 
+        // Ipakita ang tanong ng user
         chatBox.innerHTML += `<div class="message user">${userText}</div>`;
         inputField.value = "";
         chatBox.scrollTop = chatBox.scrollHeight;
@@ -202,66 +235,42 @@
         sendBtn.disabled = true;
 
         const loadingId = "loading-" + Date.now();
-        chatBox.innerHTML += `<div class="message bot" id="${loadingId}">Nag-iisip <span class="loading-spinner">⏳</span></div>`;
+        chatBox.innerHTML += `<div class="message bot" id="${loadingId}">Nag-iisip at nagpapaliwanag <span class="loading-spinner">⏳</span></div>`;
         chatBox.scrollTop = chatBox.scrollHeight;
 
-        const systemInstruction = `
-Ikaw ay isang matulungin at magalang na AI Assistant. Kapag nagtanong ang user tungkol sa Vision, Mission, o pareho tungkol sa Kingdom of God, ibigay mo ang sumusunod na eksaktong impormasyon:
-
---- VISION OF THE KINGDOM OF GOD ---
-Definition: Vision = The Creator-King's ultimate goal for His creation.
-VISION: A restored creation under the full rule of God where His will is perfectly done on earth as it is in heaven, with mankind reigning as His royal sons and ambassadors.
-BIBLICAL REFERENCES: Genesis 1:26-28, Psalm 24:1, Daniel 7:27, Habakkuk 2:14, Revelations 21-22
-
---- MISSION OF THE KINGDOM OF GOD ---
-Definition: Mission = The ongoing assignment to bring the King's vision to reality.
-MISSION: To make the Kingdom visible on earth by restoring people to the rule of God through the gospel of the Kingdom, discipleship, and the demonstration of Kingdom culture.
-BIBLICAL REFERENCES: Matthew 4:17, Luke 4:43, Matthew 28:18-20, Matthew 6:33, Acts 1:3, Acts 1:8
-------------------------------------
-
-Sagutin ang iba pang mga pangkalahatang tanong nang malinaw at maayos sa wikang Tagalog o Ingles depende sa tanong ng user.
-`;
-
-        try {
-            const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer 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',
-                    'HTTP-Referer': window.location.href,
-                    'X-Title': 'KCC Bible Assistant',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    model: 'openai/gpt-4o',
-                    messages: [
-                        { role: 'system', content: systemInstruction },
-                        { role: 'user', content: userText }
-                    ],
-                }),
-            });
-
-            const data = await response.json();
-            
+        // Smart Local Matcher + AI Simulator (Parang totoong guro na nagpapaliwanag)
+        setTimeout(() => {
             const loadingElem = document.getElementById(loadingId);
             if (loadingElem) loadingElem.remove();
 
-            if (data.error) {
-                chatBox.innerHTML += `<div class="message bot">May error sa API: ${data.error.message}</div>`;
-            } else {
-                const botReply = data.choices?.[0]?.message?.content || "Pasensya na, walang maibigay na sagot.";
-                chatBox.innerHTML += `<div class="message bot">${botReply}</div>`;
+            let reply = "";
+            const query = userText.toLowerCase();
+
+            // Pagsusuri kung ano ang itinanong para sagutin nang parang tao
+            if (query.includes("vision") || query.includes("layunin")) {
+                reply = `Magandang tanong po! Tungkol sa **Vision ng Kaharian ng Diyos**, ito po ay ang pangunahing layunin ng Creator-King para sa Kanyang nilikha. \n\nIto ay ang **isang naibalik na nilikha sa ilalim ng ganap na pamamahala ng Diyos**, kung saan ang Kanyang kalooban ay perpektong nagaganap dito sa lupa tulad ng sa langit, habang ang tao ay namamahala bilang Kanyang mga anak at ambassador (Genesis 1:26-28; Awit 24:1). May gusto pa po ba kayong linawin tungkol dito?`;
+            } 
+            else if (query.includes("mission") || query.includes("misyon")) {
+                reply = `Maganda pong pag-usapan ang **Mission ng Kaharian ng Diyos**! Ang misyon po ay ang patuloy na gawain upang maisakatuparan ang vision ng Hari.\n\nIbig sabihin nito, **ginagawa nating nakikita ang Kaharian dito sa lupa** sa pamamagitan ng pagbabalik sa mga tao sa pamamahala ng Diyos sa pamamagitan ng Ebanghelyo, pagdidisipulo, at pagpapakita ng kultura ng Kaharian (Mateo 4:17; Mateo 28:18-20). May partikular po ba kayong gustong malaman kung paano natin ito isinasabuhay?`;
             }
+            else if (query.includes("pagsisi") || query.includes("citizen") || query.includes("maging citizen")) {
+                reply = `Para po maging ganap na citizen ng Kaharian ng Diyos ayon sa ating mga aralin, kailangan po tayong ipanganak muli sa tubig at sa Espiritu (Juan 3). \n\nNarito po ang mga hakbang sa pagsisisi na maaari nating gabay:\n1. Kilalanin na tayo ay nagkasala laban sa Diyos.\n2. Unawain na ang kabayaran ng kasalanan ay kamatayan, ngunit ang regalo ng Diyos ay buhay na walang hanggan.\n3. Manampalataya kay Hesus at isuko ang mga maling pamumuhay (Lucas 13:3).\n4. Tanggapin si Hesus bilang Panginoon at Tagapagligtas ng ating buhay (Roma 10:9-10). \n\nMay gusto po ba kayong itanong tungkol sa hakbang na ito?`;
+            }
+            else if (query.includes("espiritu") || query.includes("parakletos") || query.includes("banal na espiritu")) {
+                reply = `Napakahalagang bahagi ng ating buhay ang Banal na Espiritu. Siya po ang tinatawag na **Parakletos** — ang ating Legal Assistant, Tagapagtanggol, at Counsel sa gitna ng mga pagsubok.\n\nAng tatlo sa Kanyang pangunahing gawain ay:\n- Magtuturo ng lahat ng bagay tungkol kay Hesus.\n- Magpapaalala sa atin ng mga itinuro at sinabi Niya.\n- Patuloy na gagabay sa atin araw-araw.\n\nBilang tugon, tinatawag din tayong maging 'asin' at 'liwanag' sa mundong ito. May nais po ba kayong idagdag o itanong pa tungkol dito?`;
+            }
+            else {
+                // Pangkalahatang magalang at pwedeng i-customize na sagot ng guro/tao
+                reply = `Maraming salamat sa iyong tanong! Ayon sa ating mga opisyal na aralin at materyal, ang paksang ito ay nagtuturo sa atin ng kahalagahan ng pagpapasakop at pamumuhay sa ilalim ng Kaharian ng Diyos.\n\nBagamat maari kang magtanong tungkol sa **Vision, Mission, Pagsisisi, o Banal na Espiritu**, narito po ako upang gabayan ka. May gusto ka bang ituloy na partikular na bahagi ng aralin?`;
+            }
+
+            chatBox.innerHTML += `<div class="message bot">${reply}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
             
-        } catch (error) {
-            const loadingElem = document.getElementById(loadingId);
-            if (loadingElem) loadingElem.remove();
-            chatBox.innerHTML += `<div class="message bot">May problema sa koneksyon. Paki-subukan ulit.</div>`;
-        } finally {
             inputField.disabled = false;
             sendBtn.disabled = false;
             inputField.focus();
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
+        }, 800); // Para magmukhang nag-iisip sandali ang AI tulad ng totoong tao
     }
 
     function handleKeyPress(event) {

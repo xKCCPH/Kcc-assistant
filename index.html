@@ -13,7 +13,6 @@
             --accent-blue: #3b82f6;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --glass-bg: rgba(21, 29, 48, 0.85);
         }
 
         body {
@@ -30,7 +29,7 @@
             margin: 0 auto;
         }
 
-        /* MAJESTIC HEADER */
+        /* HEADER */
         header {
             text-align: center;
             padding: 45px 30px;
@@ -41,7 +40,6 @@
             box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
         }
 
         header::before {
@@ -81,7 +79,7 @@
             font-size: 1.15rem;
         }
 
-        /* MAJESTIC ACTION BUTTONS */
+        /* ACTION BUTTONS */
         .action-buttons {
             display: flex;
             justify-content: center;
@@ -124,7 +122,7 @@
             box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
         }
 
-        /* STATS METRICS ROW */
+        /* METRICS OVERVIEW */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -275,6 +273,46 @@
             font-size: 0.95rem;
         }
 
+        /* FLOATING CHAT WIDGET BUTTON (Nakatutok sa kanang ibaba) */
+        .chat-widget-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 14px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .chat-widget-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.6);
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+        }
+
         footer {
             text-align: center;
             margin-top: 70px;
@@ -298,7 +336,7 @@
         <!-- ACTION BUTTONS -->
         <div class="action-buttons">
             <a href="https://irp-cdn.multiscreensite.com/c21a6153/files/uploaded/kingdom-principles.pdf" target="_blank" class="majestic-btn btn-pdf">
-                📄 Kingdom Principles PDF
+                📄 Kingdom Principles PDF (Dr. Myles Munroe)
             </a>
             <a href="https://www.facebook.com/lightmaligaya" target="_blank" class="majestic-btn btn-fb">
                 💬 Facebook Page (Light Maligaya)
@@ -395,6 +433,12 @@
             <p>Paano natin mai-a-apply ang mga prinsipyo at kultura ng Kaharian sa ating pang-araw-araw na pamumuhay at mga desisyon?</p>
         </div>
     </div>
+
+    <!-- FLOATING CHAT WIDGET BUTTON (Narito na ang nakitang chat button sa kanang ibaba) -->
+    <a href="https://m.me/lightmaligaya" target="_blank" class="chat-widget-button">
+        <span class="pulse-dot"></span>
+        <span>💬 Magtanong Tungkol sa Kingdom Principles</span>
+    </a>
 
     <footer>
         <p>Kingdom Community Center &bull; Executive Portal &bull; All Rights Reserved</p>

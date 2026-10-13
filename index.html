@@ -479,6 +479,29 @@
             margin: 10px 0;
         }
 
+        /* DOWNLOAD PDF BUTTON */
+        .download-pdf-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #d97706, #b45309);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
+        }
+
+        .download-pdf-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.5);
+        }
+
         /* NOTES & REFLECTION PAD */
         .notes-container {
             background: var(--bg-card);
@@ -680,7 +703,7 @@
         
         <!-- ACTION BUTTONS -->
         <div class="action-buttons">
-            <a href="https://irp-cdn.multiscreensite.com/c21a6153/files/uploaded/kingdom-principles.pdf" target="_blank" class="majestic-btn btn-pdf">
+            <a href="kingdom-principles.pdf" target="_blank" class="majestic-btn btn-pdf">
                 📄 Kingdom Principles PDF (Dr. Myles Munroe)
             </a>
             <a href="https://www.facebook.com/lightmaligaya" target="_blank" class="majestic-btn btn-fb">
@@ -747,20 +770,52 @@
 
     <!-- LIVE SEARCH BAR -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Maghanap sa mga aralin (Hermeneutics, Sovereignty, Assignment, Vision...)" onkeyup="filterContent()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Maghanap sa mga aralin (3 C's, Hermeneutics, Standard, Disciple, Inside Out...)" onkeyup="filterContent()">
     </div>
 
     <!-- MGA PANGUNAHING KONSEPTO AT ARAL (CLICKABLE CARDS) -->
     <h2 class="section-title">Mga Aral at Arangkada ni Tatay Pastor & Team (Archive)</h2>
-    <p style="color: var(--text-muted); margin-top: -10px; margin-bottom: 20px; font-size: 0.9rem;">👇 Pindutin ang alinmang card upang buksan ang nakatalagang buong aralin:</p>
+    <p style="color: var(--text-muted); margin-top: -10px; margin-bottom: 20px; font-size: 0.9rem;">👇 Pindutin ang alinmang card upang buksan ang buong aralin at i-download ang PDF handout:</p>
 
     <div class="grid" id="contentGrid">
+        <div class="card" onclick="openLesson('lesson3Cs')" data-search="3 cs constitution commission calling capacity ate jam">
+            <div>
+                <span class="card-num">SPECIAL LESSON</span>
+                <h3>3 C's of the Kingdom (Ate Jam)</h3>
+            </div>
+            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
+        </div>
+
+        <div class="card" onclick="openLesson('lessonDisciple')" data-search="am i a believer follower disciple kuya jec">
+            <div>
+                <span class="card-num">SPECIAL LESSON</span>
+                <h3>Believer, Follower, o Disciple? (Kuya Jec)</h3>
+            </div>
+            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
+        </div>
+
+        <div class="card" onclick="openLesson('lessonInsideOut')" data-search="a change from inside out mental transformation tatay pastor">
+            <div>
+                <span class="card-num">SPECIAL LESSON</span>
+                <h3>A Change from Inside Out (Tatay Pastor)</h3>
+            </div>
+            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
+        </div>
+
+        <div class="card" onclick="openLesson('lessonStandard')" data-search="standard kuya pastor jec king's word constitution">
+            <div>
+                <span class="card-num">SPECIAL LESSON</span>
+                <h3>Kingdom Standard (Kuya Pastor Jec)</h3>
+            </div>
+            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
+        </div>
+
         <div class="card" onclick="openLesson('lessonHermeneutics')" data-search="hermeneutics 10 principles original intent kingdom context constitution">
             <div>
                 <span class="card-num">SPECIAL GUIDE</span>
                 <h3>Kingdom-Based Principles of Hermeneutics</h3>
             </div>
-            <div class="open-lesson-btn">📖 Basahin ang Buong Aralin →</div>
+            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
         </div>
 
         <div class="card" onclick="openLesson('lesson1')" data-search="the sovereign of god ate jam supreme ruler shallit control authority">
@@ -768,39 +823,7 @@
                 <span class="card-num">ARAL 01</span>
                 <h3>The Sovereign of God (Ate Jam)</h3>
             </div>
-            <div class="open-lesson-btn">📖 Basahin ang Buong Aralin →</div>
-        </div>
-
-        <div class="card" onclick="openLesson('lesson2')" data-search="understanding our assignment tatay pastor ecclesia church family business monarchy">
-            <div>
-                <span class="card-num">ARAL 02</span>
-                <h3>Understanding Our Assignment (Tatay Pastor)</h3>
-            </div>
-            <div class="open-lesson-btn">📖 Basahin ang Buong Aralin →</div>
-        </div>
-
-        <div class="card" onclick="openLesson('lesson3')" data-search="vision kuya pastor jec proverbs 29 18 direksyon kaligtasan">
-            <div>
-                <span class="card-num">ARAL 03</span>
-                <h3>Vision & Direction (Kuya Pastor Jec)</h3>
-            </div>
-            <div class="open-lesson-btn">📖 Basahin ang Buong Aralin →</div>
-        </div>
-
-        <div class="card" onclick="openLesson('lesson4')" data-search="covenant kasunduan abraham sarai pagpapalit ng pangalan">
-            <div>
-                <span class="card-num">ARAL 04</span>
-                <h3>Covenant at Pagpapalit ng Pangalan</h3>
-            </div>
-            <div class="open-lesson-btn">📖 Basahin ang Buong Aralin →</div>
-        </div>
-
-        <div class="card" onclick="openLesson('lesson5')" data-search="listening and responding to the holy spirit parakletos advocate">
-            <div>
-                <span class="card-num">ARAL 05</span>
-                <h3>Listening & Responding to the Holy Spirit</h3>
-            </div>
-            <div class="open-lesson-btn">📖 Basahin ang Buong Aralin →</div>
+            <div class="open-lesson-btn">📖 Basahin at I-download →</div>
         </div>
     </div>
 
@@ -840,133 +863,89 @@
     </div>
     <div class="ai-chat-body" id="chatBody">
         <div class="chat-msg msg-bot">
-            Shalom! Ako ang iyong Kingdom Assistant. Nakabase ang aking mga sagot sa mga turo ng Kaharian, Konstitusyon, at sa 10 Principles of Kingdom Hermeneutics. Ano ang nais mong malaman o suriin?
+            Shalom! Ako ang iyong Kingdom Assistant. Nakabase ang aking mga sagot sa LAHAT ng inupload mong PDF files sa GitHub (3 C's, Inside Out, Disciple, Standard, Hermeneutics, at iba pa). Ano ang nais mong suriin?
         </div>
     </div>
     <div class="ai-chat-footer">
-        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong gamit ang Kingdom Lens..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
+        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong batay sa mga PDF notes..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
         <button class="ai-send-btn" onclick="sendAiMessage()">Ipadala</button>
     </div>
 </div>
 
 <script>
-    // DEDICATED LESSON DATABASE WITH HERMENEUTICS & BIBLE READER
+    // DEDICATED LESSON DATABASE LINKED DIRECTLY TO GITHUB PDF FILES
     const lessonsData = {
+        lesson3Cs: {
+            badge: "Ate Jam • Special Lesson",
+            title: "3 C's of the Kingdom",
+            bibleVerse: "Matthew 6:10 — 'Your kingdom come, your will be done, on earth as it is in heaven.'",
+            pdfFile: "3 C’s of the Kingdom.pdf",
+            content: `
+                <h4>1. Constitution</h4>
+                <p>Ang <strong>Constitution</strong> ay ang dokumentadong kalooban, layunin, at desisyon ng Hari para sa Kanyang mga mamamayan. Ang Bibliya ang Konstitusyon ng Kaharian ng Diyos.</p>
+                <h4>2. Commission</h4>
+                <p>Ang pagtatalaga ng tungkulin sa <em>Ecclesia</em> (Simbahan), na nagsisilbing "Cabinet" ng Hari upang alamin at isulat ang nasa isip ng Hari.</p>
+                <h4>3. Calling & Capacity</h4>
+                <p>Ang tawag sa ating buhay na nagiging pamumuhay. Ang kapasidad ay nakabase sa ating <strong>Identity</strong> at <strong>Grace</strong>.</p>
+            `
+        },
+        lessonDisciple: {
+            badge: "Kuya Jec • Special Lesson",
+            title: "Am I a Believer, a Follower, or a Disciple?",
+            bibleVerse: "John 8:31-32 — 'If you hold to my teaching, you are really my disciples. Then you will know the truth, and the truth will set you free.'",
+            pdfFile: "Am I a believer_ A follower_ Or a disciple_.pdf",
+            content: `
+                <h4>1. Believer (Naniwala)</h4>
+                <p>Ang entry point sa Kaharian; nagtitiwala at kumikilala sa Hesus, sa Kanyang mensahe, at Kanyang awtoridad.</p>
+                <h4>2. Follower (Sumunod)</h4>
+                <p>Ang sumusunod sa landas at pamumuno ng Hari nang may araw-araw na pagsuko at pag-alay sa sarili.</p>
+                <h4>3. Disciple (Naging Mag-aaral / Apprentice)</h4>
+                <p>Ang mag-aaral na nagiging tulad ng Kanyang Master; hindi lamang impormasyon kundi <strong>Transformation</strong> na nagpapakita ng buhay ng Hari sa iba.</p>
+            `
+        },
+        lessonInsideOut: {
+            badge: "Tatay Pastor • Special Lesson",
+            title: "A Change from Inside Out (Mental Transformation)",
+            bibleVerse: "Romans 12:2 — 'Do not conform to the pattern of this world, but be transformed by the renewing of your mind.'",
+            pdfFile: "A Change from inside out.pdf",
+            content: `
+                <h4>Bakit kailangang baguhin ang ating pag-iisip?</h4>
+                <ul>
+                    <li><strong>Ito ay utos ng Hari:</strong> (Matthew 4:17, Romans 12:1-2)</li>
+                    <li><strong>Upang maka-worship sa Diyos:</strong> Hindi makakasamba kapag bulok ang isip (Proverbs 23:7).</li>
+                    <li><strong>Upang maunawaan ang Kanyang kalooban:</strong> (Romans 12:2)</li>
+                </ul>
+            `
+        },
+        lessonStandard: {
+            badge: "Kuya Pastor Jec • Special Lesson",
+            title: "Kingdom Standard",
+            bibleVerse: "John 17:17 — 'Sanctify them by the truth; your word is truth.'",
+            pdfFile: "STANDARD.pdf",
+            content: `
+                <h4>Ang Standard ng Kaharian</h4>
+                <p>Ang Salita ng Hari ang ating Konstitusyon at <strong>Standard</strong> sa pamumuhay. Ang opinyon ng tao ay walang halaga kumpara sa Salita ng Hari.</p>
+                <p>Dapat tayong maging aligned sa Standard ng Hari sa ating: Character, Relationship, Decisions, Resources, Family, Job, at Priorities.</p>
+            `
+        },
         lessonHermeneutics: {
             badge: "Special Guide • Kingdom Hermeneutics",
             title: "Kingdom-Based Principles of Hermeneutics",
             bibleVerse: "Proverbs 25:2 — 'It is the glory of God to conceal a matter; to search out a matter is the glory of kings.'",
+            pdfFile: "Hermeneutics.pdf",
             content: `
-                <h4>Ano ang Hermeneutics sa Kaharian?</h4>
-                <p>Ang hermeneutics ay hindi lamang tungkol sa pag-intindi ng teksto, kundi sa pagtuklas ng <strong>orihinal na layunin ng Hari (Original Intent)</strong>—kung ano ang ibig sabihin ng Diyos nang Kanyang salitang binigkas sa Kanyang mga mamamayan.</p>
-                
-                <h4>Ang 10 Principles of Kingdom Hermeneutics:</h4>
-                <ul>
-                    <li><strong>1. The Principle of Kingdom Context:</strong> Ang Bibliya ay Konstitusyon ng isang Kaharian, hindi simpleng librong relihiyoso.</li>
-                    <li><strong>2. The Principle of Original Intent:</strong> Itanong: <em>"Ano ang ibig sabihin ng Hari rito?"</em> sa halip na <em>"Ano ang kahulugan nito sa akin?"</em> (Root words tulad ng *Ecclesia*).</li>
-                    <li><strong>3. The Principle of Contextual Interpretation:</strong> Iwasang kumuha ng "text out of context." Tingnan ang historical, cultural, grammatical, at literary context.</li>
-                    <li><strong>4. The Principle of the King’s Nature:</strong> Suriin ang Salita ayon sa katangian ng Hari—matuwid, makatarungan, mapagmahal at banal (Numbers 23:19).</li>
-                    <li><strong>5. The Principle of the King’s Constitution (Law of First Mention):</strong> Kung paano unang lumitaw ang isang konsepto sa simula (tulad ng "dominion" sa Genesis 1:26), iyon ang pundasyon ng kahulugan nito.</li>
-                    <li><strong>6. The Principle of Harmony:</strong> Ang Konstitusyon ng Kaharian ay ganap na nagkakaisa; ang isang talata ay nagpapaliwanag sa isa pa (Deuteronomy 19:15).</li>
-                    <li><strong>7. The Principle of the Holy Spirit:</strong> Ang Banal na Espiritu ang Gobernador ng Kaharian na naghahayag ng kahulugan ng Hari sa mga mamamayan (John 16:13).</li>
-                    <li><strong>8. The Principle of Application:</strong> Ang pagkaunawa ay hindi kumpleto hangga't hindi ito humahantong sa pagsunod at aksyon (James 1:22).</li>
-                    <li><strong>9. The Principle of Progressive Revelation:</strong> Ang Lumang Tipan ay Kaharian na nakatago (concealed); ang Bagong Tipan ay Kaharian na inihayag (revealed).</li>
-                    <li><strong>10. The Principle of Christ as the Central Theme:</strong> Ang lahat ng kasulatan ay tumuturo sa Hari—si Jesucristo (John 1:1, 14).</li>
-                </ul>
-
-                <div class="bible-reader-box">
-                    <h4>📖 Built-in Bible Study Reference</h4>
-                    <p><strong>Psalm 40:7 & Hebrews 10:7</strong></p>
-                    <div class="bible-verse-text">"Narito, ako'y dumating... sa balumbon ng aklat ay nasusulat tungkol sa akin."</div>
-                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Si Hesus ang buhay na Salita at ang sentro ng buong Konstitusyon ng Diyos.</p>
-                </div>
+                <h4>Ang 10 Principles of Kingdom Hermeneutics</h4>
+                <p>Tuklasin ang <strong>Original Intent</strong> ng Hari sa pamamagitan ng pag-intindi sa Bibliya bilang Konstitusyon ng Kaharian at paggamit sa Banal na Espiritu bilang Gobernador.</p>
             `
         },
         lesson1: {
             badge: "Aralin 01 • Ate Jam",
             title: "The Sovereign of God",
-            bibleVerse: "Ephesians 1:9-11 — 'He made known to us the mystery of his will... to bring unity to all things in heaven and on earth under Christ.'",
+            bibleVerse: "Ephesians 1:9-11 — 'He made known to us the mystery of his will...'",
+            pdfFile: "The Sovereign of God.pdf",
             content: `
-                <h4>1. Kahulugan ng Sovereignty (Ang "God-ness" ng Diyos)</h4>
-                <p>Ang salitang <strong>Sovereign</strong> ay nagmula sa Latin na <em>"SUPERANUS"</em> (Supreme) at Hebrew na <em>"SHALLIT"</em> (Ruler, King, Lord).</p>
-                <ul>
-                    <li><strong>His Control is His Authority:</strong> (Isaiah 46:9-11) Ang anomang iutos ng Hari ay sinusunod ng Kanyang nilikha.</li>
-                    <li><strong>His Presence is His Governance:</strong> Kasama ng Kanyang presensya ang Kanyang direktang pamamahala.</li>
-                </ul>
-
-                <div class="bible-reader-box">
-                    <h4>📖 Built-in Bible Study Reference</h4>
-                    <p><strong>Genesis 1:26-28</strong></p>
-                    <div class="bible-verse-text">"Pagkatapos ay sinabi ng Diyos, 'Lalangin natin ang tao ayon sa ating larawan... at maghari sila...'"</div>
-                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Ang tao ay nilikha bilang lokal na gobernador at embahador ng Kaharian ng Langit sa lupa.</p>
-                </div>
-            `
-        },
-        lesson2: {
-            badge: "Aralin 02 • Tatay Pastor",
-            title: "Understanding Our Assignment",
-            bibleVerse: "John 17:15-18 — 'My prayer is not that you take them out of the world but that you protect them from the evil one...'",
-            content: `
-                <h4>1. Ang Tunay na Misyon (Assignment)</h4>
-                <ul>
-                    <li><strong>Hindi Relihiyon:</strong> Ang itinatag ng Diyos ay isang pampamahalaang pamilya ("Ecclesia" / Monarchy), hindi relihiyon.</li>
-                    <li><strong>Hindi Pag-ihiwalay:</strong> (Matthew 9:12-13) Ating pinapasok at binabago ang mga sistema sa pamamagitan ng impluwensya.</li>
-                </ul>
-
-                <div class="bible-reader-box">
-                    <h4>📖 Built-in Bible Study Reference</h4>
-                    <p><strong>Psalms 115:16</strong></p>
-                    <div class="bible-verse-text">"Ang langit ay langit para sa Panginoon, ngunit ang lupa ay ibinigay niya sa mga anak ng tao."</div>
-                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Ang lupa ay teritoryo at kolonya na ipinagkatiwala sa tao upang pamahalaan ayon sa pamantayan ng Langit.</p>
-                </div>
-            `
-        },
-        lesson3: {
-            badge: "Aralin 03 • Kuya Pastor Jec",
-            title: "Vision & Direction",
-            bibleVerse: "Proverbs 29:18 (KJV) — 'Where there is no vision, the people perish: But he that keepeth the law, happy is he.'",
-            content: `
-                <h4>1. Kahalagahan ng Vision sa Kaharian</h4>
-                <p>Ang <strong>Vision</strong> ay nagbibigay ng direksyon at disiplina. Kung walang orihinal na layunin mula sa Creator-King, ang tao ay naliligaw.</p>
-
-                <div class="bible-reader-box">
-                    <h4>📖 Built-in Bible Study Reference</h4>
-                    <p><strong>John 17:3</strong></p>
-                    <div class="bible-verse-text">"At ito ang buhay na walang hanggan: ang makilala ka nila, na ikaw lamang ang tunay na Diyos, at si Jesucristo..."</div>
-                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Ang kaligtasan ay paunang hakbang o pintuan lamang; ang rurok ay ang pamumuhay sa ilalim ng Kaharian.</p>
-                </div>
-            `
-        },
-        lesson4: {
-            badge: "Aralin 04 • Tatay Pastor",
-            title: "Covenant at Pagpapalit ng Pangalan",
-            bibleVerse: "Genesis 17:4-7 — 'As for me, this is my covenant with you: You will be the father of many nations...'",
-            content: `
-                <h4>1. Ang Kasunduan ng Hari sa Tao</h4>
-                <p>Ang <strong>Covenant</strong> ay nagtatali sa Hari at sa Kanyang mga mamamayan. Ang pagpapalit ng pangalan nina Abraham at Sarah ay sumisimbolo sa bagong mindset at pamumuhay.</p>
-
-                <div class="bible-reader-box">
-                    <h4>📖 Built-in Bible Study Reference</h4>
-                    <p><strong>Deuteronomy 11:18-23</strong></p>
-                    <div class="bible-verse-text">"Itanim ninyo sa inyong puso at kaluluwa ang mga salitang ito... Ituro ninyo ito sa inyong mga anak..."</div>
-                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Ang pamilya ang institusyon ng Kaharian upang ipasa ang kultura ng Langit sa mga susunod na henerasyon.</p>
-                </div>
-            `
-        },
-        lesson5: {
-            badge: "Aralin 05 • Tatay Pastor",
-            title: "Listening & Responding to the Holy Spirit",
-            bibleVerse: "John 14:26 — 'But the Advocate, the Holy Spirit, whom the Father will send in my name, will teach you all things...'",
-            content: `
-                <h4>1. Ang Banal na Espiritu bilang Gobernador</h4>
-                <p>Siya ang <strong>Gubernador</strong> (Governor) ng Kaharian na ipinadala sa lupa upang gabayan tayo at magsilbing <em>Parakletos</em> (legal assistant).</p>
-
-                <div class="bible-reader-box">
-                    <h4>📖 Built-in Bible Study Reference</h4>
-                    <p><strong>Matthew 5:13-16</strong></p>
-                    <div class="bible-verse-text">"Kayo ang asin ng lupa... Kayo ang ilaw ng sanlibutan..."</div>
-                    <p><em>Paliwanag gamit ang Kingdom Lens:</em> Pinapanatili natin ang moralidad (asin) at dinadala ang katotohanan (ilaw) sa mga sistema sa lupa.</p>
-                </div>
+                <h4>Sovereignty of God</h4>
+                <p>Ang Diyos bilang <em>Superanus</em> at <em>Shallit</em> (Supreme Ruler at King). Ang Kanyang control ay Authority at ang Kanyang presence ay Governance.</p>
             `
         }
     };
@@ -986,6 +965,9 @@
             <div class="lesson-content">
                 ${lesson.content}
             </div>
+            <a href="${lesson.pdfFile}" target="_blank" download class="download-pdf-btn">
+                📥 I-download ang PDF Handout (${lesson.pdfFile})
+            </a>
         `;
 
         document.getElementById("lessonViewer").style.display = "block";
@@ -1025,7 +1007,7 @@
         alert("Matagumpay na na-save ang iyong notes!");
     }
 
-    // AI CHAT MODAL FUNCTIONS (KINGDOM LENS & HERMENEUTICS ENGINE)
+    // AI CHAT MODAL FUNCTIONS (BASED ON ALL UPLOADED PDF FILES)
     function toggleAiModal() {
         let modal = document.getElementById("aiModal");
         if(modal.style.display === "flex") {
@@ -1051,24 +1033,28 @@
         input.value = "";
         chatBody.scrollTop = chatBody.scrollHeight;
 
-        // Bot Response hango sa Kingdom Hermeneutics & Principles
+        // Bot Response hango sa LAHAT ng PDF files sa repository
         setTimeout(() => {
             let botDiv = document.createElement("div");
             botDiv.className = "chat-msg msg-bot";
 
             let lower = text.toLowerCase();
-            if(lower.includes("hermeneutics") || lower.includes("pag-intindi") || lower.includes("interpreting") || lower.includes("original intent")) {
-                botDiv.innerText = "Ayon sa Kingdom-Based Principles of Hermeneutics: Ang pag-interpretar ng Kasulatan ay hindi tungkol sa pansariling opinyon kundi sa pagtuklas ng 'Original Intent' ng Hari (Proverbs 25:2). Ang Bibliya ay Konstitusyon ng Kaharian, kaya dapat itong unawain sa konteksto ng gobyerno at layunin ng Diyos.";
+            if(lower.includes("3 c") || lower.includes("constitution") || lower.includes("commission") || lower.includes("calling")) {
+                botDiv.innerText = "Ayon sa PDF notes (3 C's of the Kingdom ni Ate Jam): Ang 3 C's ay (1) Constitution — Ang Bibliya bilang dokumentadong kalooban ng Hari; (2) Commission — Ang Ecclesia bilang Cabinet ng Hari; at (3) Calling & Capacity — Ang panawag na nakabase sa Identity at Grace.";
+            } else if(lower.includes("believer") || lower.includes("follower") || lower.includes("disciple")) {
+                botDiv.innerText = "Ayon sa PDF notes (Am I a Believer, Follower, or Disciple ni Kuya Jec): Ang Believer ay ang pintuak pamasok sa Kaharian; ang Follower ay ang araw-araw na sumusunod sa Hari; at ang Disciple ay ang nagiging tulad ng Kanyang Master sa pamamagitan ng Transformation.";
+            } else if(lower.includes("inside out") || lower.includes("transformation") || lower.includes("pag-iisip")) {
+                botDiv.innerText = "Ayon sa PDF notes (A Change from Inside Out ni Tatay Pastor): Utos ng Hari ang baguhin ang ating pag-iisip (Romans 12:2) upang maunawaan ang Kanyang kalooban at maiwasan ang makamundong sistema.";
+            } else if(lower.includes("standard")) {
+                botDiv.innerText = "Ayon sa PDF notes (Kingdom Standard ni Kuya Pastor Jec): Ang Salita ng Hari ang ating tanging Standard. Ang opinyon ng tao ay walang halaga kumpara sa Salita ng Hari.";
+            } else if(lower.includes("hermeneutics") || lower.includes("original intent")) {
+                botDiv.innerText = "Ayon sa Kingdom Hermeneutics PDF: Ang pag-intindi ng Kasulatan ay pagtuklas sa Original Intent ng Hari (Proverbs 25:2) gamit ang 10 Principles at ang Banal na Espiritu bilang Gobernador.";
             } else if(lower.includes("sovereign") || lower.includes("sovereignty")) {
-                botDiv.innerText = "Ayon sa The Sovereign of God: Ang Kanyang control ay authority at ang Kanyang presence ay governance. Ang layunin ng Hari ay ibalik ang Kanyang pamamahala sa lupa.";
+                botDiv.innerText = "Ayon sa The Sovereign of God PDF: Ang 'Sovereign' ay Supreme Ruler (Shallit). Ang Kanyang control ay Authority at ang Kanyang presence ay Governance.";
             } else if(lower.includes("assignment") || lower.includes("relihiyon")) {
-                botDiv.innerText = "Batay sa Understanding Our Assignment: Hindi tayo tinawag upang magtatag ng relihiyon kundi upang maging pamilya at kolonisador na magdadala ng impluwensya ng Langit sa mga sistema sa lupa.";
-            } else if(lower.includes("vision")) {
-                botDiv.innerText = "Ayon sa Vision & Direction: Ang taong walang vision ay walang direksyon (Proverbs 29:18). Ang kaligtasan ay pasaporte lamang; ang rurok ay ang mamuhay sa ilalim ng Kaharian.";
-            } else if(lower.includes("holy spirit") || lower.includes("espiritu")) {
-                botDiv.innerText = "Ayon sa aral ng Banal na Espiritu: Siya ang Gobernador ng Kaharian at Parakletos na gagabay sa atin sa buong katotohanan (John 16:13).";
+                botDiv.innerText = "Ayon sa Understanding Our Assignment PDF: Hindi tayo inatasang magtatag ng relihiyon kundi maging pamilya at kolonisador upang i-reintroduce ang Diyos sa mundo.";
             } else {
-                botDiv.innerText = "Sa lente ng Kingdom Principles at Hermeneutics: Suriin natin ang bawat talata batay sa Konstitusyon ng Kaharian at sa original intent ng Hari. May nais ka bang linawin o suriin na talata?";
+                botDiv.innerText = "Batay sa lahat ng inupload mong PDF notes sa GitHub: Ang bawat turo nina Tatay Pastor, Ate Jam, at Kuya Pastor Jec ay nakasentro sa Konstitusyon at Pamamahala ng Kaharian. May partikular ka bang tanong mula sa mga PDF?";
             }
 
             chatBody.appendChild(botDiv);

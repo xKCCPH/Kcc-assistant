@@ -6,11 +6,15 @@
     <title>KCC Bible Study Assistant</title>
     <style>
         :root {
-            --base-font-size: 16px;
+            --base-font-size: 15px;
+            --primary-color: #0f172a;
+            --accent-color: #d97706;
+            --bg-color: #f8fafc;
         }
+        * { box-sizing: border-box; }
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #f0f4f8; 
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
             margin: 0; 
             padding: 20px; 
             display: flex; 
@@ -18,129 +22,162 @@
             align-items: center;
             min-height: 100vh;
         }
-        .container { 
+        .app-container { 
             width: 100%; 
-            max-width: 700px; 
-            background: white; 
-            padding: 25px; 
-            border-radius: 12px; 
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08); 
+            max-width: 800px; 
+            background: #ffffff; 
+            border-radius: 16px; 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1); 
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .header-flex {
+        .app-header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #eaeaea;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
+            border-bottom: 3px solid var(--accent-color);
         }
-        h2 { 
-            color: #1e3a8a; 
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-title h2 { 
             margin: 0; 
-            font-size: calc(var(--base-font-size) + 6px);
+            font-size: calc(var(--base-font-size) + 5px);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .header-title span {
+            font-size: 24px;
         }
         .font-controls {
             display: flex;
-            gap: 6px;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px;
+            border-radius: 8px;
         }
         .font-btn {
-            background: #e2e8f0;
+            background: transparent;
             border: none;
-            padding: 6px 12px;
+            padding: 6px 10px;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
-            color: #334155;
-            transition: background 0.2s;
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 13px;
+            transition: all 0.2s;
         }
-        .font-btn:hover { background: #cbd5e1; }
+        .font-btn:hover { background: rgba(255, 255, 255, 0.2); color: white; }
+        
         .chat-box { 
-            height: 450px; 
-            border: 1px solid #cbd5e1; 
-            border-radius: 8px; 
-            padding: 15px; 
-            overflow-y: scroll; 
-            margin-bottom: 15px; 
+            height: 480px; 
+            padding: 24px; 
+            overflow-y: auto; 
             background: #f8fafc; 
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
         .message { 
-            margin-bottom: 12px; 
-            padding: 12px 16px; 
-            border-radius: 8px; 
-            max-width: 85%; 
-            line-height: 1.5; 
+            padding: 14px 18px; 
+            border-radius: 12px; 
+            max-width: 80%; 
+            line-height: 1.6; 
             font-size: var(--base-font-size);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
         .user { 
             background: #2563eb; 
             color: white; 
             margin-left: auto; 
-            text-align: right; 
+            border-bottom-right-radius: 2px;
         }
         .bot { 
-            background: #e2e8f0; 
-            color: #0f172a; 
+            background: white; 
+            color: #334155; 
             margin-right: auto; 
+            border-bottom-left-radius: 2px;
+            border: 1px solid #e2e8f0;
         }
-        .input-group { 
-            display: flex; 
-            gap: 10px; 
+        
+        .input-section {
+            padding: 16px 24px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
         input { 
             flex: 1; 
-            padding: 12px; 
+            padding: 14px 18px; 
             border: 1px solid #cbd5e1; 
-            border-radius: 8px; 
+            border-radius: 10px; 
             outline: none; 
             font-size: var(--base-font-size);
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
-        input:focus { border-color: #2563eb; }
+        input:focus { 
+            border-color: #2563eb; 
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
         button.send-btn { 
-            padding: 12px 24px; 
-            background: #16a34a; 
+            padding: 14px 24px; 
+            background: #0f172a; 
             color: white; 
             border: none; 
-            border-radius: 8px; 
+            border-radius: 10px; 
             cursor: pointer; 
             font-size: var(--base-font-size);
-            font-weight: bold;
-            transition: background 0.2s;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.1s;
         }
-        button.send-btn:hover { background: #15803d; }
+        button.send-btn:hover { background: #1e293b; }
+        button.send-btn:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header-flex">
-        <h2>👑 KCC Bible Assistant</h2>
+<div class="app-container">
+    <div class="app-header">
+        <div class="header-title">
+            <span>👑</span>
+            <h2>KCC Bible Assistant</h2>
+        </div>
         <div class="font-controls">
-            <button class="font-btn" onclick="adjustFontSize(-2)" title="Paliitin ang Letter">A-</button>
-            <button class="font-btn" onclick="adjustFontSize(2)" title="Lakihan ang Letter">A+</button>
+            <button class="font-btn" onclick="adjustFontSize(-1)" title="Paliitin ang Font">A-</button>
+            <button class="font-btn" onclick="adjustFontSize(1)" title="Lakihan ang Font">A+</button>
         </div>
     </div>
 
     <div class="chat-box" id="chatBox">
-        <div class="message bot">Magandang araw! Ako ang iyong KCC Assistant. May tanong ka ba tungkol sa ating mga aralin sa Kaharian ng Diyos at Hermeneutics?</div>
+        <div class="message bot">Magandang araw! Ako ang iyong KCC Assistant. May tanong ka ba tungkol sa ating mga opisyal na aralin sa Kaharian ng Diyos?</div>
     </div>
     
-    <div class="input-group">
+    <div class="input-section">
         <input type="text" id="userInput" placeholder="Magtanong dito tungkol sa aralin..." onkeypress="handleKeyPress(event)">
         <button class="send-btn" onclick="sendMessage()">I-send</button>
     </div>
 </div>
 
 <script>
-    // Hinati ang key para hindi harangan ng GitHub Secret Scanner
+    // API Key configuration (split to bypass scanner)
     const p1 = "AQ.Ab8RN6LgXxmwhGxYJFB8Y";
     const p2 = "NS7qrfikpzIG9v2jBAKjCWlOc9MBw";
     const API_KEY = p1 + p2; 
 
-    let currentSize = 16;
+    let currentSize = 15;
     function adjustFontSize(change) {
         currentSize += change;
-        if (currentSize < 12) currentSize = 12;
-        if (currentSize > 24) currentSize = 24;
+        if (currentSize < 13) currentSize = 13;
+        if (currentSize > 20) currentSize = 20;
         document.documentElement.style.setProperty('--base-font-size', currentSize + 'px');
     }
 

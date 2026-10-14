@@ -1202,12 +1202,12 @@
         chatContainer.scrollTop = chatContainer.scrollHeight;
 
         try {
-            // 3. Direktang buksan ang opisyal na NotebookLM sa bagong tab
-            const notebookUrl = 'https://gemini.google.com/notebook/80dbba40-0c5b-4d48-9298-21f16fadb232';
+            // 3. Direktang buksan ang opisyal na NotebookLM sa bagong tab gamit ang bagong Public Link
+            const notebookUrl = 'https://notebook.google.com/notebook/77923e02-07b7-4d10-a804-6e3b20ffce0d?utm_source=gemini_notebook&utm_medium=referral&original_referer=https:%2F%2Fgemini.google.com%23&pli=1';
             
             setTimeout(() => {
                 window.open(notebookUrl, '_blank');
-                botDiv.textContent = 'Naubuksan na ang KCC NotebookLM sa bagong tab. Maaari ka na pong direktang magtanong at sumangguni doon sa ating 50+ na mga doktrina at aralin!';
+                botDiv.textContent = 'Naubuksan na ang KCC NotebookLM sa bagong tab. Maaari ka na pong direktang magtanong at sumangguni doon sa ating mga aralin!';
                 chatContainer.scrollTop = chatContainer.scrollHeight;
             }, 800);
 

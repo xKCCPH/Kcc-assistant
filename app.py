@@ -1,6 +1,5 @@
 import os
 from flask import Flask, render_template, request, jsonify
-from pypdf import PdfReader
 from google import genai
 
 app = Flask(__name__, template_folder='.')
@@ -12,37 +11,15 @@ Ang iyong misyon ay magbigay ng kaalaman, gabay, at karunungan na nakabase sa KC
 
 MGA ALITUNTUNIN SA PAGSAGOT:
 1. Regulasyon, pinapangunahan, at may awtoridad ng isang Kingdom Citizen ang iyong pananalita.
-2. Gamitin ang iyong "Knowledge Base" mula sa mga PDF documents bilang pangunahing batayan ng iyong mga sagot.
-3. Kung may tinatayimang na aralin sa KCC Doctrine o Kingdom materials, sundin ito gamit ang pangkalahatang prinsipyo ng Kaharian ngunit linawin na itong ay nakabatay sa Kingdom perspective.
-4. Maging malinaw, direkta, at nakakapagbigay ng pananampalataya at pagkakakilanlan (Kingdom Identity).
+2. Gamitin ang iyong kaalaman ukol sa KCC Doctrine at Kingdom materials bilang pangunahing batayan ng iyong mga sagot.
+3. Maging malinaw, direkta, at nakakapagbigay ng pananampalataya at pagkakakilanlan (Kingdom Identity).
 """
 
-def load_all_local_pdfs():
-    """Binabasa ang lahat ng PDF files sa buong repository at pinagsasama sa isang text base."""
-    combined_text = ""
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    
-    for root, dirs, files in os.walk(current_dir):
-        for file in files:
-            if file.lower().endswith('.pdf'):
-                pdf_path = os.path.join(root, file)
-                try:
-                    reader = PdfReader(pdf_path)
-                    combined_text += f"\n--- DOCUMENT: {file} ---\n"
-                    for page in reader.pages:
-                        extracted = page.extract_text()
-                        if extracted:
-                            combined_text += extracted + "\n"
-                except Exception as e:
-                    print(f"Error reading {file}: {e}")
-                    
-    return combined_text
-
-# I-load ang mga PDF kapag nag-start ang server
-KCC_KNOWLEDGE_BASE = load_all_local_pdfs()
-
 # Initialize Gemini Client (Awtomatikong kukuha ng GEMINI_API_KEY mula sa Vercel environment variables)
-client = genai.Client()
+try:
+    client = genai.Client()
+except Exception as e:
+    print(f"GenAI Client Init Error: {e}")
 
 @app.route('/')
 def home():
@@ -61,18 +38,15 @@ def combot_api():
         if not user_message:
             return jsonify({"status": "error", "reply": "Mangyaring magbigay ng tanong o mensahe."}), 400
 
-        # Pagsasamahin ang System Prompt, PDF Knowledge Base, at Tanong ng User
+        # Pagsasamahin ang System Prompt at Tanong ng User
         full_prompt = f"""
 {COMBOT_SYSTEM_PROMPT}
-
-MGA DOKUMENTO AT ARALIN (KCC KNOWLEDGE BASE):
-{KCC_KNOWLEDGE_BASE}
 
 TANONG NG USER:
 {user_message}
 """
 
-        # Paggamit ng tamang Google GenAI SDK syntax
+        # Paggamit ng Google GenAI API
         response = client.models.generate_content(
             model='gemini-2.5-flash',
             contents=full_prompt

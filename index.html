@@ -1257,5 +1257,69 @@
         floatBtn.style.cursor = 'grab';
     });
 </script>
+   document.addEventListener('mouseup', () => {
+    isDragging = false;
+    floatBtn.style.cursor = 'grab';
+});
+</script>
+
+<script>
+async function sendMessage() {
+    const inputField = document.getElementById('chat-input');
+    const chatContainer = document.getElementById('chat-messages'); 
+    const userMessage = inputField ? inputField.value.trim() : '';
+
+    if (!userMessage) return;
+
+    // 1. Ipakita ang message ng User sa chat
+    const userDiv = document.createElement('div');
+    userDiv.className = 'chat-bubble user-bubble';
+    userDiv.textContent = userMessage;
+    chatContainer.appendChild(userDiv);
+
+    inputField.value = '';
+
+    // 2. Magpakita ng Loading Indicator
+    const botDiv = document.createElement('div');
+    botDiv.className = 'chat-bubble bot-bubble';
+    botDiv.textContent = 'Nagsusuri sa KCC Knowledge Base...';
+    chatContainer.appendChild(botDiv);
+    
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    try {
+        // 3. Mag-fetch papunta sa ating Flask API (/api/combot)
+        const response = await fetch('/api/combot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: userMessage })
+        });
+
+        const data = await response.json();
+
+        // 4. Ipakita ang totoong sagot galing sa Gemini at KCC PDFs
+        if (data.status === 'success') {
+            botDiv.textContent = data.reply;
+        } else {
+            botDiv.textContent = 'Paumanhin, nagkaroon ng error: ' + (data.reply || 'Hindi maiproseso.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        botDiv.textContent = 'Paumanhin, hindi makakonekta sa server sa ngayon.';
+    }
+
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// Pwede ring gumana sa pag-press ng Enter key
+document.getElementById('chat-input')?.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+</script>
+
 </body>
 </html>

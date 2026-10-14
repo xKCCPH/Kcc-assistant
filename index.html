@@ -453,7 +453,7 @@
             box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
         }
 
-        /* FULL PAGE LESSON VIEWER OVERLAY WITH FUTURISTIC ANIMATION */
+        /* FULL PAGE LESSON VIEWER OVERLAY */
         .lesson-viewer-overlay {
             display: none;
             position: fixed;
@@ -710,7 +710,7 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
         }
 
-        /* AI CHAT MODAL POPUP WITH SLIDE-UP ANIMATION */
+        /* AI CHAT MODAL POPUP */
         .ai-modal {
             display: none;
             position: fixed;
@@ -971,25 +971,30 @@
 <!-- FLOATING CHAT BUTTON -->
 <div class="chat-widget-button" onclick="toggleAiModal()">
     <span class="pulse-dot"></span>
-    <span>💬 Itanong kay Gemini AI (Kingdom Lens)</span>
+    <span>💬 Itanong kay COMBOT (Kingdom Lens)</span>
 </div>
 
 <!-- AI CHAT MODAL POPUP -->
-<div class="ai-modal" id="aiModal">
-    <div class="ai-modal-header">
-        <h4>👑 Kingdom Assistant (AI Bot)</h4>
-        <button class="close-btn" onclick="toggleAiModal()">✕</button>
-    </div>
-    <div class="ai-chat-body" id="chatBody">
-        <div class="chat-msg msg-bot">
-            Shalom! Ako ang iyong Kingdom Assistant. Handa akong umanalisa at sumagot sa iyong mga katanungan gamit ang Kingdom Lens, Hermeneutics, at ang buong PDF Library natin. Ano ang nais mong malaman?
+    <div class="ai-modal" id="aiModal">
+        <div class="ai-modal-header">
+            <h4>👑 COMBOT (Community Assistant)</h4>
+            <button class="close-btn" onclick="toggleAiModal()">✕</button>
+        </div>
+        <div class="ai-chat-body" id="chatBody">
+            <div class="chat-msg msg-bot">
+                <strong>Greetings, Citizens! 👑</strong><br><br>
+                Ako si <strong>"COMBOT"</strong>, ang inyong Community Virtual Assistant.<br>
+                Nandito ako upang tulungan kayong magbalik-tanaw at mag-aral muli ng mga leksyon natin sa Kingdom Community Center.<br><br>
+                📌 <strong>PAALALA:</strong><br>
+                Gamitin natin ang <em>Kingdom Hermeneutics</em> sa pag-analisa ng ating mga aralin at tingnan ang lahat sa <em>Lente ng Kaharian</em>—upang manatili tayo sa katotohanan at tamang layunin ng Salita.<br><br>
+                <strong>Ano ang nais ninyong alamin o balikang aralin ngayon?</strong>
+            </div>
+        </div>
+        <div class="ai-chat-footer">
+            <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong tungkol sa Salita o mga Aralin..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
+            <button class="ai-send-btn" onclick="sendAiMessage()">Ipadala</button>
         </div>
     </div>
-    <div class="ai-chat-footer">
-        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong tungkol sa Salita o mga Aralin..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
-        <button class="ai-send-btn" onclick="sendAiMessage()">Ipadala</button>
-    </div>
-</div>
 
 <script>
     const lessonsData = {

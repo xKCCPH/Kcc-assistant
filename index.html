@@ -1224,6 +1224,38 @@
         }, 700);
     }
 </script>
+<!-- Floating Bible Button -->
+<div id="floating-bible-btn" style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; cursor: grab; user-select: none;">
+    <a href="/bible" style="display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #d97706, #b45309); color: white; padding: 10px 18px; border-radius: 50px; text-decoration: none; font-family: sans-serif; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.4); font-size: 14px;" title="Buksan ang ASND Bible">
+        <span style="font-size: 18px;">📖</span>
+        <span>ASND Bible</span>
+    </a>
+</div>
 
+<script>
+    const floatBtn = document.getElementById('floating-bible-btn');
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    floatBtn.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - floatBtn.getBoundingClientRect().left;
+        offsetY = e.clientY - floatBtn.getBoundingClientRect().top;
+        floatBtn.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        floatBtn.style.left = (e.clientX - offsetX) + 'px';
+        floatBtn.style.top = (e.clientY - offsetY) + 'px';
+        floatBtn.style.bottom = 'auto';
+        floatBtn.style.right = 'auto';
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        floatBtn.style.cursor = 'grab';
+    });
+</script>
 </body>
 </html>

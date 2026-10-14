@@ -452,7 +452,6 @@
             margin-bottom: 8px;
         }
 
-        /* BUILT-IN BIBLE VIEWER BOX SA SECOND PAGE */
         .bible-reader-box {
             background: #0b0f19;
             border: 1px solid var(--accent-gold);
@@ -479,7 +478,6 @@
             margin: 10px 0;
         }
 
-        /* DOWNLOAD PDF BUTTON */
         .download-pdf-btn {
             display: inline-flex;
             align-items: center;
@@ -542,7 +540,7 @@
             transform: translateY(-1px);
         }
 
-        /* CUSTOM TOAST NOTIFICATION STYLES */
+        /* CUSTOM TOAST NOTIFICATION */
         .toast-notification {
             visibility: hidden;
             min-width: 300px;
@@ -811,58 +809,12 @@
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 Maghanap sa mga aralin (3 C's, Hermeneutics, Standard, Disciple, Inside Out, Sovereign...)" onkeyup="filterContent()">
     </div>
 
-    <!-- MGA PANGUNAHING KONSEPTO AT ARAL (CLICKABLE CARDS) -->
+    <!-- CENTRALIZED PDF LIBRARY & LESSON CARDS -->
     <h2 class="section-title">Mga Aral at Arangkada ni Tatay Pastor & Team (Archive)</h2>
     <p style="color: var(--text-muted); margin-top: -10px; margin-bottom: 20px; font-size: 0.9rem;">👇 Pindutin ang alinmang card upang buksan at basahin ang kumpletong aralin:</p>
 
     <div class="grid" id="contentGrid">
-        <div class="card" onclick="openLesson('lesson3Cs')" data-search="3 cs constitution commission calling capacity ate jam">
-            <div>
-                <span class="card-num">SPECIAL LESSON</span>
-                <h3>3 C's of the Kingdom (Ate Jam)</h3>
-            </div>
-            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
-        </div>
-
-        <div class="card" onclick="openLesson('lessonDisciple')" data-search="am i a believer follower disciple kuya jec">
-            <div>
-                <span class="card-num">SPECIAL LESSON</span>
-                <h3>Believer, Follower, o Disciple? (Kuya Jec)</h3>
-            </div>
-            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
-        </div>
-
-        <div class="card" onclick="openLesson('lessonInsideOut')" data-search="a change from inside out mental transformation tatay pastor">
-            <div>
-                <span class="card-num">SPECIAL LESSON</span>
-                <h3>A Change from Inside Out (Tatay Pastor)</h3>
-            </div>
-            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
-        </div>
-
-        <div class="card" onclick="openLesson('lessonStandard')" data-search="standard kuya pastor jec king's word constitution">
-            <div>
-                <span class="card-num">SPECIAL LESSON</span>
-                <h3>Kingdom Standard (Kuya Pastor Jec)</h3>
-            </div>
-            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
-        </div>
-
-        <div class="card" onclick="openLesson('lessonHermeneutics')" data-search="hermeneutics 10 principles original intent kingdom context constitution">
-            <div>
-                <span class="card-num">SPECIAL GUIDE</span>
-                <h3>Kingdom-Based Principles of Hermeneutics</h3>
-            </div>
-            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
-        </div>
-
-        <div class="card" onclick="openLesson('lesson1')" data-search="the sovereign of god ate jam supreme ruler shallit control authority">
-            <div>
-                <span class="card-num">ARAL 01</span>
-                <h3>The Sovereign of God (Ate Jam)</h3>
-            </div>
-            <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
-        </div>
+        <!-- Ang mga cards na ito ay direktang kumukuha sa centralized lessonsData library sa ibaba -->
     </div>
 
     <!-- NOTES & REFLECTION PAD -->
@@ -884,7 +836,7 @@
     <span>✨ Matagumpay na na-save ang iyong notes!</span>
 </div>
 
-<!-- FULL-PAGE LESSON VIEWER OVERLAY (SECOND PAGE) -->
+<!-- FULL-PAGE LESSON VIEWER OVERLAY -->
 <div class="lesson-viewer-overlay" id="lessonViewer">
     <div class="lesson-viewer-container">
         <button class="back-btn" onclick="closeLesson()">← Bumalik sa Main Dashboard</button>
@@ -906,7 +858,7 @@
     </div>
     <div class="ai-chat-body" id="chatBody">
         <div class="chat-msg msg-bot">
-            Shalom! Ako ang iyong Kingdom Assistant. Handa akong umanalisa at tumulong sa iyong mga katanungan gamit ang Kingdom Lens, Hermeneutics, at ang mga turo sa ating mga PDF. Ano ang nais mong malaman?
+            Shalom! Ako ang iyong Kingdom Assistant. Handa akong umanalisa at sumagot sa iyong mga katanungan gamit ang Kingdom Lens, Hermeneutics, at ang buong PDF Library natin. Ano ang nais mong malaman?
         </div>
     </div>
     <div class="ai-chat-footer">
@@ -916,11 +868,15 @@
 </div>
 
 <script>
-    // DEDICATED LESSON DATABASE LINKED DIRECTLY TO GITHUB PDF FILES
+    /* ==========================================================
+       CENTRALIZED PDF LIBRARY & LESSON DATABASE
+       (Dito mo lang idadagdag ang mga susunod pang PDF at Aralin!)
+       ========================================================== */
     const lessonsData = {
         lesson3Cs: {
             badge: "Ate Jam • Special Lesson",
             title: "3 C's of the Kingdom",
+            searchKey: "3 cs constitution commission calling capacity ate jam",
             bibleVerse: "Matthew 6:10 — 'Your kingdom come, your will be done, on earth as it is in heaven.'",
             pdfFile: "3 C’s of the Kingdom.pdf",
             content: `
@@ -935,7 +891,8 @@
         lessonDisciple: {
             badge: "Kuya Jec • Special Lesson",
             title: "Am I a Believer, a Follower, or a Disciple?",
-            bibleVerse: "John 8:31-32 — 'If you hold to my teaching, you are really my disciples. Then you will know the truth, and the truth will set you free.'",
+            searchKey: "am i a believer follower disciple kuya jec disipulo",
+            bibleVerse: "John 8:31-32 — 'If you hold to my teaching, you are really my disciples. Then you will know the truth...'",
             pdfFile: "Am I a believer_ A follower_ Or a disciple_.pdf",
             content: `
                 <h4>1. Believer (Naniwala)</h4>
@@ -949,6 +906,7 @@
         lessonInsideOut: {
             badge: "Tatay Pastor • Special Lesson",
             title: "A Change from Inside Out (Mental Transformation)",
+            searchKey: "a change from inside out mental transformation tatay pastor isip",
             bibleVerse: "Romans 12:2 — 'Do not conform to the pattern of this world, but be transformed by the renewing of your mind.'",
             pdfFile: "A Change from inside out.pdf",
             content: `
@@ -963,6 +921,7 @@
         lessonStandard: {
             badge: "Kuya Pastor Jec • Special Lesson",
             title: "Kingdom Standard",
+            searchKey: "standard kuya pastor jec king's word constitution pamantayan",
             bibleVerse: "John 17:17 — 'Sanctify them by the truth; your word is truth.'",
             pdfFile: "STANDARD.pdf",
             content: `
@@ -974,6 +933,7 @@
         lessonHermeneutics: {
             badge: "Special Guide • Kingdom Hermeneutics",
             title: "Kingdom-Based Principles of Hermeneutics",
+            searchKey: "hermeneutics 10 principles original intent kingdom context constitution",
             bibleVerse: "Proverbs 25:2 — 'It is the glory of God to conceal a matter; to search out a matter is the glory of kings.'",
             pdfFile: "Hermeneutics.pdf",
             content: `
@@ -984,6 +944,7 @@
         lesson1: {
             badge: "Aralin 01 • Ate Jam",
             title: "The Sovereign of God",
+            searchKey: "the sovereign of god ate jam supreme ruler shallit control authority",
             bibleVerse: "Ephesians 1:9-11 — 'He made known to us the mystery of his will...'",
             pdfFile: "The Sovereign of God.pdf",
             content: `
@@ -992,6 +953,38 @@
             `
         }
     };
+
+    // AUTOMATIC RENDERING OF LESSON CARDS (Awtomatikong binubuo ang grid mula sa library)
+    document.addEventListener("DOMContentLoaded", function() {
+        renderLessonCards();
+        
+        let saved = localStorage.getItem("kcc_user_notes");
+        if(saved) {
+            document.getElementById("userNotes").value = saved;
+        }
+    });
+
+    function renderLessonCards() {
+        const grid = document.getElementById("contentGrid");
+        grid.innerHTML = "";
+
+        for (const key in lessonsData) {
+            const lesson = lessonsData[key];
+            const card = document.createElement("div");
+            card.className = "card";
+            card.setAttribute("data-search", lesson.searchKey);
+            card.onclick = () => openLesson(key);
+
+            card.innerHTML = `
+                <div>
+                    <span class="card-num">${lesson.badge}</span>
+                    <h3>${lesson.title}</h3>
+                </div>
+                <div class="open-lesson-btn">📖 Basahin ang Aralin →</div>
+            `;
+            grid.appendChild(card);
+        }
+    }
 
     function openLesson(lessonKey) {
         const lesson = lessonsData[lessonKey];
@@ -1037,13 +1030,6 @@
     }
 
     // NOTES LOCALSTORAGE & CUSTOM TOAST
-    document.addEventListener("DOMContentLoaded", function() {
-        let saved = localStorage.getItem("kcc_user_notes");
-        if(saved) {
-            document.getElementById("userNotes").value = saved;
-        }
-    });
-
     function showToast() {
         let toast = document.getElementById("toastNotification");
         toast.classList.add("show");
@@ -1058,7 +1044,7 @@
         showToast();
     }
 
-    // ADVANCED AI CHAT ANALYZER (KINGDOM LENS & HERMENEUTICS ENGINE)
+    // ADVANCED AI CHAT ANALYZER (DYNAMIC KNOWLEDGE BASE)
     function toggleAiModal() {
         let modal = document.getElementById("aiModal");
         if(modal.style.display === "flex") {
@@ -1075,7 +1061,6 @@
 
         let chatBody = document.getElementById("chatBody");
 
-        // User message
         let userDiv = document.createElement("div");
         userDiv.className = "chat-msg msg-user";
         userDiv.innerText = text;
@@ -1084,40 +1069,32 @@
         input.value = "";
         chatBody.scrollTop = chatBody.scrollHeight;
 
-        // Intelligent AI Simulation hango sa Hermeneutics at PDF Frameworks
         setTimeout(() => {
             let botDiv = document.createElement("div");
             botDiv.className = "chat-msg msg-bot";
 
             let lower = text.toLowerCase();
             
-            // Pagsusuri gamit ang Hermeneutics / Pag-intindi sa Biblia
             if(lower.includes("hirap") || lower.includes("paano intindihin") || lower.includes("pag-unawa") || lower.includes("bible") || lower.includes("talata") || lower.includes("hermeneutics")) {
-                botDiv.innerText = "Shalom! Nauunawaan ko na minsan ay mahirap intindihin ang Bibliya kapag tiningnan natin ito sa relihiyosong paraan. Ngunit ayon sa ating Kingdom Hermeneutics at sa mga turo nina Tatay Pastor at Ate Jam: Huwag nating basahin ang Bibliya bilang simpleng librong relihiyoso kundi bilang *Konstitusyon ng Kaharian*. Gamitin natin ang *Original Intent* ng Hari—itinatanong natin: 'Ano ba ang ibig sabihin ng Diyos nang sinabi Niya ito?' sa halip na 'Ano ang ibig sabihin nito sa akin?'. Gabay din natin ang Banal na Espiritu bilang Gobernador upang linawin ang bawat talata!";
+                botDiv.innerText = "Shalom! Huwag nating basahin ang Bibliya bilang simpleng librong relihiyoso kundi bilang *Konstitusyon ng Kaharian*. Gamitin natin ang *Original Intent* ng Hari—itinatanong natin: 'Ano ba ang ibig sabihin ng Diyos nang sinabi Niya ito?' sa halip na 'Ano ang ibig sabihin nito sa akin?'. Gabay natin ang Banal na Espiritu bilang Gobernador!";
             } 
-            // 3 C's of the Kingdom
             else if(lower.includes("3 c") || lower.includes("constitution") || lower.includes("commission") || lower.includes("calling") || lower.includes("capacity")) {
-                botDiv.innerText = "Batay sa aral tungkol sa 3 C's ng Kaharian (ni Ate Jam): \n1. **Constitution:** Ang Bibliya ang dokumentadong kalooban at desisyon ng Hari.\n2. **Commission:** Ang Ecclesia (Simbahan) ay ang Gabinete ng Hari na naatasang magdala ng Kanyang layunin.\n3. **Calling & Capacity:** Ang ating panawagan ay nakabase sa ating Identity at Grace, na nagbibigay sa atin ng burden at desires na tuparin ang kalooban ng Diyos.";
+                botDiv.innerText = "Batay sa 3 C's ng Kaharian (ni Ate Jam): \n1. **Constitution:** Ang Bibliya ang dokumentadong kalooban ng Hari.\n2. **Commission:** Ang Ecclesia (Simbahan) ay Gabinete ng Hari.\n3. **Calling & Capacity:** Ang panawag ay nakabase sa Identity at Grace.";
             } 
-            // Believer, Follower, Disciple
             else if(lower.includes("believer") || lower.includes("follower") || lower.includes("disciple") || lower.includes("disipulo")) {
-                botDiv.innerText = "Ayon sa mga aral ni Kuya Jec (Am I a Believer, Follower, or Disciple?): \n• **Believer:** Ang tumitiwala at nagpapakilala sa Hesus (ang pintuan o entry point sa Kaharian).\n• **Follower:** Ang araw-araw na sumusunod sa landas, pamumuno, at lifestyle ng Hari.\n• **Disciple:** Ang mag-aaral na dumaan sa ganap na *Transformation* at nagre-reproduce ng buhay ng Hari sa iba.";
+                botDiv.innerText = "Ayon kay Kuya Jec: \n• **Believer:** Entry point o pagtitiwala sa Hesus.\n• **Follower:** Araw-araw na pagsunod at pagsuko sa Hari.\n• **Disciple:** Mag-aaral na dumaan sa Transformation at nagre-reproduce ng buhay ng Hari.";
             } 
-            // A Change from Inside Out
-            else if(lower.includes("inside out") || lower.includes("transformation") || lower.includes("isip") || lower.includes("mind") || lower.includes("pagbabago")) {
-                botDiv.innerText = "Ayon sa turo ni Tatay Pastor (A Change from Inside Out): Kailangan ang mental transformation o pagbabago ng pag-iisip dahil ito ay utos ng Hari (Romans 12:2). Hindi tayo makasamba nang maayos kung bulok o makamundo pa rin ang ating isip (Proverbs 23:7). Kailangan nating iwan ang lumang kultura at mamuhay ayon sa Kingdom Community.";
+            else if(lower.includes("inside out") || lower.includes("transformation") || lower.includes("isip") || lower.includes("mind")) {
+                botDiv.innerText = "Ayon kay Tatay Pastor (A Change from Inside Out): Kailangan ang mental transformation o pagbabago ng pag-iisip dahil utos ito ng Hari (Romans 12:2) upang maunawaan ang Kanyang kalooban at maiwasan ang makamundong sistema.";
             } 
-            // Kingdom Standard
-            else if(lower.includes("standard") || lower.includes("opinyon")) {
-                botDiv.innerText = "Ayon kay Kuya Pastor Jec (Kingdom Standard): Ang tanging pamantayan o Standard sa ating komunidad ay ang Salita ng Hari. Ang opinyon ng tao ay walang halaga! Kailangan nating i-align ang ating character, relationship, decisions, at priorities sa Salita ng Diyos.";
+            else if(lower.includes("standard")) {
+                botDiv.innerText = "Ayon kay Kuya Pastor Jec (Kingdom Standard): Ang Salita ng Hari ang ating tanging Standard. Ang opinyon ng tao ay walang halaga kumpara sa Salita ng Hari.";
             } 
-            // Sovereignty & Assignment
             else if(lower.includes("sovereign") || lower.includes("assignment") || lower.includes("hari")) {
-                botDiv.innerText = "Sa lente ng Kingdom Principles: Ang ating Diyos ay Kataas-taasang Hari (Shallit). Ang Kanyang layunin ay hindi magtatag ng relihiyon kundi ibalik ang Kanyang pamamahala (Governance) sa lupa sa pamamagitan natin bilang Kanyang mga embahador at kolonisador.";
+                botDiv.innerText = "Sa lente ng Kingdom Principles: Ang Diyos ang Kataas-taasang Hari (Shallit). Ang Kanyang layunin ay ibalik ang Kanyang pamamahala sa lupa sa pamamagitan natin bilang Kanyang mga embahador.";
             } 
-            // General fallback na matalino at parang tao
             else {
-                botDiv.innerText = "Magandang tanong 'yan! Sinusuri ko ang iyong katanungan gamit ang Kingdom Lens at ang mga inupload nating PDF notes nina Tatay Pastor, Ate Jam, at Kuya Pastor Jec. Tandaan natin na ang bawat katotohanan sa Bibliya ay dapat nating tingnan sa konteksto ng Gobyerno at Kaharian ng Diyos. May gusto ka bang linawin pa tungkol sa Hermeneutics o sa mga aralin natin?";
+                botDiv.innerText = "Magandang tanong 'yan, Rexford! Sinusuri ko ang iyong katanungan gamit ang buong PDF Library natin. Tandaan natin na ang bawat katotohanan ay dapat nating tingnan sa konteksto ng Gobyerno at Kaharian ng Diyos. May gusto ka bang idagdag o itanong pa?";
             }
 
             chatBody.appendChild(botDiv);

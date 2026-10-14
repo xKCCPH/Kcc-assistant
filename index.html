@@ -298,7 +298,7 @@
             font-style: italic;
         }
 
-        /* AUDIO SECTION WITH TABLE OF CONTENTS & UPLOAD BUTTON */
+        /* AUDIO SECTION WITH TABLE OF CONTENTS & MULTI-DRIVE SUBMISSION BUTTON */
         .audio-section {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -342,9 +342,9 @@
             background: rgba(251, 191, 36, 0.15);
             color: var(--accent-gold);
             border: 1px solid var(--accent-gold);
-            padding: 10px 18px;
+            padding: 12px 22px;
             border-radius: 12px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
@@ -356,6 +356,7 @@
             background: var(--accent-gold);
             color: black;
             box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+            transform: translateY(-2px);
         }
 
         .audio-grid {
@@ -422,6 +423,78 @@
 
         .toc-item:last-child {
             border-bottom: none;
+        }
+
+        /* MODAL POPUP STYLES FOR DRIVE FOLDERS */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(7, 10, 19, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-gold);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .modal-card h3 {
+            color: var(--accent-gold);
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        .modal-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        .drive-link-btn {
+            display: block;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--text-main);
+            border: 1px solid var(--accent-blue);
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-bottom: 12px;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        .drive-link-btn:hover {
+            background: var(--accent-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .close-modal-btn {
+            background: #1e293b;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .close-modal-btn:hover {
+            color: var(--text-main);
+            border-color: var(--text-main);
         }
 
         .metrics-grid {
@@ -716,7 +789,7 @@
         }
 
         .toast-notification.show {
-            visibility: visible;
+            visibility: hidden; /* handled by JS */
             opacity: 1;
             bottom: 45px;
         }
@@ -817,14 +890,14 @@
         <p>"Ang taong walang vision ay walang direksyon at disiplina (Proverbs 29:18). Hindi tayo tinawag upang magtatag ng relihiyon, kundi upang i-reintroduce ang Diyos at impluwensyahan ang mundo."</p>
     </div>
 
-    <!-- AUDIO SECTION WITH TABLE OF CONTENTS & UPLOAD BUTTON -->
+    <!-- AUDIO SECTION WITH TABLE OF CONTENTS & MULTI-DRIVE SUBMISSION BUTTON -->
     <div class="audio-section">
         <h3 style="margin: 0 0 5px 0; color: var(--accent-gold);">🎧 KCC Audio Sermons & Overviews</h3>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Makinig sa mga na-record na audio teachings at panayam sa ating mga aralin.</p>
         
         <div class="audio-controls-row">
             <button class="toc-btn" onclick="toggleToc()">📜 Talaan ng Lahat ng Audio (Table of Contents)</button>
-            <button class="upload-audio-btn" onclick="openSubmissionModal()">📤 Mag-submit ng Audio para sa Verification</button>
+            <button class="upload-audio-btn" onclick="openDriveModal()">📤 Mag-submit ng Audio or Notes nyo para madagdagan ng learning material ang ating Community Page</button>
         </div>
 
         <!-- COLLAPSIBLE TABLE OF CONTENTS -->
@@ -869,6 +942,26 @@
                     <source src="audio-konstitusyon.mp3" type="audio/mpeg">
                 </audio>
             </div>
+        </div>
+    </div>
+
+    <!-- GOOGLE DRIVE SUBMISSION MODAL POPUP -->
+    <div class="modal-overlay" id="driveModal">
+        <div class="modal-card">
+            <h3>📁 KCC Submission & Resource Folders</h3>
+            <p>Piliin ang Google Drive folder kung saan mo gustong mag-upload o suriin ang mga materyales:</p>
+            
+            <a href="https://drive.google.com/drive/folders/1ciDq40kVQbwk8cyBUy39i4riWs2D5c-E?usp=drive_link" target="_blank" class="drive-link-btn">
+                📂 Folder 1: Audio & Media Uploads
+            </a>
+            <a href="https://drive.google.com/drive/folders/1kGMjtHhILYFnUvtgnOPmk65RYWr6y_xy?usp=drive_link" target="_blank" class="drive-link-btn">
+                📂 Folder 2: Notes & Handouts Submissions
+            </a>
+            <a href="https://drive.google.com/drive/folders/12XrVTY3meBKW_kNTWhl2QHUd2x_IcyGG?usp=drive_link" target="_blank" class="drive-link-btn">
+                📂 Folder 3: Verified Community Materials
+            </a>
+
+            <button class="close-modal-btn" onclick="closeDriveModal()">Isara</button>
         </div>
     </div>
 
@@ -1055,8 +1148,12 @@
         }
     }
 
-    function openSubmissionModal() {
-        alert("Salamat sa iyong pagnanais na mag-submit ng audio lesson! Maaari mo itong i-send sa ating admin sa Facebook Page o Google Drive link para ma-verify at maipost dito sa portal.");
+    function openDriveModal() {
+        document.getElementById("driveModal").style.display = "flex";
+    }
+
+    function closeDriveModal() {
+        document.getElementById("driveModal").style.display = "none";
     }
 
     function shareWebsite() {
@@ -1139,9 +1236,9 @@
 
     function showToast() {
         let toast = document.getElementById("toastNotification");
-        toast.classList.add("show");
+        toast.className = "toast-notification show";
         setTimeout(function() { 
-            toast.classList.remove("show"); 
+            toast.className = "toast-notification"; 
         }, 3000);
     }
 

@@ -975,26 +975,26 @@
 </div>
 
 <!-- AI CHAT MODAL POPUP -->
-    <div class="ai-modal" id="aiModal">
-        <div class="ai-modal-header">
-            <h4>👑 COMBOT (Community Assistant)</h4>
-            <button class="close-btn" onclick="toggleAiModal()">✕</button>
-        </div>
-        <div class="ai-chat-body" id="chatBody">
-            <div class="chat-msg msg-bot">
-                <strong>Greetings, Citizens! 👑</strong><br><br>
-                Ako si <strong>"COMBOT"</strong>, ang inyong Community Virtual Assistant.<br>
-                Nandito ako upang tulungan kayong magbalik-tanaw at mag-aral muli ng mga leksyon natin sa Kingdom Community Center.<br><br>
-                📌 <strong>PAALALA:</strong><br>
-                Gamitin natin ang <em>Kingdom Hermeneutics</em> sa pag-analisa ng ating mga aralin at tingnan ang lahat sa <em>Lente ng Kaharian</em>—upang manatili tayo sa katotohanan at tamang layunin ng Salita.<br><br>
-                <strong>Ano ang nais ninyong alamin o balikang aralin ngayon?</strong>
-            </div>
-        </div>
-        <div class="ai-chat-footer">
-            <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong tungkol sa Salita o mga Aralin..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
-            <button class="ai-send-btn" onclick="sendAiMessage()">Ipadala</button>
+<div class="ai-modal" id="aiModal">
+    <div class="ai-modal-header">
+        <h4>👑 COMBOT (Community Assistant)</h4>
+        <button class="close-btn" onclick="toggleAiModal()">✕</button>
+    </div>
+    <div class="ai-chat-body" id="chatBody">
+        <div class="chat-msg msg-bot">
+            <strong>Greetings, Citizens! 👑</strong><br><br>
+            Ako si <strong>"COMBOT"</strong>, ang inyong Community Virtual Assistant.<br>
+            Nandito ako upang tulungan kayong magbalik-tanaw at mag-aral muli ng mga leksyon natin sa Kingdom Community Center.<br><br>
+            📌 <strong>PAALALA:</strong><br>
+            Gamitin natin ang <em>Kingdom Hermeneutics</em> sa pag-analisa ng ating mga aralin at tingnan ang lahat sa <em>Lente ng Kaharian</em>—upang manatili tayo sa katotohanan at tamang layunin ng Salita.<br><br>
+            <strong>Ano ang nais ninyong alamin o balikang aralin ngayon?</strong>
         </div>
     </div>
+    <div class="ai-chat-footer">
+        <input type="text" id="aiInput" class="ai-input" placeholder="Magtanong tungkol sa Salita o mga Aralin..." onkeydown="if(event.key === 'Enter') sendAiMessage()">
+        <button class="ai-send-btn" onclick="sendAiMessage()">Ipadala</button>
+    </div>
+</div>
 
 <script>
     const lessonsData = {
@@ -1176,54 +1176,50 @@
         }
     }
 
-    function sendAiMessage() {
-        let input = document.getElementById("aiInput");
-        let text = input.value.trim();
-        if(!text) return;
+    // DIREKTANG NOTEBOOK INTEGRATION NA WALANG SERVER ERROR
+    async function sendAiMessage() {
+        const inputField = document.getElementById('aiInput');
+        const chatContainer = document.getElementById('chatBody');
+        const userMessage = inputField ? inputField.value.trim() : '';
 
-        let chatBody = document.getElementById("chatBody");
+        if (!userMessage) return;
 
-        let userDiv = document.createElement("div");
-        userDiv.className = "chat-msg msg-user";
-        userDiv.innerText = text;
-        chatBody.appendChild(userDiv);
+        // 1. Ipakita ang mensahe ng User sa chat
+        const userDiv = document.createElement('div');
+        userDiv.className = 'chat-msg msg-user';
+        userDiv.textContent = userMessage;
+        chatContainer.appendChild(userDiv);
 
-        input.value = "";
-        chatBody.scrollTop = chatBody.scrollHeight;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        inputField.value = '';
 
-        setTimeout(() => {
-            let botDiv = document.createElement("div");
-            botDiv.className = "chat-msg msg-bot";
+        // 2. Magpakita ng Loading / Redirect Indicator
+        const botDiv = document.createElement('div');
+        botDiv.className = 'chat-msg msg-bot';
+        botDiv.textContent = 'Binubuksan ang opisyal na KCC NotebookLM...';
+        chatContainer.appendChild(botDiv);
 
-            let lower = text.toLowerCase();
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        try {
+            // 3. Direktang buksan ang opisyal na NotebookLM sa bagong tab
+            const notebookUrl = 'https://gemini.google.com/notebook/80dbba40-0c5b-4d48-9298-21f16fadb232';
             
-            if(lower.includes("hirap") || lower.includes("paano intindihin") || lower.includes("pag-unawa") || lower.includes("bible") || lower.includes("talata") || lower.includes("hermeneutics")) {
-                botDiv.innerText = "Shalom! Huwag nating basahin ang Bibliya bilang simpleng librong relihiyoso kundi bilang Konstitusyon ng Kaharian. Gamitin natin ang Original Intent ng Hari—itinatanong natin: 'Ano ba ang ibig sabihin ng Diyos nang sinabi Niya ito?' sa halip na 'Ano ang ibig sabihin nito sa akin?'. Gabay natin ang Banal na Espiritu bilang Gobernador!";
-            } 
-            else if(lower.includes("3 c") || lower.includes("constitution") || lower.includes("commission") || lower.includes("calling") || lower.includes("capacity")) {
-                botDiv.innerText = "Batay sa 3 C's ng Kaharian (ni Ate Jam): \n1. Constitution: Ang Bibliya ang dokumentadong kalooban ng Hari.\n2. Commission: Ang Ecclesia (Simbahan) ay Gabinete ng Hari.\n3. Calling & Capacity: Ang panawag ay nakabase sa Identity at Grace.";
-            } 
-            else if(lower.includes("believer") || lower.includes("follower") || lower.includes("disciple") || lower.includes("disipulo")) {
-                botDiv.innerText = "Ayon kay Kuya Jec: \n• Believer: Entry point o pagtitiwala sa Hesus.\n• Follower: Araw-araw na pagsunod at pagsuko sa Hari.\n• Disciple: Mag-aaral na dumaan sa Transformation at nagre-reproduce ng buhay ng Hari.";
-            } 
-            else if(lower.includes("inside out") || lower.includes("transformation") || lower.includes("isip") || lower.includes("mind")) {
-                botDiv.innerText = "Ayon kay Tatay Pastor (A Change from Inside Out): Kailangan ang mental transformation o pagbabago ng pag-iisip dahil utos ito ng Hari (Romans 12:2) upang maunawaan ang Kanyang kalooban at maiwasan ang makamundong sistema.";
-            } 
-            else if(lower.includes("standard")) {
-                botDiv.innerText = "Ayon kay Kuya Pastor Jec (Kingdom Standard): Ang Salita ng Hari ang ating tanging Standard. Ang opinyon ng tao ay walang halaga kumpara sa Salita ng Hari.";
-            } 
-            else if(lower.includes("sovereign") || lower.includes("assignment") || lower.includes("hari")) {
-                botDiv.innerText = "Sa lente ng Kingdom Principles: Ang Diyos ang Kataas-taasang Hari (Shallit). Ang Kanyang layunin ay ibalik ang Kanyang pamamahala sa lupa sa pamamagitan natin bilang Kanyang mga embahador.";
-            } 
-            else {
-                botDiv.innerText = "Magandang tanong 'yan! Sinusuri ko ang iyong katanungan gamit ang buong PDF Library natin. Tandaan natin na ang bawat katotohanan ay dapat nating tingnan sa konteksto ng Gobyerno at Kaharian ng Diyos. May gusto ka bang idagdag o itanong pa?";
-            }
+            setTimeout(() => {
+                window.open(notebookUrl, '_blank');
+                botDiv.textContent = 'Naubuksan na ang KCC NotebookLM sa bagong tab. Maaari ka na pong direktang magtanong at sumangguni doon sa ating 50+ na mga doktrina at aralin!';
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 800);
 
-            chatBody.appendChild(botDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }, 700);
+        } catch (error) {
+            console.error('Error:', error);
+            botDiv.textContent = 'Paumanhin, mangyaring bisitahin ang aming opisyal na notebook.';
+        }
+
+        chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 </script>
+
 <!-- Floating Bible Button -->
 <div id="floating-bible-btn" style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; cursor: grab; user-select: none;">
     <a href="/bible" style="display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #d97706, #b45309); color: white; padding: 10px 18px; border-radius: 50px; text-decoration: none; font-family: sans-serif; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.4); font-size: 14px;" title="Buksan ang ASND Bible">
@@ -1256,56 +1252,6 @@
         isDragging = false;
         floatBtn.style.cursor = 'grab';
     });
-</script>
-   document.addEventListener('mouseup', () => {
-    isDragging = false;
-    floatBtn.style.cursor = 'grab';
-});
-</script>
-
-<script>
-async function sendAiMessage() {
-    const inputField = document.getElementById('aiInput');
-    const chatContainer = document.getElementById('chatBody');
-    const userMessage = inputField ? inputField.value.trim() : '';
-
-    if (!userMessage) return;
-
-    // 1. Ipakita ang mensahe ng User sa chat
-    const userDiv = document.createElement('div');
-    userDiv.className = 'chat-msg msg-user';
-    userDiv.textContent = userMessage;
-    chatContainer.appendChild(userDiv);
-
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-
-    inputField.value = '';
-
-    // 2. Magpakita ng Loading Indicator
-    const botDiv = document.createElement('div');
-    botDiv.className = 'chat-msg msg-bot';
-    botDiv.textContent = 'Binubuksan ang opisyal na KCC NotebookLM...';
-    chatContainer.appendChild(botDiv);
-
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-
-    try {
-        // 3. Direktang i-redirect o buksan ang NotebookLM sa bagong tab
-        const notebookUrl = `https://gemini.google.com/notebook/80dbba40-0c5b-4d48-9298-21f16fadb232`;
-        
-        setTimeout(() => {
-            window.open(notebookUrl, '_blank');
-            botDiv.textContent = 'Naubuksan na ang KCC NotebookLM sa bagong tab. Maaari ka na po direktang magtanong doon sa ating 50+ na mga doktrina at aralin!';
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }, 800);
-
-    } catch (error) {
-        console.error('Error:', error);
-        botDiv.textContent = 'Paumanhin, mangyaring bisitahin ang aming opisyal na notebook.';
-    }
-
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-}
 </script>
 
 </body>

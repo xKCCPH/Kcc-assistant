@@ -72,18 +72,25 @@ TANONG NG USER:
 {user_message}
 """
 
-        # Paggamit ng Google GenAI Interactions API
-        interaction = client.interactions.create(
-            model="gemini-2.5-flash",
-            input=full_prompt
+        # Paggamit ng tamang Google GenAI SDK syntax
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=full_prompt
         )
 
-        response_text = interaction.output_text
+        response_text = response.text
 
         return jsonify({
             "status": "success",
             "reply": response_text
         })
+
+    except Exception as e:
+        print(f"Combot API Error: {e}")
+        return jsonify({
+            "status": "error",
+            "reply": f"Paumanhin, nagkaroon ng pansamantalang suliranin sa pagpoproseso ng iyong hiling: {str(e)}"
+        }), 500
 
     except Exception as e:
         print(f"Combot API Error: {e}")

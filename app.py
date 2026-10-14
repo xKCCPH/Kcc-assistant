@@ -1,97 +1,96 @@
 import os
 from flask import Flask, render_template, request, jsonify
 from pypdf import PdfReader
-import sqlite3
+from google import genai
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.')
 
-# --- 1. AUTOMATIC KCC PDF KNOWLEDGE LOADER ---
-def load_all_kcc_pdfs():
-    knowledge_text = ""
-    print("Binabasa ang lahat ng KCC PDF files para sa Combot Knowledge Base...")
-    for filename in os.listdir('.'):
-        if filename.lower().endswith('.pdf'):
-            try:
-                reader = PdfReader(filename)
-                for page in reader.pages:
-                    text = page.extract_text()
-                    if text:
-                        knowledge_text += text + "\n"
-            except Exception as e:
-                print(f"Error sa pagbasa ng {filename}: {e}")
-    return knowledge_text
+# System Persona at Guidelines para kay Combot
+COMBOT_SYSTEM_PROMPT = """
+Ikaw si Combot, ang opisyal na AI Assistant ng Kingdom Citizen Church (KCC).
+Ang iyong misyon ay magbigay ng kaalaman, gabay, at kasagutan na nakabatay lamang sa KCC Doctrine, Kingdom Identity, Citizenship, at Constitution ng Kaharian ng Diyos.
 
-# I-load ang buong kaalaman mula sa mga PDF sa repository
-KCC_KNOWLEDGE_BASE = load_all_kcc_pdfs()
-
-# System prompt directive para kay Combot
-COMBOT_SYSTEM_PROMPT = f"""
-Ikaw si COMBOT (Kingdom Lens), ang opisyal at matalinong AI Assistant ng Kingdom Community Center (KCC).
-Ang iyong layunin ay sagutin ang lahat ng tanong ng mga gumagamit base sa mga opisyal na aralin, katuruan, at PDF documents ng KCC.
-
-MGA GABAY NA PRINSIPYO SA PAGSAGOT:
-1. Kingdom Identity & Citizenship: Ang mga mananampalataya ay mga "Citizens" ng Kaharian ng Langit, hindi lamang mga miyembro ng relihiyon. Ang KCC ay isang "Colony" ng langit dito sa lupa.
-2. The Bible as the Constitution: Ang Salita ng Diyos (Bibliya) ang ating Saligang Batas (Constitution) na nagpapatakbo sa ating pamumuhay.
-3. Kingdom Culture: Isabuhay ang Katwiran (Righteousness), Kapayapaan (Peace), at Kagalakan sa Espiritu Santo. Ang tunay na pag-ibig ay hindi nagtutolerat sa maling gawain.
-4. Dominion at Purpose: Ang tao ay nilikha upang mamuno at irepresenta ang Hari (God) sa lupa.
-5. Community Unity: Ang kapangyarihan at awtoridad ay dumadaloy sa pamamagitan ng pagkakaisa sa komunidad.
-
-NARITO ANG BUONG MGA ARALIN AT PDF DOCUMENTS BILANG KAHIT ANONG BATAYAN NG IYONG MGA ISASAGOT:
-{KCC_KNOWLEDGE_BASE}
-
-Sumagot nang may awtoridad ng Salita, may pagmamahal, at nakabase nang buo sa mga konseptong nakasaad sa itaas.
+MGA ALITUNTUNIN SA PAGSAGOT:
+1. Magalang, propesyonal, at may awtoridad ng isang Kingdom Citizen ang iyong pananalita.
+2. Gamitin ang iyong "Knowledge Base" mula sa mga PDF documents bilang pangunahing batayan ng iyong mga sagot.
+3. Kung may itinatanong na wala sa KCC Doctrine o PDF materials, sagutin ito gamit ang pangkalahatang prinsipyo ng Kaharian ngunit linawin na ito ay nakabatay sa Kingdom perspective.
+4. Maging malinaw, direkta, at nakakapagpatibay ng pananampalataya at pagkakakilanlan (Kingdom Identity).
 """
 
-# --- 2. DATABASE HELPER PARA SA BIBLE APP ---
-def query_bible(keyword):
-    db_path = 'ASND.SQLite3'
-    if not os.path.exists(db_path):
-        return []
+def load_all_kcc_pdfs():
+    """Binabasa ang lahat ng PDF files sa buong repository at pinagsasama sa isang text base."""
+    combined_text = ""
+    current_dir = os.path.dirname(os.path.abspath(__file__))
     
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    try:
-        # Hinahanap ang keyword sa ASND database (hal. aklat, talata, o salita)
-        query = "SELECT book_name, chapter, verse, text FROM verses WHERE text LIKE ? OR book_name LIKE ? LIMIT 50"
-        cursor.execute(query, (f'%{keyword}%', f'%{keyword}%'))
-        results = cursor.fetchall()
-    except Exception as e:
-        results = [("Error", 0, 0, str(e))]
-    finally:
-        conn.close()
-    return results
+    for root, dirs, files in os.walk(current_dir):
+        for file in files:
+            if file.lower().endswith('.pdf'):
+                pdf_path = os.path.join(root, file)
+                try:
+                    reader = PdfReader(pdf_path)
+                    combined_text += f"\n--- DOCUMENT: {file} ---\n"
+                    for page in reader.pages:
+                        extracted = page.extract_text()
+                        if extracted:
+                            combined_text += extracted + "\n"
+                except Exception as e:
+                    print(f"Error reading {file}: {e}")
+                    
+    return combined_text
 
-# --- 3. FLASK ROUTES ---
+# Basahin ang mga PDF kapag nag-start ang server
+KCC_KNOWLEDGE_BASE = load_all_kcc_pdfs()
+
+# Initialize Gemini Client (awtomatikong kukuha ng GEMINI_API_KEY mula sa Vercel)
+client = genai.Client()
 
 @app.route('/')
 def home():
-    # Dito nakalagay ang main landing page mo o kaya ay template ng website
     return render_template('index.html')
 
-@app.route('/bible', methods=['GET', 'POST'])
-def bible_app():
-    verses = []
-    search_query = ""
-    if request.method == 'POST':
-        search_query = request.form.get('query', '')
-        if search_query:
-            verses = query_bible(search_query)
-    return render_template('bible.html', verses=verses, query=search_query)
+@app.route('/bible')
+def bible():
+    return render_template('bible.html')
 
 @app.route('/api/combot', methods=['POST'])
 def combot_api():
-    data = request.get_json()
-    user_message = data.get('message', '')
-    
-    # Dito mo ikinakabit ang AI response logic gamit ang COMBOT_SYSTEM_PROMPT at user_message
-    # (Maaari itong i-connect sa iyong OpenAI/Gemini API key gamit ang prompt sa itaas)
-    
-    response_text = f"(Halimbawa ng sagot ni Combot batay sa KCC PDFs para sa tanong na: '{user_message}')"
-    
-    return jsonify({
-        "status": "success",
-        "reply": response_text
-    })
+    try:
+        data = request.get_json() or {}
+        user_message = data.get('message', '')
+
+        if not user_message:
+            return jsonify({"status": "error", "reply": "Mangyaring magbigay ng tanong o mensahe."}), 400
+
+        # Pagsasamahin ang System Prompt, PDF Knowledge Base, at Tanong ng User
+        full_prompt = f"""
+{COMBOT_SYSTEM_PROMPT}
+
+MGA DOKUMENTO AT ARALIN (KCC KNOWLEDGE BASE):
+{KCC_KNOWLEDGE_BASE}
+
+TANONG NG USER:
+{user_message}
+"""
+
+        # Paggamit ng Google GenAI Interactions API
+        interaction = client.interactions.create(
+            model="gemini-2.5-flash",
+            input=full_prompt
+        )
+
+        response_text = interaction.output_text
+
+        return jsonify({
+            "status": "success",
+            "reply": response_text
+        })
+
+    except Exception as e:
+        print(f"Combot API Error: {e}")
+        return jsonify({
+            "status": "error",
+            "reply": f"Paumanhin, nagkaroon ng pansamantalang suliranin sa pagproproseso ng iyong hiling: {str(e)}"
+        }), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

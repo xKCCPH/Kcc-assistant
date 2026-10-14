@@ -1264,16 +1264,16 @@
 </script>
 
 <script>
-async function sendMessage() {
-    const inputField = document.getElementById('chat-input');
-    const chatContainer = document.getElementById('chat-messages'); 
+async function sendAiMessage() {
+    const inputField = document.getElementById('aiInput');
+    const chatContainer = document.getElementById('chatBody'); 
     const userMessage = inputField ? inputField.value.trim() : '';
 
     if (!userMessage) return;
 
     // 1. Ipakita ang message ng User sa chat
     const userDiv = document.createElement('div');
-    userDiv.className = 'chat-bubble user-bubble';
+    userDiv.className = 'chat-msg msg-user';
     userDiv.textContent = userMessage;
     chatContainer.appendChild(userDiv);
 
@@ -1281,7 +1281,7 @@ async function sendMessage() {
 
     // 2. Magpakita ng Loading Indicator
     const botDiv = document.createElement('div');
-    botDiv.className = 'chat-bubble bot-bubble';
+    botDiv.className = 'chat-msg msg-bot';
     botDiv.textContent = 'Nagsusuri sa KCC Knowledge Base...';
     chatContainer.appendChild(botDiv);
     
@@ -1312,13 +1312,6 @@ async function sendMessage() {
 
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
-
-// Pwede ring gumana sa pag-press ng Enter key
-document.getElementById('chat-input')?.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-});
 </script>
 
 </body>

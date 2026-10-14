@@ -1266,48 +1266,42 @@
 <script>
 async function sendAiMessage() {
     const inputField = document.getElementById('aiInput');
-    const chatContainer = document.getElementById('chatBody'); 
+    const chatContainer = document.getElementById('chatBody');
     const userMessage = inputField ? inputField.value.trim() : '';
 
     if (!userMessage) return;
 
-    // 1. Ipakita ang message ng User sa chat
+    // 1. Ipakita ang mensahe ng User sa chat
     const userDiv = document.createElement('div');
     userDiv.className = 'chat-msg msg-user';
     userDiv.textContent = userMessage;
     chatContainer.appendChild(userDiv);
+
+    chatContainer.scrollTop = chatContainer.scrollHeight;
 
     inputField.value = '';
 
     // 2. Magpakita ng Loading Indicator
     const botDiv = document.createElement('div');
     botDiv.className = 'chat-msg msg-bot';
-    botDiv.textContent = 'Nagsusuri sa KCC Knowledge Base...';
+    botDiv.textContent = 'Binubuksan ang opisyal na KCC NotebookLM...';
     chatContainer.appendChild(botDiv);
-    
+
     chatContainer.scrollTop = chatContainer.scrollHeight;
 
     try {
-        // 3. Mag-fetch papunta sa ating Flask API (/api/combot)
-        const response = await fetch('/api/combot', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message: userMessage })
-        });
+        // 3. Direktang i-redirect o buksan ang NotebookLM sa bagong tab
+        const notebookUrl = `https://gemini.google.com/notebook/80dbba40-0c5b-4d48-9298-21f16fadb232`;
+        
+        setTimeout(() => {
+            window.open(notebookUrl, '_blank');
+            botDiv.textContent = 'Naubuksan na ang KCC NotebookLM sa bagong tab. Maaari ka na po direktang magtanong doon sa ating 50+ na mga doktrina at aralin!';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }, 800);
 
-        const data = await response.json();
-
-        // 4. Ipakita ang totoong sagot galing sa Gemini at KCC PDFs
-        if (data.status === 'success') {
-            botDiv.textContent = data.reply;
-        } else {
-            botDiv.textContent = 'Paumanhin, nagkaroon ng error: ' + (data.reply || 'Hindi maiproseso.');
-        }
     } catch (error) {
         console.error('Error:', error);
-        botDiv.textContent = 'Paumanhin, hindi makakonekta sa server sa ngayon.';
+        botDiv.textContent = 'Paumanhin, mangyaring bisitahin ang aming opisyal na notebook.';
     }
 
     chatContainer.scrollTop = chatContainer.scrollHeight;

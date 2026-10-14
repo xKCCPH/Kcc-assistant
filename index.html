@@ -298,6 +298,69 @@
             font-style: italic;
         }
 
+        /* REELS / SHORT VIDEOS SECTION STYLES */
+        .reels-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 35px;
+            backdrop-filter: blur(12px);
+        }
+
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .reel-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .reel-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.2);
+        }
+
+        .reel-video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 177.78%; /* 9:16 Aspect Ratio for Reels/Shorts */
+            background: #000;
+        }
+
+        .reel-video-container video, .reel-video-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+            object-fit: cover;
+        }
+
+        .reel-info {
+            padding: 15px;
+        }
+
+        .reel-info h4 {
+            color: var(--accent-gold);
+            margin: 0 0 6px 0;
+            font-size: 1rem;
+        }
+
+        .reel-info p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
         /* AUDIO SECTION WITH TABLE OF CONTENTS & MULTI-DRIVE SUBMISSION BUTTON */
         .audio-section {
             background: var(--bg-card);
@@ -789,7 +852,7 @@
         }
 
         .toast-notification.show {
-            visibility: hidden; /* handled by JS */
+            visibility: visible;
             opacity: 1;
             bottom: 45px;
         }
@@ -890,14 +953,58 @@
         <p>"Ang taong walang vision ay walang direksyon at disiplina (Proverbs 29:18). Hindi tayo tinawag upang magtatag ng relihiyon, kundi upang i-reintroduce ang Diyos at impluwensyahan ang mundo."</p>
     </div>
 
+    <!-- NEW: KINGDOM REELS & SHORT VIDEOS SECTION -->
+    <div class="reels-section">
+        <h3 style="margin: 0 0 5px 0; color: var(--accent-gold);">🎥 Kingdom Reels & Short Video Highlights</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Panoorin ang maiikling mga aral, clips, at paalala sa lente ng Kaharian.</p>
+        
+        <div class="reels-grid">
+            <div class="reel-card">
+                <div class="reel-video-container">
+                    <!-- Pwedeng palitan ng sariling .mp4 video link o YouTube Short embed -->
+                    <video controls poster="https://via.placeholder.com/300x533/070a13/fbbf24?text=Reel+1+Thumbnail">
+                        <source src="reel1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="reel-info">
+                    <h4>3 C's in 60 Seconds</h4>
+                    <p>Mabilis na paliwanag sa Constitution, Commission, at Calling.</p>
+                </div>
+            </div>
+
+            <div class="reel-card">
+                <div class="reel-video-container">
+                    <video controls poster="https://via.placeholder.com/300x533/070a13/3b82f6?text=Reel+2+Thumbnail">
+                        <source src="reel2.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="reel-info">
+                    <h4>Ano ang Kingdom Standard?</h4>
+                    <p>Maikling hamon para sa ating pang-araw-araw na pamumuhay.</p>
+                </div>
+            </div>
+
+            <div class="reel-card">
+                <div class="reel-video-container">
+                    <video controls poster="https://via.placeholder.com/300x533/070a13/06b6d4?text=Reel+3+Thumbnail">
+                        <source src="reel3.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="reel-info">
+                    <h4>Mental Transformation</h4>
+                    <p>Paano baguhin ang pananaw mula sa loob palabas (Inside Out).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- AUDIO SECTION WITH TABLE OF CONTENTS & MULTI-DRIVE SUBMISSION BUTTON -->
     <div class="audio-section">
         <h3 style="margin: 0 0 5px 0; color: var(--accent-gold);">🎧 KCC Audio Sermons & Overviews</h3>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Makinig sa mga na-record na audio teachings at panayam sa ating mga aralin.</p>
         
         <div class="audio-controls-row">
-            <button class="toc-btn" onclick="toggleToc()">📜 Talaan ng Lahat ng Audio (Table of Contents)</button>
-            <button class="upload-audio-btn" onclick="openDriveModal()">📤 Mag-submit ng Audio or Notes nyo para madagdagan ng learning material ang ating Community Page</button>
+            <button class="upload-audio-btn" onclick="openDriveModal()">📤 Share your Learning material para sa ating Community Page</button>
         </div>
 
         <!-- COLLAPSIBLE TABLE OF CONTENTS -->
@@ -948,17 +1055,17 @@
     <!-- GOOGLE DRIVE SUBMISSION MODAL POPUP -->
     <div class="modal-overlay" id="driveModal">
         <div class="modal-card">
-            <h3>📁 KCC Resource Folders</h3>
+            <h3>📁 KCC Submission & Resource Folders</h3>
             <p>Piliin ang Google Drive folder kung saan mo gustong mag-upload o suriin ang mga materyales:</p>
             
             <a href="https://drive.google.com/drive/folders/1ciDq40kVQbwk8cyBUy39i4riWs2D5c-E?usp=drive_link" target="_blank" class="drive-link-btn">
-                📂 Folder 1: SHARE YOUR NOTES AS LEARNING RESOURCES!
+                📂 Folder 1: SHARE YOUR NOTES AS A LEARNING RESOURCES
             </a>
             <a href="https://drive.google.com/drive/folders/1kGMjtHhILYFnUvtgnOPmk65RYWr6y_xy?usp=drive_link" target="_blank" class="drive-link-btn">
-                📂 Folder 2: Recording/ AUDIO SERMON/PREACH
+                📂 Folder 2: RECORDING / AUDIO SEARMON / PREACH
             </a>
             <a href="https://drive.google.com/drive/folders/12XrVTY3meBKW_kNTWhl2QHUd2x_IcyGG?usp=drive_link" target="_blank" class="drive-link-btn">
-                📂 Folder 3: Ibahagi ang inyong pinakamasayang karanasan sa ating community sa pamamagitan ng larawan, at alamin din ang iba pang mga ganap sa ating community!
+                📂 Folder 3: COMMUNITY PHOTOS AT MGA GANAP (SHARE MO DIN YUNG SAYO HIHI)
             </a>
 
             <button class="close-modal-btn" onclick="closeDriveModal()">Isara</button>
@@ -1236,9 +1343,9 @@
 
     function showToast() {
         let toast = document.getElementById("toastNotification");
-        toast.className = "toast-notification show";
+        toast.classList.add("show");
         setTimeout(function() { 
-            toast.className = "toast-notification"; 
+            toast.classList.remove("show"); 
         }, 3000);
     }
 

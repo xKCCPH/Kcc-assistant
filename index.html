@@ -813,9 +813,7 @@
     <h2 class="section-title">Mga Aral at Arangkada ni Tatay Pastor & Team (Archive)</h2>
     <p style="color: var(--text-muted); margin-top: -10px; margin-bottom: 20px; font-size: 0.9rem;">👇 Pindutin ang alinmang card upang buksan at basahin ang kumpletong aralin:</p>
 
-    <div class="grid" id="contentGrid">
-        <!-- Ang mga cards na ito ay direktang kumukuha sa centralized lessonsData library sa ibaba -->
-    </div>
+    <div class="grid" id="contentGrid"></div>
 
     <!-- NOTES & REFLECTION PAD -->
     <div class="notes-container">
@@ -868,10 +866,6 @@
 </div>
 
 <script>
-    /* ==========================================================
-       CENTRALIZED PDF LIBRARY & LESSON DATABASE
-       (Dito mo lang idadagdag ang mga susunod pang PDF at Aralin!)
-       ========================================================== */
     const lessonsData = {
         lesson3Cs: {
             badge: "Ate Jam • Special Lesson",
@@ -954,7 +948,6 @@
         }
     };
 
-    // AUTOMATIC RENDERING OF LESSON CARDS (Awtomatikong binubuo ang grid mula sa library)
     document.addEventListener("DOMContentLoaded", function() {
         renderLessonCards();
         
@@ -1029,7 +1022,6 @@
         });
     }
 
-    // NOTES LOCALSTORAGE & CUSTOM TOAST
     function showToast() {
         let toast = document.getElementById("toastNotification");
         toast.classList.add("show");
@@ -1044,7 +1036,6 @@
         showToast();
     }
 
-    // ADVANCED AI CHAT ANALYZER (DYNAMIC KNOWLEDGE BASE)
     function toggleAiModal() {
         let modal = document.getElementById("aiModal");
         if(modal.style.display === "flex") {
@@ -1076,13 +1067,13 @@
             let lower = text.toLowerCase();
             
             if(lower.includes("hirap") || lower.includes("paano intindihin") || lower.includes("pag-unawa") || lower.includes("bible") || lower.includes("talata") || lower.includes("hermeneutics")) {
-                botDiv.innerText = "Shalom! Huwag nating basahin ang Bibliya bilang simpleng librong relihiyoso kundi bilang *Konstitusyon ng Kaharian*. Gamitin natin ang *Original Intent* ng Hari—itinatanong natin: 'Ano ba ang ibig sabihin ng Diyos nang sinabi Niya ito?' sa halip na 'Ano ang ibig sabihin nito sa akin?'. Gabay natin ang Banal na Espiritu bilang Gobernador!";
+                botDiv.innerText = "Shalom! Huwag nating basahin ang Bibliya bilang simpleng librong relihiyoso kundi bilang Konstitusyon ng Kaharian. Gamitin natin ang Original Intent ng Hari—itinatanong natin: 'Ano ba ang ibig sabihin ng Diyos nang sinabi Niya ito?' sa halip na 'Ano ang ibig sabihin nito sa akin?'. Gabay natin ang Banal na Espiritu bilang Gobernador!";
             } 
             else if(lower.includes("3 c") || lower.includes("constitution") || lower.includes("commission") || lower.includes("calling") || lower.includes("capacity")) {
-                botDiv.innerText = "Batay sa 3 C's ng Kaharian (ni Ate Jam): \n1. **Constitution:** Ang Bibliya ang dokumentadong kalooban ng Hari.\n2. **Commission:** Ang Ecclesia (Simbahan) ay Gabinete ng Hari.\n3. **Calling & Capacity:** Ang panawag ay nakabase sa Identity at Grace.";
+                botDiv.innerText = "Batay sa 3 C's ng Kaharian (ni Ate Jam): \n1. Constitution: Ang Bibliya ang dokumentadong kalooban ng Hari.\n2. Commission: Ang Ecclesia (Simbahan) ay Gabinete ng Hari.\n3. Calling & Capacity: Ang panawag ay nakabase sa Identity at Grace.";
             } 
             else if(lower.includes("believer") || lower.includes("follower") || lower.includes("disciple") || lower.includes("disipulo")) {
-                botDiv.innerText = "Ayon kay Kuya Jec: \n• **Believer:** Entry point o pagtitiwala sa Hesus.\n• **Follower:** Araw-araw na pagsunod at pagsuko sa Hari.\n• **Disciple:** Mag-aaral na dumaan sa Transformation at nagre-reproduce ng buhay ng Hari.";
+                botDiv.innerText = "Ayon kay Kuya Jec: \n• Believer: Entry point o pagtitiwala sa Hesus.\n• Follower: Araw-araw na pagsunod at pagsuko sa Hari.\n• Disciple: Mag-aaral na dumaan sa Transformation at nagre-reproduce ng buhay ng Hari.";
             } 
             else if(lower.includes("inside out") || lower.includes("transformation") || lower.includes("isip") || lower.includes("mind")) {
                 botDiv.innerText = "Ayon kay Tatay Pastor (A Change from Inside Out): Kailangan ang mental transformation o pagbabago ng pag-iisip dahil utos ito ng Hari (Romans 12:2) upang maunawaan ang Kanyang kalooban at maiwasan ang makamundong sistema.";
@@ -1094,7 +1085,7 @@
                 botDiv.innerText = "Sa lente ng Kingdom Principles: Ang Diyos ang Kataas-taasang Hari (Shallit). Ang Kanyang layunin ay ibalik ang Kanyang pamamahala sa lupa sa pamamagitan natin bilang Kanyang mga embahador.";
             } 
             else {
-                botDiv.innerText = "Magandang tanong 'yan, Rexford! Sinusuri ko ang iyong katanungan gamit ang buong PDF Library natin. Tandaan natin na ang bawat katotohanan ay dapat nating tingnan sa konteksto ng Gobyerno at Kaharian ng Diyos. May gusto ka bang idagdag o itanong pa?";
+                botDiv.innerText = "Magandang tanong 'yan! Sinusuri ko ang iyong katanungan gamit ang buong PDF Library natin. Tandaan natin na ang bawat katotohanan ay dapat nating tingnan sa konteksto ng Gobyerno at Kaharian ng Diyos. May gusto ka bang idagdag o itanong pa?";
             }
 
             chatBody.appendChild(botDiv);

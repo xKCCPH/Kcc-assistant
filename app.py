@@ -5,7 +5,6 @@ import re
 
 app = Flask(__name__)
 
-# Kuhanin ang tamang path para mabasa sa Vercel cloud
 basedir = os.path.abspath(os.path.dirname(__file__))
 db_path = os.path.join(basedir, 'ASND.SQLite3')
 
@@ -17,15 +16,13 @@ def get_db_connection():
 def clean_text(text):
     if not text:
         return ""
-    # Tinatanggal ang lahat ng HTML/XML tags tulad ng <pb/>, <i>, </i>
     return re.sub(r'<[^>]+>', '', text)
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
+# Dito natin inilagay sa /bible path para hindi masapawan ang main home page ninyo
+@app.route('/bible', methods=['GET', 'POST'])
+def bible():
     conn = get_db_connection()
     cursor = conn.cursor()
-
-    # Kumuha ng listahan ng lahat ng aklat para sa Table of Contents
     cursor.execute("SELECT book_number, long_name FROM books ORDER BY book_number")
     books = cursor.fetchall()
 
@@ -43,7 +40,6 @@ def index():
         if b_name_row:
             current_book_name = b_name_row['long_name']
 
-    # 1. Kapag nag-search ng salita mula Genesis hanggang Revelation
     if request.method == 'POST':
         query = request.form.get('query', '').strip()
         if query:
@@ -55,8 +51,6 @@ def index():
                 ORDER BY v.book_number, v.chapter, v.verse
             """, ('%' + query + '%',))
             raw_verses = cursor.fetchall()
-
-    # 2. Kapag pumili ng aklat at kabanata mula sa Table of Contents
     elif selected_book:
         cursor.execute("SELECT DISTINCT chapter FROM verses WHERE book_number = ? ORDER BY chapter", (selected_book,))
         chapters = [row['chapter'] for row in cursor.fetchall()]
@@ -73,7 +67,6 @@ def index():
 
     conn.close()
 
-    # Linisin ang bawat talata para tanggalin ang mga unwanted tags
     for v in raw_verses:
         v_dict = dict(v)
         v_dict['text'] = clean_text(v_dict['text'])
@@ -82,6 +75,17 @@ def index():
     return render_template('index.html', books=books, verses=verses, query=query, 
                            selected_book=selected_book, selected_chapter=selected_chapter, 
                            chapters=chapters, current_book_name=current_book_name)
+
+# Pwedeng magdagdag ng simpleng welcome page para sa mismong main link (/)
+@app.route('/')
+def home():
+    return """
+    <div style="font-family: Arial; text-align: center; margin-top: 100px;">
+        <h1>Welcome to Kingdom Community Center</h1>
+        <p>I-click ang button sa ibaba para buksan ang ASND Bible Studio:</p>
+        <a href="/bible" style="display: inline-block; padding: 15px 30px; background-color: #2b6cb0; color: white; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: bold;">📖 Buksan ang ASND Bible</a>
+    </div>
+    """
 
 if __name__ == '__main__':
     app.run(debug=True)

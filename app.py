@@ -1,91 +1,97 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+from pypdf import PdfReader
 import sqlite3
-import re
 
 app = Flask(__name__)
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-db_path = os.path.join(basedir, 'ASND.SQLite3')
+# --- 1. AUTOMATIC KCC PDF KNOWLEDGE LOADER ---
+def load_all_kcc_pdfs():
+    knowledge_text = ""
+    print("Binabasa ang lahat ng KCC PDF files para sa Combot Knowledge Base...")
+    for filename in os.listdir('.'):
+        if filename.lower().endswith('.pdf'):
+            try:
+                reader = PdfReader(filename)
+                for page in reader.pages:
+                    text = page.extract_text()
+                    if text:
+                        knowledge_text += text + "\n"
+            except Exception as e:
+                print(f"Error sa pagbasa ng {filename}: {e}")
+    return knowledge_text
 
-def get_db_connection():
+# I-load ang buong kaalaman mula sa mga PDF sa repository
+KCC_KNOWLEDGE_BASE = load_all_kcc_pdfs()
+
+# System prompt directive para kay Combot
+COMBOT_SYSTEM_PROMPT = f"""
+Ikaw si COMBOT (Kingdom Lens), ang opisyal at matalinong AI Assistant ng Kingdom Community Center (KCC).
+Ang iyong layunin ay sagutin ang lahat ng tanong ng mga gumagamit base sa mga opisyal na aralin, katuruan, at PDF documents ng KCC.
+
+MGA GABAY NA PRINSIPYO SA PAGSAGOT:
+1. Kingdom Identity & Citizenship: Ang mga mananampalataya ay mga "Citizens" ng Kaharian ng Langit, hindi lamang mga miyembro ng relihiyon. Ang KCC ay isang "Colony" ng langit dito sa lupa.
+2. The Bible as the Constitution: Ang Salita ng Diyos (Bibliya) ang ating Saligang Batas (Constitution) na nagpapatakbo sa ating pamumuhay.
+3. Kingdom Culture: Isabuhay ang Katwiran (Righteousness), Kapayapaan (Peace), at Kagalakan sa Espiritu Santo. Ang tunay na pag-ibig ay hindi nagtutolerat sa maling gawain.
+4. Dominion at Purpose: Ang tao ay nilikha upang mamuno at irepresenta ang Hari (God) sa lupa.
+5. Community Unity: Ang kapangyarihan at awtoridad ay dumadaloy sa pamamagitan ng pagkakaisa sa komunidad.
+
+NARITO ANG BUONG MGA ARALIN AT PDF DOCUMENTS BILANG KAHIT ANONG BATAYAN NG IYONG MGA ISASAGOT:
+{KCC_KNOWLEDGE_BASE}
+
+Sumagot nang may awtoridad ng Salita, may pagmamahal, at nakabase nang buo sa mga konseptong nakasaad sa itaas.
+"""
+
+# --- 2. DATABASE HELPER PARA SA BIBLE APP ---
+def query_bible(keyword):
+    db_path = 'ASND.SQLite3'
+    if not os.path.exists(db_path):
+        return []
+    
     conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    return conn
-
-def clean_text(text):
-    if not text:
-        return ""
-    return re.sub(r'<[^>]+>', '', text)
-
-# Dito natin inilagay sa /bible path para hindi masapawan ang main home page ninyo
-@app.route('/bible', methods=['GET', 'POST'])
-def bible():
-    conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT book_number, long_name FROM books ORDER BY book_number")
-    books = cursor.fetchall()
+    try:
+        # Hinahanap ang keyword sa ASND database (hal. aklat, talata, o salita)
+        query = "SELECT book_name, chapter, verse, text FROM verses WHERE text LIKE ? OR book_name LIKE ? LIMIT 50"
+        cursor.execute(query, (f'%{keyword}%', f'%{keyword}%'))
+        results = cursor.fetchall()
+    except Exception as e:
+        results = [("Error", 0, 0, str(e))]
+    finally:
+        conn.close()
+    return results
 
-    raw_verses = []
-    verses = []
-    query = ""
-    selected_book = request.args.get('book', type=int)
-    selected_chapter = request.args.get('chapter', type=int)
-    chapters = []
-    current_book_name = ""
+# --- 3. FLASK ROUTES ---
 
-    if selected_book:
-        cursor.execute("SELECT long_name FROM books WHERE book_number = ?", (selected_book,))
-        b_name_row = cursor.fetchone()
-        if b_name_row:
-            current_book_name = b_name_row['long_name']
-
-    if request.method == 'POST':
-        query = request.form.get('query', '').strip()
-        if query:
-            cursor.execute("""
-                SELECT b.long_name, v.chapter, v.verse, v.text 
-                FROM verses v 
-                JOIN books b ON v.book_number = b.book_number 
-                WHERE v.text LIKE ? 
-                ORDER BY v.book_number, v.chapter, v.verse
-            """, ('%' + query + '%',))
-            raw_verses = cursor.fetchall()
-    elif selected_book:
-        cursor.execute("SELECT DISTINCT chapter FROM verses WHERE book_number = ? ORDER BY chapter", (selected_book,))
-        chapters = [row['chapter'] for row in cursor.fetchall()]
-
-        if selected_chapter:
-            cursor.execute("""
-                SELECT b.long_name, v.chapter, v.verse, v.text 
-                FROM verses v 
-                JOIN books b ON v.book_number = b.book_number 
-                WHERE v.book_number = ? AND v.chapter = ? 
-                ORDER BY v.verse
-            """, (selected_book, selected_chapter))
-            raw_verses = cursor.fetchall()
-
-    conn.close()
-
-    for v in raw_verses:
-        v_dict = dict(v)
-        v_dict['text'] = clean_text(v_dict['text'])
-        verses.append(v_dict)
-
-    return render_template('index.html', books=books, verses=verses, query=query, 
-                           selected_book=selected_book, selected_chapter=selected_chapter, 
-                           chapters=chapters, current_book_name=current_book_name)
-
-# Pwedeng magdagdag ng simpleng welcome page para sa mismong main link (/)
 @app.route('/')
 def home():
-    return """
-    <div style="font-family: Arial; text-align: center; margin-top: 100px;">
-        <h1>Welcome to Kingdom Community Center</h1>
-        <p>I-click ang button sa ibaba para buksan ang ASND Bible Studio:</p>
-        <a href="/bible" style="display: inline-block; padding: 15px 30px; background-color: #2b6cb0; color: white; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: bold;">📖 Buksan ang ASND Bible</a>
-    </div>
-    """
+    # Dito nakalagay ang main landing page mo o kaya ay template ng website
+    return render_template('index.html')
+
+@app.route('/bible', methods=['GET', 'POST'])
+def bible_app():
+    verses = []
+    search_query = ""
+    if request.method == 'POST':
+        search_query = request.form.get('query', '')
+        if search_query:
+            verses = query_bible(search_query)
+    return render_template('bible.html', verses=verses, query=search_query)
+
+@app.route('/api/combot', methods=['POST'])
+def combot_api():
+    data = request.get_json()
+    user_message = data.get('message', '')
+    
+    # Dito mo ikinakabit ang AI response logic gamit ang COMBOT_SYSTEM_PROMPT at user_message
+    # (Maaari itong i-connect sa iyong OpenAI/Gemini API key gamit ang prompt sa itaas)
+    
+    response_text = f"(Halimbawa ng sagot ni Combot batay sa KCC PDFs para sa tanong na: '{user_message}')"
+    
+    return jsonify({
+        "status": "success",
+        "reply": response_text
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)

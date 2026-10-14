@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <title>ASND Bible Studio</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #1e1e1e; color: #d4d4d4; }
+        header { background-color: #252526; color: #ffffff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
+        .container { display: flex; height: calc(100vh - 60px); overflow: hidden; }
+        
+        /* Kaliwang Sidebar: Table of Contents */
+        .sidebar-left { width: 280px; background-color: #252526; border-right: 1px solid #333; overflow-y: auto; padding: 15px; }
+        .sidebar-left h3 { font-size: 16px; color: #9cdcfe; margin-top: 0; }
+        .book-list { list-style: none; padding: 0; margin: 0; }
+        .book-list li { margin-bottom: 4px; }
+        .book-list a { text-decoration: none; color: #cccccc; display: block; padding: 6px 10px; border-radius: 4px; font-size: 14px; }
+        .book-list a:hover { background-color: #37373d; color: #ffffff; }
+
+        /* Gitna: Main Reading Area */
+        .main-reader { flex: 1; background-color: #1e1e1e; padding: 30px; overflow-y: auto; }
+        .search-box { margin-bottom: 25px; display: flex; gap: 10px; }
+        .search-box input[type="text"] { flex: 1; padding: 12px; font-size: 15px; background: #2d2d2d; border: 1px solid #444; color: white; border-radius: 4px; }
+        .search-box button { padding: 12px 24px; font-size: 15px; background-color: #0e639c; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .search-box button:hover { background-color: #1177bb; }
+        
+        .chapter-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin: 15px 0 25px 0; }
+        .chapter-btn { padding: 6px 12px; background: #333333; color: #4ec9b0; text-decoration: none; border-radius: 4px; font-size: 13px; border: 1px solid #444; }
+        .chapter-btn:hover { background: #0e639c; color: white; }
+
+        .verse-paragraph { line-height: 1.8; font-size: 16px; margin-bottom: 20px; text-align: justify; }
+        .verse-num { font-weight: bold; color: #b5cea8; font-size: 13px; vertical-align: super; margin-right: 4px; }
+        .verse-search-item { background: #252526; padding: 15px; margin-bottom: 12px; border-radius: 6px; border-left: 4px solid #0e639c; }
+        .verse-ref { font-weight: bold; color: #4ec9b0; margin-bottom: 5px; display: inline-block; }
+
+        /* Kanan Sidebar: Insights / Resources */
+        .sidebar-right { width: 320px; background-color: #252526; border-left: 1px solid #333; padding: 20px; overflow-y: auto; }
+        .sidebar-right h3 { font-size: 16px; color: #4ec9b0; margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .insight-card { font-size: 14px; color: #b5b5b5; line-height: 1.5; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>ASND Bible Studio</h2>
+    <span style="font-size: 14px; color: #888;"> THE CONSTITUTION</span>
+</header>
+
+<div class="container">
+    <!-- 1. KALIWANG SIDEBAR: Table of Contents -->
+    <div class="sidebar-left">
+        <h3>Mga Aklat</h3>
+        <ul class="book-list">
+            {% for b in books %}
+                <li><a href="/?book={{ b.book_number }}">{{ b.long_name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- 2. GITNA: Reader & Search Results -->
+    <div class="main-reader">
+        <form method="POST" action="/" class="search-box">
+            <input type="text" name="query" value="{{ query }}" placeholder="Maghanap ng salita (hal. Panginoon, Diyos, pag-ibig)..." required>
+            <button type="submit">Hanapin</button>
+        </form>
+
+        {% if current_book_name %}
+            <h2>{{ current_book_name }}</h2>
+            {% if chapters %}
+                <p style="font-size: 14px; color: #aaa;">Pumili ng Kabanata:</p>
+                <div class="chapter-buttons">
+                    {% for ch in chapters %}
+                        <a href="/?book={{ selected_book }}&chapter={{ ch }}" class="chapter-btn">Kabanata {{ ch }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <hr style="border-color: #333; margin: 20px 0;">
+        {% endif %}
+
+        <!-- Kung nag-search ng Salita -->
+        {% if query %}
+            <h3>Mga nahanap para sa salitang: "{{ query }}" ({{ verses|length }} na talata)</h3>
+            <div style="margin-top: 20px;">
+                {% for v in verses %}
+                    <div class="verse-search-item">
+                        <span class="verse-ref">{{ v.long_name }} {{ v.chapter }}:{{ v.verse }}</span>
+                        <p style="margin: 5px 0 0 0;">{{ v.text }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        
+        <!-- Kung nagbabasa ng Chapter -->
+        {% elif verses and selected_chapter %}
+            <h3>Kabanata {{ selected_chapter }}</h3>
+            <div class="verse-paragraph">
+                {% for v in verses %}
+                    <span class="verse-num">{{ v.verse }}</span><span>{{ v.text }} </span>
+                {% endfor %}
+            </div>
+
+        {% elif not selected_book %}
+            <div style="text-align: center; margin-top: 100px; color: #777;">
+                <h2>Maligayang Pagdating sa iyong Bible App!</h2>
+                <p>Pumili ng aklat sa kaliwa o mag-search sa itaas para magsimulang magbasa.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- 3. KANANG SIDEBAR: Insights & Resources -->
+    <div class="sidebar-right">
+        <h3>Insights & Notes</h3>
+        <div class="insight-card">
+            <p><strong>Chapter Overview:</strong> Dito lalabas ang mga notes, buod, o kaugnay na PDF aralin habang nagbabasa ka.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

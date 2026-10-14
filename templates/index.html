@@ -113,6 +113,40 @@
         </div>
     </div>
 </div>
+<!-- Floating Bible Button -->
+<div id="floating-bible-btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; cursor: grab; user-select: none;">
+    <a href="/bible" style="display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #2b6cb0, #4299e1); color: white; padding: 12px 20px; border-radius: 50px; text-decoration: none; font-family: Arial, sans-serif; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s;" title="Buksan ang ASND Bible">
+        <span style="font-size: 20px;">📖</span>
+        <span>ASND Bible</span>
+    </a>
+</div>
+
+<!-- JavaScript para pwede galaw-galawin (draggable) ang button -->
+<script>
+    const floatBtn = document.getElementById('floating-bible-btn');
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    floatBtn.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - floatBtn.getBoundingClientRect().left;
+        offsetY = e.clientY - floatBtn.getBoundingClientRect().top;
+        floatBtn.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        floatBtn.style.left = (e.clientX - offsetX) + 'px';
+        floatBtn.style.top = (e.clientY - offsetY) + 'px';
+        floatBtn.style.bottom = 'auto';
+        floatBtn.style.right = 'auto';
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        floatBtn.style.cursor = 'grab';
+    });
+</script>
 
 </body>
 </html>
